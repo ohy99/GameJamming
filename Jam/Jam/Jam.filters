@@ -1,0 +1,446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Scenes">
+      <UniqueIdentifier>{73eca939-180e-4399-ad86-add48d8b7d13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\HY">
+      <UniqueIdentifier>{59b76753-e219-402c-8bc6-85034f5c40d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject">
+      <UniqueIdentifier>{93d2b6b0-7add-417a-be06-92f5f31d7d1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Minion">
+      <UniqueIdentifier>{dd80a9e3-2c7a-4857-b31b-54e74a7f6ac9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Weapon">
+      <UniqueIdentifier>{b8d69183-04a7-4937-9ffc-2969fe4060db}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadOBJ.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadTGA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharacterInfo.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadTextData.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderHelper.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CollisionManager.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PhysicsManager.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjectManager.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AudioPlayer.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameLogic.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnvironmentManager.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameScene.cpp">
+      <Filter>Header Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderManager.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mainmenu.cpp">
+      <Filter>Header Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Options.cpp">
+      <Filter>Header Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Levelselect.cpp">
+      <Filter>Header Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Lose.cpp">
+      <Filter>Header Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Win.cpp">
+      <Filter>Header Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collidable.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Projectile.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ObjectPoolManager.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WeaponInfo.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GenericEnvironmentCollidable.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GenericDecoration.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SpriteAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MinionManager.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DamageArea.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Tower.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TowerManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ParticleManager.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SpellManager.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SpellManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ShowHpManager.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyAiLogic.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MinionSiege.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Minion.cpp">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MinionHealer.cpp">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MinionInfo.cpp">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MinionMelee.cpp">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MinionRange.cpp">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Consumables.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shop.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Weapon.cpp">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WeaponCannon.cpp">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NoobBow.cpp">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GoodBow.cpp">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\OkayBow.cpp">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ProjectileRainArrow.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\HUDManager.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\trans.cpp">
+      <Filter>Header Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MinionAir.cpp">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadOBJ.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadTGA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\shader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneManager.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FontType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharacterInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DetectMemoryLeak.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadTextData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshNotFound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RenderHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SingletonTemplate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TextManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CollisionManager.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GlobalVariableManager.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PhysicsManager.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjectManager.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AudioPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameLogic.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyMinion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyTower.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GenericDecoration.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnvironmentManager.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameScene.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RenderManager.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collidable.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Levelselect.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mainmenu.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Options.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Lose.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Win.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ObjectPoolManager.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Faction.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Projectile.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WeaponInfo.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SeasonManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GenericEnvironmentCollidable.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Tower.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteAnimation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MinionManager.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DamageArea.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HpBar.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TowerManager.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ParticleManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpellManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ShowHpManager.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyAiLogic.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Minion.h">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MinionHealer.h">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MinionInfo.h">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MinionMelee.h">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MinionRange.h">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MinionSiege.h">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Consumables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Weapon.h">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WeaponCannon.h">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NoobBow.h">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\OkayBow.h">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GoodBow.h">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ProjectileRainArrow.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HUDManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\trans.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MinionAir.h">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
