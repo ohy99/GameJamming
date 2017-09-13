@@ -36,6 +36,13 @@
     </ClCompile>
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Application.cpp" />
+    <ClCompile Include="Source\InputController.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\PlayerCollisionResponse.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\EnvironmentManager.h">
@@ -82,6 +89,22 @@
     </ClInclude>
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\Application.h" />
+    <ClInclude Include="Source\InputController.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Player.h" />
+    <ClInclude Include="Source\Collider.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CollisionResponse.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerCollisionResponse.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ColliderBase.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Managers">
@@ -92,6 +115,9 @@
     </Filter>
     <Filter Include="GameObject">
       <UniqueIdentifier>{131af0b6-272d-4518-9b59-5f01e5efb021}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{cf356cf4-be8d-4b45-ab0e-a5c4ae1dd529}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

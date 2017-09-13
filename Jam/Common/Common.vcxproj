@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Source\AudioPlayer.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\FontTypeManager.cpp" />
     <ClCompile Include="Source\KeyboardController.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTextData.cpp" />
@@ -30,6 +31,7 @@
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\MouseController.cpp" />
     <ClCompile Include="Source\Mtx44.cpp" />
+    <ClCompile Include="Source\MyDebugger.cpp" />
     <ClCompile Include="Source\RenderHelper.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\SpriteAnimation.cpp" />
@@ -45,6 +47,7 @@
     <ClInclude Include="Source\DetectMemoryLeak.h" />
     <ClInclude Include="Source\Faction.h" />
     <ClInclude Include="Source\FontType.h" />
+    <ClInclude Include="Source\FontTypeManager.h" />
     <ClInclude Include="Source\Graphics.h" />
     <ClInclude Include="Source\HpBar.h" />
     <ClInclude Include="Source\KeyboardController.h" />
@@ -60,6 +63,7 @@
     <ClInclude Include="Source\MeshNotFound.h" />
     <ClInclude Include="Source\MouseController.h" />
     <ClInclude Include="Source\Mtx44.h" />
+    <ClInclude Include="Source\MyDebugger.h" />
     <ClInclude Include="Source\MyMath.h" />
     <ClInclude Include="Source\RenderHelper.h" />
     <ClInclude Include="Source\shader.hpp" />

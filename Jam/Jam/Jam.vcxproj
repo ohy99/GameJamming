@@ -161,26 +161,35 @@
     <ClCompile Include="Source\GameScene.cpp" />
     <ClCompile Include="Source\CollisionManager.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
+    <ClCompile Include="Source\InputController.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Mainmenu.cpp" />
     <ClCompile Include="Source\Options.cpp" />
     <ClCompile Include="Source\ParticleManager.cpp" />
     <ClCompile Include="Source\PhysicsManager.cpp" />
+    <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\PlayerCollisionResponse.cpp" />
     <ClCompile Include="Source\RenderManager.cpp" />
     <ClCompile Include="Source\ShowHpManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
+    <ClInclude Include="Source\Collider.h" />
+    <ClInclude Include="Source\ColliderBase.h" />
+    <ClInclude Include="Source\CollisionResponse.h" />
     <ClInclude Include="Source\EnvironmentManager.h" />
     <ClInclude Include="Source\GameObjectManager.h" />
     <ClInclude Include="Source\GameScene.h" />
     <ClInclude Include="Source\CollisionManager.h" />
+    <ClInclude Include="Source\InputController.h" />
     <ClInclude Include="Source\Mainmenu.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GlobalVariableManager.h" />
     <ClInclude Include="Source\Options.h" />
     <ClInclude Include="Source\ParticleManager.h" />
     <ClInclude Include="Source\PhysicsManager.h" />
+    <ClInclude Include="Source\Player.h" />
+    <ClInclude Include="Source\PlayerCollisionResponse.h" />
     <ClInclude Include="Source\RenderManager.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneManager.h" />

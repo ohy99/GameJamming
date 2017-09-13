@@ -3,7 +3,7 @@
 #define APPLICATION_H
 
 #include "timer.h"
-
+class GLFWwindow;
 class Application
 {
 public:
@@ -20,13 +20,21 @@ public:
 	//static void GetCursorPos(double *xpos, double *ypos);
 	static int GetWindowWidth();
 	static int GetWindowHeight();
-
+	void SetWindowWidth(int window_width);
+	void SetWindowHeight(int window_height);
 private:
 	Application();
 	~Application();
 
+	void PostInputUpdate();
+	void UpdateInput();
+
 	//Declare a window object
+	GLFWwindow* m_window;
+	static int m_window_width, m_window_height;
+
 	StopWatch m_timer;
+
 };
 
 #endif

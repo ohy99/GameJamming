@@ -8,10 +8,13 @@ class GlobalVariables : public Singleton<GlobalVariables>
 	friend Singleton;
 
 public:
+	float * worldWidth;
+	float * worldHeight;
 
-
+	float get_worldWidth() { return *worldWidth; }
+	float get_worldHeight() { return *worldHeight; }
 protected:
-	GlobalVariables() {}
+	GlobalVariables() : worldWidth(nullptr), worldHeight(nullptr) {}
 	~GlobalVariables() {}
 };
 

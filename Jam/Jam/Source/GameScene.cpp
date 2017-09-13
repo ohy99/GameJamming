@@ -19,6 +19,11 @@
 #include "RenderManager.h"
 #include "ShowHpManager.h"
 #include "SpriteAnimation.h"
+#include "MyDebugger.h"
+#include "FontTypeManager.h"
+#include "KeyboardController.h"
+#include "MouseController.h"
+#include "Player.h"
 
 GameScene::GameScene()
 {
@@ -33,7 +38,8 @@ GameScene::~GameScene()
 	EnvironmentManager::Destroy();
 	RenderManager::Destroy();
 	ShowHpManager::Destroy();
-
+	
+	FontTypeManager::Destroy();
 }
 
 void GameScene::Init()
@@ -54,16 +60,21 @@ void GameScene::Init()
 	glEnable(GL_ALPHA_TEST);
 
 	Graphics::GetInstance()->init();
-
-	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
-
 	Math::InitRNG();
 
-	axis = MeshBuilder::GenerateAxes("", 100, 100, 100);
+	MouseController::GetInstance()->SetKeepMouseCentered(false);
 
+	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
+	axis = MeshBuilder::GenerateAxes("", 100, 100, 100);
 
 	worldHeight = 100;
 	worldWidth = worldHeight * Application::GetWindowWidth() / Application::GetWindowHeight();
+
+	GlobalVariables::GetInstance()->worldWidth = &this->worldWidth;
+	GlobalVariables::GetInstance()->worldHeight = &this->worldHeight;
+	//Player init must be called after this 2 lines. because world width and height is used (for now)
+	InputController::GetInstance()->init();//insert file here
+	Player::GetInstance()->init();
 }
 
 
@@ -71,6 +82,8 @@ void GameScene::Update(double dt)
 {
 	worldHeight = 100;
 	worldWidth = worldHeight * Application::GetWindowWidth() / Application::GetWindowHeight();
+	//Update Player
+	Player::GetInstance()->update(dt);
 	//Update enemies
 	//Update Physics
 	//PhysicsManager::GetInstance()->update(dt);
@@ -80,7 +93,6 @@ void GameScene::Update(double dt)
 	//ShowHpManager::GetInstance()->update(dt);
 
 	fps = 1.0 / dt;
-
 }
 
 
@@ -111,6 +123,12 @@ void GameScene::Render()
 
 	ShowHpManager::GetInstance()->render_all_hp_text();
 	RenderManager::GetInstance()->post_render();
+
+	MyDebugger::GetInstance()->render_debug_info();
+	//hax
+#if DEBUGPLAYER
+	Player::GetInstance()->render_debug();
+#endif
 	ms.PopMatrix();
 
 }
