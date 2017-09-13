@@ -9,6 +9,7 @@
 #include "PlayerCollisionResponse.h"
 #include "Graphics.h"
 #include "RenderHelper.h"
+#include "CollisionManager.h"
 
 Player::Player() : inputController(*InputController::GetInstance()), collider(nullptr)
 {
@@ -33,6 +34,7 @@ void Player::init()
 
 	//IMPORTANT. SET COLLISION
 	static_cast< Collider<PlayerResponse>* >(collider)->set(Collision::CollisionType::AABB, &this->pos, -this->scale, this->scale);
+	CollisionManager::GetInstance()->add_collider(this->collider);
 
 	//variables
 	move_speed = 10.f;

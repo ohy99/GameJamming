@@ -4,15 +4,18 @@
 #include "SingletonTemplate.h"
 #include <vector>
 #include <list>
+#include <set>
 //class Collidable;
+class ColliderBase;
 class CollisionManager : public Singleton<CollisionManager>
 {
 	friend Singleton;
-	//std::vector<Collidable*> colliders;
-	//Collidable* ground;
+	std::set<ColliderBase*> colliders;
+
 public:
 	void update(double dt);
-	//void add_collider(Collidable* collidable);
+	void add_collider(ColliderBase* collidable);
+	void remove_collider(ColliderBase* collidable);
 	//void add_ground(Collidable* ground);
 	//Collidable* get_ground();
 protected:

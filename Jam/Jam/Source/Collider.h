@@ -20,7 +20,7 @@ public:
 	void set(Collision::CollisionType type, Vector3 * pos, Vector3 value1, Vector3 value2 = 0);
 	void set(Collision::CollisionType type, Vector3 * pos, float value1);
 
-	bool check_collision(Collider* other);
+	bool check_collision(ColliderBase* other);
 	GameObject* get_owner() { return owner; }
 };
 
@@ -66,12 +66,14 @@ inline void Collider<Response>::set(Collision::CollisionType type, Vector3 * pos
 }
 
 template<class Response>
-inline bool Collider<Response>::check_collision(Collider * other)
+inline bool Collider<Response>::check_collision(ColliderBase * other)
 {
-	if (this->collision.isCollide(other->collision))
+	Collider* other_collider = static_cast<Collider*>(other);
+
+	if (this->collision.isCollide(other_collider->collision))
 	{
-		this->Response::response(other->get_owner());
-		other->Response::response(this->get_owner());
+		this->Response::response(other_collider->get_owner());
+		other_collider->Response::response(this->get_owner());
 		return true;
 	}
 	return false;
