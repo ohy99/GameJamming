@@ -4,13 +4,14 @@
 #include "SingletonTemplate.h"
 #include <map>
 #include <sstream>
+#include <string>
 #include "Vector3.h"
 
 class MyDebugger : public Singleton<MyDebugger>
 {
 	friend Singleton<MyDebugger>;
 
-	std::map<std::string , std::stringstream> debug_info;
+	std::map<std::string , std::string> debug_info;
 	Vector3 text_scale;
 	
 public:
@@ -35,5 +36,5 @@ inline void MyDebugger::watch_this_info(std::string Tag, T info)
 	ss << std::fixed;
 	ss.precision(2);
 	ss << info;
-	debug_info[Tag] = ss;
+	debug_info[Tag] = ss.str();
 }

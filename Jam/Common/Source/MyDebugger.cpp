@@ -15,7 +15,7 @@ void MyDebugger::render_debug_info()
 		ms.PushMatrix();
 		ms.Translate(0, num++ * text_scale.y, 0);
 		ms.Scale(text_scale);
-		RenderHelper::RenderText(font, p.second.str(), Color(0, 1, 0));
+		RenderHelper::RenderText(font, p.first + " : " + p.second, Color(0, 1, 0));
 		ms.PopMatrix();
 	}
 

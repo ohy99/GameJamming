@@ -3,7 +3,7 @@
 #include "GameObject.h"
 
 
-PhysicsManager::PhysicsManager() : gravity(0, -10, 0)
+PhysicsManager::PhysicsManager() //: gravity(0, -10, 0)
 {
 
 }
@@ -15,7 +15,7 @@ void PhysicsManager::update(double dt) {
 
 	for each (auto &go in objects)
 	{
-		if (go->active == false)
+		if (go.first->active == false)
 			continue;
 
 		//go->update(dt);
@@ -26,7 +26,13 @@ void PhysicsManager::update(double dt) {
 		//		continue;
 		//	if (proj->pos.y < 0)
 		//		proj->active = false;
-
+		try {
+			go.first->dir = go.second->velocity.Normalized();
+		}
+		catch (DivideByZero) {
+			go.first->dir = go.first->dir;
+		}
+		go.first->pos += go.second->velocity * (float)dt;
 		//	proj->velocity += proj->get_mass() * gravity * (float)dt;
 		//	proj->dir = proj->velocity.Normalized();
 		//	proj->pos += proj->velocity * (float)dt;
@@ -35,12 +41,24 @@ void PhysicsManager::update(double dt) {
 	}
 }
 
-void PhysicsManager::add_object(GameObject* go)
+void PhysicsManager::add_object(GameObject* go, Physics* physic)
 {
-	objects.push_back(go);
+	objects.push_back(std::make_pair (go, physic ));
 }
 
-Vector3 PhysicsManager::get_gravity()
+void PhysicsManager::remove_object(GameObject * go)
 {
-	return gravity;
+	for (std::vector< std::pair<GameObject*, Physics* > > ::iterator it = objects.begin(); it != objects.end(); ++it)
+	{
+		if (go == (*it).first)
+		{
+			it = objects.erase(it);
+			return;
+		}
+	}
 }
+
+//Vector3 PhysicsManager::get_gravity()
+//{
+//	return gravity;
+//}

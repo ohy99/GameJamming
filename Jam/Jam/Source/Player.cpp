@@ -10,8 +10,13 @@
 #include "Graphics.h"
 #include "RenderHelper.h"
 #include "CollisionManager.h"
+#include "Weapon.h"
+#include "PewPewGun.h"
+#include "BamBamMelee.h"
+#include "MyDebugger.h"
 
-Player::Player() : inputController(*InputController::GetInstance()), collider(nullptr)
+Player::Player() : inputController(*InputController::GetInstance()), collider(nullptr), 
+	faction(Faction::FACTION_SIDE::PLAYER)
 {
 	//once only so yea
 	collider = new Collider<PlayerResponse>(this);
@@ -33,8 +38,21 @@ void Player::init()
 	RenderManager::GetInstance()->attach_renderable(this);
 
 	//IMPORTANT. SET COLLISION
-	static_cast< Collider<PlayerResponse>* >(collider)->set(Collision::CollisionType::AABB, &this->pos, -this->scale, this->scale);
+	static_cast< Collider<PlayerResponse>* >(collider)->set(Collision::CollisionType::AABB, &this->pos, -this->scale * 0.5f, this->scale * 0.5f);
 	CollisionManager::GetInstance()->add_collider(this->collider);
+
+	//WEAPON
+	weapon[0] = new PewPew(this->faction.side);
+	weapon[0]->scale.Set(1, 1);
+	RenderManager::GetInstance()->attach_renderable(weapon[0], 1);
+	weapon[0]->active = true;
+	weapon[0]->name = "GUN";
+
+	weapon[1] = new BamBam(this->faction.side);
+	weapon[1]->scale.Set(1, 1);
+	RenderManager::GetInstance()->attach_renderable(weapon[1], 1);
+	weapon[1]->active = true;
+	weapon[1]->name = "GUN";
 
 	//variables
 	move_speed = 10.f;
@@ -82,11 +100,20 @@ void Player::update_movement(double dt)
 
 void Player::update_weapon(double dt)
 {
-	if (inputController.isInputDown(InputController::SHOOT)) {
+	weapon[0]->update(dt);
+	weapon[0]->pos = this->pos;
+	weapon[0]->dir = this->dir;
+	weapon[1]->update(dt);
+	weapon[1]->pos = this->pos;
+	weapon[1]->dir = this->dir;
 
+	//MyDebugger::GetInstance()->watch_this_info("SHOOT", inputController.isInputDown(InputController::SHOOT));
+	
+	if (inputController.isInputDown(InputController::SHOOT)) {
+		weapon[0]->discharge();
 	}
 	if (inputController.isInputDown(InputController::MELEE)) {
-
+		weapon[1]->discharge();
 	}
 }
 
@@ -96,35 +123,35 @@ void Player::render_debug()
 	ms.PushMatrix();
 	ms.Translate(this->pos);
 
-	//top line
-	ms.PushMatrix();
-	ms.Translate(0, this->scale.y, 0);
-	ms.Scale(this->scale.x, 0, 0);
-	RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("REDLINE"), false);
-	ms.PopMatrix();
+	////top line
+	//ms.PushMatrix();
+	//ms.Translate(0, this->scale.y, 0);
+	//ms.Scale(this->scale.x, 0, 0);
+	//RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("REDLINE"), false);
+	//ms.PopMatrix();
 
-	//bot line
-	ms.PushMatrix();
-	ms.Translate(0, -this->scale.y, 0);
-	ms.Scale(this->scale.x, 0, 0);
-	RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("REDLINE"), false);
-	ms.PopMatrix();
+	////bot line
+	//ms.PushMatrix();
+	//ms.Translate(0, -this->scale.y, 0);
+	//ms.Scale(this->scale.x, 0, 0);
+	//RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("REDLINE"), false);
+	//ms.PopMatrix();
 
-	//left line
-	ms.PushMatrix();
-	ms.Translate(-this->scale.x, 0, 0);
-	ms.Rotate(90, 0, 0, 1);
-	ms.Scale(this->scale.y, 0, 0);
-	RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("GREENLINE"), false);
-	ms.PopMatrix();
+	////left line
+	//ms.PushMatrix();
+	//ms.Translate(-this->scale.x, 0, 0);
+	//ms.Rotate(90, 0, 0, 1);
+	//ms.Scale(this->scale.y, 0, 0);
+	//RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("GREENLINE"), false);
+	//ms.PopMatrix();
 
-	//right line
-	ms.PushMatrix();
-	ms.Translate(this->scale.x, 0, 0);
-	ms.Rotate(90, 0, 0, 1);
-	ms.Scale(this->scale.y, 0, 0);
-	RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("GREENLINE"), false);
-	ms.PopMatrix();
+	////right line
+	//ms.PushMatrix();
+	//ms.Translate(this->scale.x, 0, 0);
+	//ms.Rotate(90, 0, 0, 1);
+	//ms.Scale(this->scale.y, 0, 0);
+	//RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("GREENLINE"), false);
+	//ms.PopMatrix();
 
 	ms.PopMatrix();
 }

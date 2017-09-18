@@ -24,6 +24,8 @@
 #include "KeyboardController.h"
 #include "MouseController.h"
 #include "Player.h"
+//#include "ProjectileManager.h"
+#include "DmgHitBoxManager.h"
 
 GameScene::GameScene()
 {
@@ -40,6 +42,10 @@ GameScene::~GameScene()
 	ShowHpManager::Destroy();
 	
 	FontTypeManager::Destroy();
+	//ProjectileManager::Destroy();
+	Player::Destroy();
+
+	DmgHitBoxManager::Destroy();
 }
 
 void GameScene::Init()
@@ -75,6 +81,9 @@ void GameScene::Init()
 	//Player init must be called after this 2 lines. because world width and height is used (for now)
 	InputController::GetInstance()->init();//insert file here
 	Player::GetInstance()->init();
+
+	//ProjectileManager::GetInstance();
+	DmgHitBoxManager::GetInstance();
 }
 
 
@@ -85,10 +94,13 @@ void GameScene::Update(double dt)
 	//Update Player
 	Player::GetInstance()->update(dt);
 	//Update enemies
+
+	//Update all hitbox entities
+	DmgHitBoxManager::GetInstance()->update_all_hitbox(dt);
 	//Update Physics
-	//PhysicsManager::GetInstance()->update(dt);
+	PhysicsManager::GetInstance()->update(dt);
 	//Update collisions
-	//CollisionManager::GetInstance()->update(dt);
+	CollisionManager::GetInstance()->update(dt);
 	//update the show hp thing
 	//ShowHpManager::GetInstance()->update(dt);
 

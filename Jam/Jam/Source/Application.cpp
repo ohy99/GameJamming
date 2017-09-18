@@ -135,6 +135,8 @@ void Application::Init()
 	//Sets the key callback
 	//glfwSetKeyCallback(m_window, key_callback);
 	glfwSetWindowSizeCallback(m_window, resize_callback);
+	glfwSetMouseButtonCallback(m_window, &Application::MouseButtonCallbacks);
+	glfwSetScrollCallback(m_window, &Application::MouseScrollCallbacks);
 
 	glewExperimental = true; // Needed for core profile
 	//Initialize GLEW
@@ -202,6 +204,19 @@ void Application::UpdateInput()
 	// Update Keyboard Input
 	for (int i = 0; i < KeyboardController::MAX_KEYS; ++i)
 		KeyboardController::GetInstance()->UpdateKeyboardStatus(i, (GetAsyncKeyState(i) & 0x8001) != 0);
+}
+void Application::MouseButtonCallbacks(GLFWwindow* window, int button, int action, int mods)
+{
+	// Send the callback to the mouse controller to handle
+	if (action == GLFW_PRESS)
+		MouseController::GetInstance()->UpdateMouseButtonPressed(button);
+	else
+		MouseController::GetInstance()->UpdateMouseButtonReleased(button);
+}
+
+void Application::MouseScrollCallbacks(GLFWwindow* window, double xoffset, double yoffset)
+{
+	MouseController::GetInstance()->UpdateMouseScroll(xoffset, yoffset);
 }
 
 void Application::Exit()

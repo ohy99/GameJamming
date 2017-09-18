@@ -1,8 +1,8 @@
 #ifndef COLLIDER_H
 #define COLLIDER_H
 
-#include "Collision.h"
 #include "ColliderBase.h"
+#include "Collision.h"
 
 class GameObject;
 template<class Response>
@@ -22,6 +22,13 @@ public:
 
 	bool check_collision(ColliderBase* other);
 	GameObject* get_owner() { return owner; }
+
+	ColliderBase* duplicate(GameObject* owner) {
+		Collider<Response>* temp = new Collider<Response>(owner);
+		temp->collision = this->collision;
+		temp->collision.mid = &owner->pos;
+		return temp;
+	}
 };
 
 

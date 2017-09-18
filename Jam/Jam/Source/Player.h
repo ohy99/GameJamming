@@ -6,7 +6,8 @@
 #include "SingletonTemplate.h"
 #include "InputController.h"
 #include "GameObject.h"
-
+#include "Faction.h"
+class Weapon;
 class ColliderBase;
 /********************************************************************************
 
@@ -19,9 +20,10 @@ class Player : public Singleton<Player>, GameObject
 	friend Singleton<Player>;
 	InputController& inputController;
 	ColliderBase* collider;
-
+	Weapon* weapon[2];
 	//Variables
 	float move_speed;
+	const Faction faction;
 
 	//Methods
 	void update_movement(double dt);

@@ -9,6 +9,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Common Components">
+      <UniqueIdentifier>{7c9dc5e8-c532-4d87-b77a-bb911db3f0f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\MatrixStack.cpp">
@@ -88,9 +91,6 @@
     <ClInclude Include="Source\AudioPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -100,16 +100,10 @@
     <ClInclude Include="Source\DetectMemoryLeak.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Faction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\FontType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\HpBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Light.h">
@@ -171,6 +165,30 @@
     </ClInclude>
     <ClInclude Include="Source\FontTypeManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Button.h">
+      <Filter>Common Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Faction.h">
+      <Filter>Common Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HpBar.h">
+      <Filter>Common Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics.h">
+      <Filter>Common Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Damage.h">
+      <Filter>Common Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MyTimer.h">
+      <Filter>Common Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DamageEjector.h">
+      <Filter>Common Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DamageType.h">
+      <Filter>Common Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

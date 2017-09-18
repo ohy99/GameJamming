@@ -73,7 +73,7 @@ void InputController::init(const char * file_path)
 		input_map[PLAYER_INPUT::MOVE_RIGHT] = std::make_pair(CONTROLLER_TYPE::KEYBOARD, 'D');
 
 		input_map[PLAYER_INPUT::SHOOT] = std::make_pair(CONTROLLER_TYPE::MOUSE, 0);
-		input_map[PLAYER_INPUT::MELEE] = std::make_pair(CONTROLLER_TYPE::KEYBOARD, 1);
+		input_map[PLAYER_INPUT::MELEE] = std::make_pair(CONTROLLER_TYPE::MOUSE, 1);
 		input_map[PLAYER_INPUT::DASH] = std::make_pair(CONTROLLER_TYPE::KEYBOARD, VK_SPACE);
 	}
 }

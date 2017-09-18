@@ -44,6 +44,9 @@
     <ClInclude Include="Source\Button.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Collision.h" />
+    <ClInclude Include="Source\Damage.h" />
+    <ClInclude Include="Source\DamageEjector.h" />
+    <ClInclude Include="Source\DamageType.h" />
     <ClInclude Include="Source\DetectMemoryLeak.h" />
     <ClInclude Include="Source\Faction.h" />
     <ClInclude Include="Source\FontType.h" />
@@ -65,6 +68,8 @@
     <ClInclude Include="Source\Mtx44.h" />
     <ClInclude Include="Source\MyDebugger.h" />
     <ClInclude Include="Source\MyMath.h" />
+    <ClInclude Include="Source\MyTimer.h" />
+    <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Source\RenderHelper.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\SingletonTemplate.h" />

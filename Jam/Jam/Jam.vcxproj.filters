@@ -7,9 +7,6 @@
     <ClCompile Include="Source\CollisionManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ParticleManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Source\PhysicsManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
@@ -43,15 +40,39 @@
     <ClCompile Include="Source\PlayerCollisionResponse.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Projectile.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ProjectileCollisionResponse.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Weapon.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ParticleManager.cpp">
+      <Filter>Managers\Poolers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ProjectileManager.cpp">
+      <Filter>Managers\Poolers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AreaOfEffect.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DmgHitBoxManager.cpp">
+      <Filter>Managers\Poolers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DmgHitBox.cpp">
+      <Filter>GameObject\HitBoxClass</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BamBamMelee.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\EnvironmentManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="Source\CollisionManager.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ParticleManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="Source\PhysicsManager.h">
@@ -105,6 +126,48 @@
     <ClInclude Include="Source\ColliderBase.h">
       <Filter>Collision</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Projectile.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ProjectileCollisionResponse.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Weapon.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PewPewGun.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ParticleManager.h">
+      <Filter>Managers\Poolers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ProjectileManager.h">
+      <Filter>Managers\Poolers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AOEManager.h">
+      <Filter>Managers\Poolers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AreaOfEffect.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DmgHitBoxManager.h">
+      <Filter>Managers\Poolers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BamBamMelee.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DmgHitBox.h">
+      <Filter>GameObject\HitBoxClass</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DieCondition.h">
+      <Filter>GameObject\HitBoxClass\DieCondition</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DieToTimer.h">
+      <Filter>GameObject\HitBoxClass\DieCondition</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DieToDistance.h">
+      <Filter>GameObject\HitBoxClass\DieCondition</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Managers">
@@ -118,6 +181,15 @@
     </Filter>
     <Filter Include="Collision">
       <UniqueIdentifier>{cf356cf4-be8d-4b45-ab0e-a5c4ae1dd529}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Poolers">
+      <UniqueIdentifier>{5edc5a4a-f9d1-47d0-84fc-87076e352f6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\HitBoxClass">
+      <UniqueIdentifier>{9c407d53-37d6-4ec3-9825-a16af8875b78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\HitBoxClass\DieCondition">
+      <UniqueIdentifier>{dd412800-13f6-4113-9071-518f9ba3ec6d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
