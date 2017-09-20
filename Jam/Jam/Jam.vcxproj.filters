@@ -52,9 +52,6 @@
     <ClCompile Include="Source\ParticleManager.cpp">
       <Filter>Managers\Poolers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ProjectileManager.cpp">
-      <Filter>Managers\Poolers</Filter>
-    </ClCompile>
     <ClCompile Include="Source\AreaOfEffect.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
@@ -66,6 +63,16 @@
     </ClCompile>
     <ClCompile Include="Source\BamBamMelee.cpp">
       <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DamageHitCollisionResponse.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyInfo.cpp" />
+    <ClCompile Include="Source\Enemy.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyManager.cpp">
+      <Filter>Managers\Poolers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,12 +148,6 @@
     <ClInclude Include="Source\ParticleManager.h">
       <Filter>Managers\Poolers</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ProjectileManager.h">
-      <Filter>Managers\Poolers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\AOEManager.h">
-      <Filter>Managers\Poolers</Filter>
-    </ClInclude>
     <ClInclude Include="Source\AreaOfEffect.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -167,6 +168,36 @@
     </ClInclude>
     <ClInclude Include="Source\DieToDistance.h">
       <Filter>GameObject\HitBoxClass\DieCondition</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DamageHitCollisionResponse.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharacterBase.h">
+      <Filter>Abstracts</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyInfo.h">
+      <Filter>Abstracts</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CrowdControl.h">
+      <Filter>Abstracts</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FSMStack.h">
+      <Filter>AiStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateBase.h">
+      <Filter>AiStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MoveState.h">
+      <Filter>AiStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AttackState.h">
+      <Filter>AiStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyManager.h">
+      <Filter>Managers\Poolers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +221,12 @@
     </Filter>
     <Filter Include="GameObject\HitBoxClass\DieCondition">
       <UniqueIdentifier>{dd412800-13f6-4113-9071-518f9ba3ec6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Abstracts">
+      <UniqueIdentifier>{0911b821-2381-45f6-a5c0-0642c775e7c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AiStates">
+      <UniqueIdentifier>{a850808d-e5a7-4566-b877-c6bbf0822133}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -158,8 +158,12 @@
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\AreaOfEffect.cpp" />
     <ClCompile Include="Source\BamBamMelee.cpp" />
+    <ClCompile Include="Source\DamageHitCollisionResponse.cpp" />
     <ClCompile Include="Source\DmgHitBox.cpp" />
     <ClCompile Include="Source\DmgHitBoxManager.cpp" />
+    <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\EnemyInfo.cpp" />
+    <ClCompile Include="Source\EnemyManager.cpp" />
     <ClCompile Include="Source\EnvironmentManager.cpp" />
     <ClCompile Include="Source\GameObjectManager.cpp" />
     <ClCompile Include="Source\GameScene.cpp" />
@@ -175,25 +179,31 @@
     <ClCompile Include="Source\PlayerCollisionResponse.cpp" />
     <ClCompile Include="Source\Projectile.cpp" />
     <ClCompile Include="Source\ProjectileCollisionResponse.cpp" />
-    <ClCompile Include="Source\ProjectileManager.cpp" />
     <ClCompile Include="Source\RenderManager.cpp" />
     <ClCompile Include="Source\ShowHpManager.cpp" />
     <ClCompile Include="Source\Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\AOEManager.h" />
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\AreaOfEffect.h" />
+    <ClInclude Include="Source\AttackState.h" />
     <ClInclude Include="Source\BamBamMelee.h" />
+    <ClInclude Include="Source\CharacterBase.h" />
     <ClInclude Include="Source\Collider.h" />
     <ClInclude Include="Source\ColliderBase.h" />
     <ClInclude Include="Source\CollisionResponse.h" />
+    <ClInclude Include="Source\CrowdControl.h" />
+    <ClInclude Include="Source\DamageHitCollisionResponse.h" />
     <ClInclude Include="Source\DieCondition.h" />
     <ClInclude Include="Source\DieToDistance.h" />
     <ClInclude Include="Source\DieToTimer.h" />
     <ClInclude Include="Source\DmgHitBox.h" />
     <ClInclude Include="Source\DmgHitBoxManager.h" />
+    <ClInclude Include="Source\Enemy.h" />
+    <ClInclude Include="Source\EnemyInfo.h" />
+    <ClInclude Include="Source\EnemyManager.h" />
     <ClInclude Include="Source\EnvironmentManager.h" />
+    <ClInclude Include="Source\FSMStack.h" />
     <ClInclude Include="Source\GameObjectManager.h" />
     <ClInclude Include="Source\GameScene.h" />
     <ClInclude Include="Source\CollisionManager.h" />
@@ -201,6 +211,7 @@
     <ClInclude Include="Source\Mainmenu.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GlobalVariableManager.h" />
+    <ClInclude Include="Source\MoveState.h" />
     <ClInclude Include="Source\Options.h" />
     <ClInclude Include="Source\ParticleManager.h" />
     <ClInclude Include="Source\PewPewGun.h" />
@@ -209,12 +220,12 @@
     <ClInclude Include="Source\PlayerCollisionResponse.h" />
     <ClInclude Include="Source\Projectile.h" />
     <ClInclude Include="Source\ProjectileCollisionResponse.h" />
-    <ClInclude Include="Source\ProjectileManager.h" />
     <ClInclude Include="Source\RenderManager.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\ShowHpManager.h" />
     <ClInclude Include="Source\SingletonTemplate.h" />
+    <ClInclude Include="Source\StateBase.h" />
     <ClInclude Include="Source\Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

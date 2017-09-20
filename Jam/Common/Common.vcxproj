@@ -22,6 +22,7 @@
     <ClCompile Include="Source\AudioPlayer.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\FontTypeManager.cpp" />
+    <ClCompile Include="Source\HitPoints.cpp" />
     <ClCompile Include="Source\KeyboardController.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTextData.cpp" />
@@ -52,6 +53,7 @@
     <ClInclude Include="Source\FontType.h" />
     <ClInclude Include="Source\FontTypeManager.h" />
     <ClInclude Include="Source\Graphics.h" />
+    <ClInclude Include="Source\HitPoints.h" />
     <ClInclude Include="Source\HpBar.h" />
     <ClInclude Include="Source\KeyboardController.h" />
     <ClInclude Include="Source\Light.h" />

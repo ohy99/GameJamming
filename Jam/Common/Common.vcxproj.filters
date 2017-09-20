@@ -71,6 +71,9 @@
     <ClCompile Include="Source\FontTypeManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\HitPoints.cpp">
+      <Filter>Common Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\MatrixStack.h">
@@ -188,6 +191,9 @@
       <Filter>Common Components</Filter>
     </ClInclude>
     <ClInclude Include="Source\DamageType.h">
+      <Filter>Common Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HitPoints.h">
       <Filter>Common Components</Filter>
     </ClInclude>
   </ItemGroup>

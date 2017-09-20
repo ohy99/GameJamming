@@ -15,11 +15,11 @@
 #include "BamBamMelee.h"
 #include "MyDebugger.h"
 
-Player::Player() : inputController(*InputController::GetInstance()), collider(nullptr), 
-	faction(Faction::FACTION_SIDE::PLAYER)
+Player::Player() : inputController(*InputController::GetInstance()), collider(nullptr)
 {
 	//once only so yea
 	collider = new Collider<PlayerResponse>(this);
+	this->faction.side = Faction::PLAYER;
 }
 
 Player::~Player()
@@ -33,7 +33,7 @@ void Player::init()
 	this->dir.Set(0, 1, 0);
 	this->active = true;
 
-	this->mesh = MeshList::GetInstance()->getMesh("Cone");
+	this->mesh = MeshList::GetInstance()->getMesh("Quad");
 
 	RenderManager::GetInstance()->attach_renderable(this);
 
@@ -56,6 +56,7 @@ void Player::init()
 
 	//variables
 	move_speed = 10.f;
+	this->hitpoint.init_hp(100);
 }
 
 void Player::update(double dt)
@@ -123,40 +124,13 @@ void Player::render_debug()
 	ms.PushMatrix();
 	ms.Translate(this->pos);
 
-	////top line
-	//ms.PushMatrix();
-	//ms.Translate(0, this->scale.y, 0);
-	//ms.Scale(this->scale.x, 0, 0);
-	//RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("REDLINE"), false);
-	//ms.PopMatrix();
-
-	////bot line
-	//ms.PushMatrix();
-	//ms.Translate(0, -this->scale.y, 0);
-	//ms.Scale(this->scale.x, 0, 0);
-	//RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("REDLINE"), false);
-	//ms.PopMatrix();
-
-	////left line
-	//ms.PushMatrix();
-	//ms.Translate(-this->scale.x, 0, 0);
-	//ms.Rotate(90, 0, 0, 1);
-	//ms.Scale(this->scale.y, 0, 0);
-	//RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("GREENLINE"), false);
-	//ms.PopMatrix();
-
-	////right line
-	//ms.PushMatrix();
-	//ms.Translate(this->scale.x, 0, 0);
-	//ms.Rotate(90, 0, 0, 1);
-	//ms.Scale(this->scale.y, 0, 0);
-	//RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("GREENLINE"), false);
-	//ms.PopMatrix();
-
 	ms.PopMatrix();
 }
 
-//void Player::render()
-//{
-//}
+void Player::render()
+{
+	GameObject::render();
+
+	hitpoint.render_hpbar(Vector3(pos.x, pos.y + scale.y, pos.z), Vector3(scale.x, 1));
+}
 

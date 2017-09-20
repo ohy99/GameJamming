@@ -20,6 +20,16 @@ struct Collision
 	Vector3 point;//from mid
 	Vector3 normal;
 
+	Collision* operator=(Collision& other) {
+		this->collisionType = other.collisionType;
+		this->min = other.min;
+		this->max = other.max;
+		this->mid = other.mid;
+		this->radius = other.radius;
+		this->point = other.point;
+		this->normal = other.normal;
+		return this;
+	}
 	Collision(CollisionType type = CollisionType::AABB) : collisionType(type) {
 		mid = nullptr;
 	}

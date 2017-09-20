@@ -7,15 +7,16 @@
 #include "InputController.h"
 #include "GameObject.h"
 #include "Faction.h"
+#include "CharacterBase.h"
 class Weapon;
 class ColliderBase;
 /********************************************************************************
 
 NOTE:
-	public singleton, private gameobject. dont let other access gameobject info
+	JK no note
 
 ********************************************************************************/
-class Player : public Singleton<Player>, GameObject
+class Player : public Singleton<Player>, public CharacterBase, public GameObject
 {
 	friend Singleton<Player>;
 	InputController& inputController;
@@ -23,7 +24,6 @@ class Player : public Singleton<Player>, GameObject
 	Weapon* weapon[2];
 	//Variables
 	float move_speed;
-	const Faction faction;
 
 	//Methods
 	void update_movement(double dt);
@@ -33,7 +33,7 @@ public:
 	void init();
 	//overwrite virtuals from gameobj
 	void update(double dt);
-	//void render();
+	void render();
 
 	void render_debug();
 protected:

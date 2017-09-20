@@ -3,6 +3,7 @@
 #include "ColliderBase.h"
 #include "Collider.h"
 #include "ProjectileCollisionResponse.h"
+#include "DamageHitCollisionResponse.h"
 
 Projectile::Projectile() : collider(nullptr)
 {
@@ -29,4 +30,7 @@ void Projectile::set(Vector3 pos, Vector3 dir, Faction::FACTION_SIDE side, float
 	this->physic.velocity = dir * velocity;
 	this->damage.set(damage);
 	this->faction.side = side;
+
+	DamageHitResponse* dhr = dynamic_cast<DamageHitResponse *>(this->collider);
+	dhr->attach_faction_component(&this->faction);
 }

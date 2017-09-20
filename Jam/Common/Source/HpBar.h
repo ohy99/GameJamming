@@ -10,19 +10,29 @@
 class HpBar : public Singleton<HpBar>
 {
 	friend Singleton;
-	Mesh* redBar;
-	Mesh* greenBar;
+
+	Mesh* default_redBar;
+	Mesh* default_greenBar;
 	//float hpPercent;
 	HpBar() {
-		redBar = MeshList::GetInstance()->getMesh("REDHPBAR");
-		greenBar = MeshList::GetInstance()->getMesh("GREENHPBAR");
+		redBar = default_redBar = MeshList::GetInstance()->getMesh("REDHPBAR");
+		greenBar = default_greenBar = MeshList::GetInstance()->getMesh("GREENHPBAR");
 	}
 public:
 	Vector3 pos;
 	Vector3 scale;
+	Mesh* redBar;
+	Mesh* greenBar;
 
 	virtual ~HpBar() {
 	}
+
+	void reset_default_mesh()
+	{
+		redBar = default_redBar;
+		greenBar = default_greenBar;
+	}
+
 
 	void update(float hpPercent) {
 

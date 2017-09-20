@@ -1,6 +1,7 @@
 #include "CollisionManager.h"
 
 #include "ColliderBase.h"
+#include "MyDebugger.h"
 
 CollisionManager::CollisionManager()
 {
@@ -24,6 +25,8 @@ void CollisionManager::update(double dt)
 
 		}
 	}
+
+	MyDebugger::GetInstance()->watch_this_info("COLLISION SIZE", colliders.size());
 }
 
 void CollisionManager::add_collider(ColliderBase* collidable)

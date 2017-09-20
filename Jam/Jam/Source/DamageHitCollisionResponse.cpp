@@ -1,0 +1,31 @@
+#include "DamageHitCollisionResponse.h"
+
+#include "Damage.h"
+#include "Player.h"
+#include "CharacterBase.h"
+#include "Faction.h"
+
+DamageHitResponse::DamageHitResponse(Damage* damage_component) : damage_component(damage_component)
+{
+}
+DamageHitResponse::DamageHitResponse() : damage_component(nullptr), faction_component(nullptr)
+{
+}
+
+DamageHitResponse::~DamageHitResponse()
+{
+}
+
+void DamageHitResponse::response(GameObject * other)
+{
+	//list all class that will get affected by this
+	//eg. Class* class = dynamic_cast<Class*>(other)
+	//this will mean that Class has something to do with this
+	CharacterBase* someguy = dynamic_cast<CharacterBase*>(other);
+
+
+	if (someguy && someguy->faction.side != this->faction_component->side)
+	{
+		someguy->hitpoint.kena_hit(this->damage_component->get_dmg());
+	}
+}
