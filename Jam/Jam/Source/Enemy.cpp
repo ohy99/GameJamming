@@ -101,4 +101,7 @@ Enemy::Enemy()
 
 Enemy::~Enemy()
 {
+	delete collider;
+	for (int i = 0; i < sizeof(weapon)/sizeof(weapon[0]); ++i)
+		delete weapon[i];
 }

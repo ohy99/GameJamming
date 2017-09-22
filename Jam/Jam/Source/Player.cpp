@@ -24,6 +24,9 @@ Player::Player() : inputController(*InputController::GetInstance()), collider(nu
 
 Player::~Player()
 {
+	delete collider;
+	for (int i = 0; i < sizeof(weapon) / sizeof(weapon[0]); ++i)
+		delete weapon[i];
 }
 
 void Player::init()

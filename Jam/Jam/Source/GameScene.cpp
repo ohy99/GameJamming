@@ -48,6 +48,13 @@ GameScene::~GameScene()
 	Player::Destroy();
 
 	DmgHitBoxManager::Destroy();
+	ShowHpManager::Destroy();
+	EnemyManager::Destroy();
+
+	InputController::Destroy();
+	MyDebugger::Destroy();
+	MouseController::Destroy();
+	KeyboardController::Destroy();
 }
 
 void GameScene::Init()
@@ -85,6 +92,7 @@ void GameScene::Init()
 	Player::GetInstance()->init();
 
 	//ProjectileManager::GetInstance();
+	EnemyManager::GetInstance();
 	DmgHitBoxManager::GetInstance();
 	ShowHpManager::GetInstance();
 }
@@ -174,6 +182,6 @@ void GameScene::Exit()
 	EnvironmentManager::Destroy();
 	RenderManager::Destroy();
 
-	ShowHpManager::Destroy();
+	ShowHpManager::GetInstance()->clear_hptext();
 }
 

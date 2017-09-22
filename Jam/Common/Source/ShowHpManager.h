@@ -36,6 +36,7 @@ public:
 	void render_all_hp_text();
 	void generate_hp_text(Vector3 pos, int value = 0, bool is_crit = false);//in case doing crit can just enable tat
 
+	void clear_hptext();
 protected:
 	ShowHpManager();
 	~ShowHpManager();

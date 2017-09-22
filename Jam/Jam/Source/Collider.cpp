@@ -54,7 +54,7 @@ void Collider::set_collision(Collision::CollisionType type, Vector3 * pos, float
 
 void Collider::set_response(CollisionResponse * collision_response)
 {
-	if (!this->collision_response)
+	if (this->collision_response)
 	{
 		delete this->collision_response;
 		this->collision_response = nullptr;

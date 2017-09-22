@@ -24,6 +24,7 @@ public:
 				p.second = nullptr;
 			}
 		}
+		scenes.clear();
 	}
 	void addScene(std::string key, Scene* a) {
 		scenes[key] = a;

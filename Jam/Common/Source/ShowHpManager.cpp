@@ -15,6 +15,7 @@ default_speed(8.f), default_scaling_speed(2.f), default_disappearing_direction(0
 
 ShowHpManager::~ShowHpManager()
 {
+	this->clear_hptext();
 }
 
 void ShowHpManager::update(double dt)
@@ -51,6 +52,14 @@ void ShowHpManager::generate_hp_text(Vector3 pos, int value, bool is_crit)
 	if (value < 0)
 		temp->color.Set(0, 1, 0);//healing is green color
 	hp_text.push_back(temp);
+}
+
+void ShowHpManager::clear_hptext()
+{
+	for each (auto &t in hp_text)
+		delete t;
+	
+	hp_text.clear();
 }
 
 ShowHpManager::HPTEXT::HPTEXT(Vector3 pos, int value, double duration) :

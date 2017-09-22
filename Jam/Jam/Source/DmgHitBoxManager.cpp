@@ -11,9 +11,9 @@
 #include "DamageHitCollisionResponse.h"
 #include "AOECollisionResponse.h"
 #include "ProjectileCollisionResponse.h"
+#include "MyDebugger.h"
 
-
-DmgHitBox* DEBUG_FIRST;
+//DmgHitBox* DEBUG_FIRST;
 
 void DmgHitBoxManager::pool_vector(std::vector<DmgHitBox*>& vec, DmgHitBox * hitbox, unsigned int number)
 {
@@ -67,8 +67,8 @@ void DmgHitBoxManager::set_hitbox(DmgHitBox& hitbox, DMG_COLLIDER_TYPE type)
 		dhr->attach_faction_component(&hitbox.faction);
 	}
 
-	if (DEBUG_FIRST == nullptr)
-		DEBUG_FIRST = &hitbox;
+	//if (DEBUG_FIRST == nullptr)
+	//	DEBUG_FIRST = &hitbox;
 }
 
 DmgHitBox * DmgHitBoxManager::get_hitbox(DMG_COLLIDER_TYPE type)
@@ -93,7 +93,6 @@ void DmgHitBoxManager::deactivate_all()
 	}
 }
 
-#include "MyDebugger.h"
 
 void DmgHitBoxManager::update_all_hitbox(double dt)
 {
@@ -103,18 +102,18 @@ void DmgHitBoxManager::update_all_hitbox(double dt)
 			hb->update(dt);
 	}
 
-	if (DEBUG_FIRST)
-	{
-		if (DEBUG_FIRST->active)
-		{
-			MyDebugger::GetInstance()->watch_this_info("first hb", DEBUG_FIRST->pos);
-			//DamageHitResponse* dhr = dynamic_cast<DamageHitResponse*>(DEBUG_FIRST);
-			MyDebugger::GetInstance()->watch_this_info("debugfirst col", &DEBUG_FIRST->collider);
-			//MyDebugger::GetInstance()->watch_this_info("first hb", &dhr);
-		}
-		else
-			DEBUG_FIRST = nullptr;
-	}
+	//if (DEBUG_FIRST)
+	//{
+	//	if (DEBUG_FIRST->active)
+	//	{
+	//		MyDebugger::GetInstance()->watch_this_info("first hb", DEBUG_FIRST->pos);
+	//		//DamageHitResponse* dhr = dynamic_cast<DamageHitResponse*>(DEBUG_FIRST);
+	//		MyDebugger::GetInstance()->watch_this_info("debugfirst col", &DEBUG_FIRST->collider);
+	//		//MyDebugger::GetInstance()->watch_this_info("first hb", &dhr);
+	//	}
+	//	else
+	//		DEBUG_FIRST = nullptr;
+	//}
 }
 
 DmgHitBoxManager::DmgHitBoxManager()
@@ -136,8 +135,9 @@ DmgHitBoxManager::DmgHitBoxManager()
 
 DmgHitBoxManager::~DmgHitBoxManager()
 {
-	for each (auto m in hit_box_pool)
+	for each (auto &m in hit_box_pool)
 	{
 		delete m;
 	}
+	hit_box_pool.clear();
 }

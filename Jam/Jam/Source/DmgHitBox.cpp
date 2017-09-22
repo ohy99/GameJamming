@@ -11,7 +11,7 @@ DmgHitBox::DmgHitBox() : collider(nullptr), die_condition(nullptr)
 {
 }
 
-DmgHitBox::DmgHitBox(const DmgHitBox & other)
+DmgHitBox::DmgHitBox(const DmgHitBox & other) : collider(nullptr), die_condition(nullptr)
 {
 	this->collider = other.collider->duplicate(this);
 	this->mesh = other.mesh;
@@ -21,6 +21,9 @@ DmgHitBox::DmgHitBox(const DmgHitBox & other)
 DmgHitBox::~DmgHitBox()
 {
 	delete collider;
+	if (die_condition)
+		delete die_condition;
+	
 }
 
 void DmgHitBox::set_inactive()

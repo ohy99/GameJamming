@@ -26,7 +26,6 @@ EnemyManager::EnemyManager()
 	for (int i = 0; i < 50; ++i)
 	{
 		enemy_pool.push_back(new Enemy);
-
 	}
 }
 
@@ -34,4 +33,5 @@ EnemyManager::~EnemyManager()
 {
 	for each (auto &e in enemy_pool)
 		delete e;
+	enemy_pool.clear();
 }
