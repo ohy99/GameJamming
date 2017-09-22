@@ -180,7 +180,6 @@
     <ClCompile Include="Source\PlayerCollisionResponse.cpp" />
     <ClCompile Include="Source\ProjectileCollisionResponse.cpp" />
     <ClCompile Include="Source\RenderManager.cpp" />
-    <ClCompile Include="Source\ShowHpManager.cpp" />
     <ClCompile Include="Source\Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -221,7 +220,6 @@
     <ClInclude Include="Source\RenderManager.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneManager.h" />
-    <ClInclude Include="Source\ShowHpManager.h" />
     <ClInclude Include="Source\SingletonTemplate.h" />
     <ClInclude Include="Source\StateBase.h" />
     <ClInclude Include="Source\Weapon.h" />

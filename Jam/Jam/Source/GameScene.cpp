@@ -86,6 +86,7 @@ void GameScene::Init()
 
 	//ProjectileManager::GetInstance();
 	DmgHitBoxManager::GetInstance();
+	ShowHpManager::GetInstance();
 }
 
 
@@ -120,7 +121,7 @@ void GameScene::Update(double dt)
 	//Update collisions
 	CollisionManager::GetInstance()->update(dt);
 	//update the show hp thing
-	//ShowHpManager::GetInstance()->update(dt);
+	ShowHpManager::GetInstance()->update(dt);
 
 	fps = 1.0 / dt;
 }

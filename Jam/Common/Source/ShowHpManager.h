@@ -29,16 +29,13 @@ class ShowHpManager : public Singleton<ShowHpManager>
 	float default_speed;
 	float default_scaling_speed;
 	Vector3 default_disappearing_direction;
-	FontType chiller_font;
+	FontType& chiller_font;
 
-	FontType calibri;
 public:
 	void update(double dt);
 	void render_all_hp_text();
 	void generate_hp_text(Vector3 pos, int value = 0, bool is_crit = false);//in case doing crit can just enable tat
-	FontType& get_font();
 
-	FontType& get_calibri();
 protected:
 	ShowHpManager();
 	~ShowHpManager();

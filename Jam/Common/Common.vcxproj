@@ -35,6 +35,7 @@
     <ClCompile Include="Source\MyDebugger.cpp" />
     <ClCompile Include="Source\RenderHelper.cpp" />
     <ClCompile Include="Source\shader.cpp" />
+    <ClCompile Include="Source\ShowHpManager.cpp" />
     <ClCompile Include="Source\SpriteAnimation.cpp" />
     <ClCompile Include="Source\timer.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
@@ -74,6 +75,7 @@
     <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Source\RenderHelper.h" />
     <ClInclude Include="Source\shader.hpp" />
+    <ClInclude Include="Source\ShowHpManager.h" />
     <ClInclude Include="Source\SingletonTemplate.h" />
     <ClInclude Include="Source\sound.h" />
     <ClInclude Include="Source\SpriteAnimation.h" />

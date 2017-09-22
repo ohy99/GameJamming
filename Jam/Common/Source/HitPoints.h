@@ -7,6 +7,7 @@ class HitPoint
 {
 	int hitpoint;
 	int max_hitpoint;
+
 public:
 	HitPoint();
 	~HitPoint();
@@ -20,13 +21,13 @@ public:
 	float get_hp_percentage();
 	int get_hp();
 
-	int kena_hit(int damage);
-	int kena_hit_currenthp(float percent_of_current_hp);
-	int kena_hit_maxhp(float percent_of_max_hp);
+	int kena_hit(int damage, Vector3* pos = nullptr, bool is_crit = false);
+	int kena_hit_currenthp(float percent_of_current_hp, Vector3* pos = nullptr, bool is_crit = false);
+	int kena_hit_maxhp(float percent_of_max_hp, Vector3* pos = nullptr, bool is_crit = false);
 
-	int kena_heal(int damage);
-	int kena_heal_currenthp(float percent_of_current_hp);
-	int kena_heal_maxhp(float percent_of_max_hp);
+	int kena_heal(int damage, Vector3* pos = nullptr, bool is_crit = false);
+	int kena_heal_currenthp(float percent_of_current_hp, Vector3* pos = nullptr, bool is_crit = false);
+	int kena_heal_maxhp(float percent_of_max_hp, Vector3* pos = nullptr, bool is_crit = false);
 
 	void render_hpbar(Vector3 pos, Vector3 scale, std::string foreground_mesh = "", std::string background_mesh = "");
 };

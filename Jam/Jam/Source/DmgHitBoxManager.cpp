@@ -42,7 +42,7 @@ void DmgHitBoxManager::set_hitbox(DmgHitBox& hitbox, DMG_COLLIDER_TYPE type)
 	{
 	case PROJECTILE:
 		hitbox.scale.Set(1, 1, 1);
-		if (!dynamic_cast<DamageHitResponse*>(hitbox.collider->get_response()))//if not the collider i want
+		if (!dynamic_cast<ProjectileResponse*>(hitbox.collider->get_response()))//if not the collider i want
 			hitbox.collider->set_response(new ProjectileResponse);
 		
 		hitbox.collider->set_collision(Collision::CollisionType::SPHERE, &hitbox.pos, hitbox.scale.x);
@@ -55,6 +55,7 @@ void DmgHitBoxManager::set_hitbox(DmgHitBox& hitbox, DMG_COLLIDER_TYPE type)
 		hitbox.collider->set_collision(Collision::CollisionType::AABB, &hitbox.pos, -hitbox.scale * 0.5f, hitbox.scale * 0.5f);
 		break;
 	default:
+		std::cout << "BO SET UH" << std::endl;
 		hitbox.scale.Set(1, 1, 1);
 		//hitbox.get_collider_component()->set(Collision::CollisionType::SPHERE, &hitbox.pos, hitbox.scale.x);
 	}
@@ -127,7 +128,7 @@ DmgHitBoxManager::DmgHitBoxManager()
 	dhr->attach_damage_component(&default_hitbox->damage);
 	dhr->attach_faction_component(&default_hitbox->faction);
 
-	dmg_hitbox_mesh[DEFAULT] = MeshList::GetInstance()->getMesh("Sphere");
+	//dmg_hitbox_mesh[DEFAULT] = MeshList::GetInstance()->getMesh("Sphere");
 	dmg_hitbox_mesh[PROJECTILE] = MeshList::GetInstance()->getMesh("Sphere");
 	dmg_hitbox_mesh[MELEE] = MeshList::GetInstance()->getMesh("Quad");
 	pool_vector(hit_box_pool, default_hitbox);

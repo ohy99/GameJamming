@@ -3,6 +3,7 @@
 #include "MyMath.h"
 #include <iostream>
 #include "HpBar.h"
+#include "ShowHpManager.h"
 
 HitPoint::HitPoint() : max_hitpoint(1), hitpoint(1)
 {
@@ -37,7 +38,7 @@ int HitPoint::get_hp()
 	return this->hitpoint;
 }
 
-int HitPoint::kena_hit(int damage)
+int HitPoint::kena_hit(int damage, Vector3* pos, bool is_crit)
 {
 	if (damage < 0)
 	{
@@ -45,11 +46,17 @@ int HitPoint::kena_hit(int damage)
 			<< "(Info) " << this << " Hp = " << this->hitpoint << " , MaxHp = " << this->max_hitpoint << std::endl;
 		damage = 0;
 	}
+	int diff = this->hitpoint;
 	this->hitpoint = Math::Max(this->hitpoint - damage, 0);
+	diff -= this->hitpoint;
+
+	if (pos)
+		ShowHpManager::GetInstance()->generate_hp_text(*pos, diff, false);
+
 	return this->hitpoint;
 }
 
-int HitPoint::kena_hit_currenthp(float percent_of_current_hp)
+int HitPoint::kena_hit_currenthp(float percent_of_current_hp, Vector3* pos, bool is_crit)
 {
 	if (percent_of_current_hp < 0.f)
 	{
@@ -57,11 +64,17 @@ int HitPoint::kena_hit_currenthp(float percent_of_current_hp)
 			<< "(Info) " << this << " Hp = " << this->hitpoint << " , MaxHp = " << this->max_hitpoint << std::endl;
 		percent_of_current_hp = 0.f;
 	}
+	int diff = this->hitpoint;
 	this->hitpoint = Math::Max(this->hitpoint - (int)(percent_of_current_hp * this->hitpoint), 0);
+	diff -= this->hitpoint;
+
+	if (pos)
+		ShowHpManager::GetInstance()->generate_hp_text(*pos, diff, false);
+
 	return this->hitpoint;
 }
 
-int HitPoint::kena_hit_maxhp(float percent_of_max_hp)
+int HitPoint::kena_hit_maxhp(float percent_of_max_hp, Vector3* pos, bool is_crit)
 {
 	if (percent_of_max_hp < 0.f)
 	{
@@ -69,11 +82,17 @@ int HitPoint::kena_hit_maxhp(float percent_of_max_hp)
 			<< "(Info) " << this << " Hp = " << this->hitpoint << " , MaxHp = " << this->max_hitpoint << std::endl;
 		percent_of_max_hp = 0.f;
 	}
+	int diff = this->hitpoint;
 	this->hitpoint = Math::Max(this->hitpoint - (int)(percent_of_max_hp * this->max_hitpoint), 0);
+	diff -= this->hitpoint;
+
+	if (pos)
+		ShowHpManager::GetInstance()->generate_hp_text(*pos, diff, false);
+
 	return this->hitpoint;
 }
 
-int HitPoint::kena_heal(int heal)
+int HitPoint::kena_heal(int heal, Vector3* pos, bool is_crit)
 {
 	if (heal < 0)
 	{
@@ -81,11 +100,17 @@ int HitPoint::kena_heal(int heal)
 			<< "(Info) " << this << " Hp = " << this->hitpoint << " , MaxHp = " << this->max_hitpoint << std::endl;
 		heal = 0;
 	}
+	int diff = this->hitpoint;
 	this->hitpoint = Math::Min(this->hitpoint + heal, this->max_hitpoint);
+	diff -= this->hitpoint;
+
+	if (pos)
+		ShowHpManager::GetInstance()->generate_hp_text(*pos, diff, false);
+
 	return this->hitpoint;
 }
 
-int HitPoint::kena_heal_currenthp(float percent_of_current_hp)
+int HitPoint::kena_heal_currenthp(float percent_of_current_hp, Vector3* pos, bool is_crit)
 {
 	if (percent_of_current_hp < 0.f)
 	{
@@ -93,11 +118,17 @@ int HitPoint::kena_heal_currenthp(float percent_of_current_hp)
 			<< "(Info) " << this << " Hp = " << this->hitpoint << " , MaxHp = " << this->max_hitpoint << std::endl;
 		percent_of_current_hp = 0.f;
 	}
+	int diff = this->hitpoint;
 	this->hitpoint = Math::Min(this->hitpoint + (int)(percent_of_current_hp * this->hitpoint), this->max_hitpoint);
+	diff -= this->hitpoint;
+
+	if (pos)
+		ShowHpManager::GetInstance()->generate_hp_text(*pos, diff, false);
+
 	return this->hitpoint;
 }
 
-int HitPoint::kena_heal_maxhp(float percent_of_max_hp)
+int HitPoint::kena_heal_maxhp(float percent_of_max_hp, Vector3* pos, bool is_crit)
 {
 	if (percent_of_max_hp < 0.f)
 	{
@@ -105,7 +136,13 @@ int HitPoint::kena_heal_maxhp(float percent_of_max_hp)
 			<< "(Info) " << this << " Hp = " << this->hitpoint << " , MaxHp = " << this->max_hitpoint << std::endl;
 		percent_of_max_hp = 0.f;
 	}
+	int diff = this->hitpoint;
 	this->hitpoint = Math::Min(this->hitpoint + (int)(percent_of_max_hp * this->max_hitpoint), this->max_hitpoint);
+	diff -= this->hitpoint;
+
+	if (pos)
+		ShowHpManager::GetInstance()->generate_hp_text(*pos, diff, false);
+
 	return this->hitpoint;
 }
 

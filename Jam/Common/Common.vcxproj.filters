@@ -74,6 +74,9 @@
     <ClCompile Include="Source\HitPoints.cpp">
       <Filter>Common Components</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ShowHpManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\MatrixStack.h">
@@ -195,6 +198,9 @@
     </ClInclude>
     <ClInclude Include="Source\HitPoints.h">
       <Filter>Common Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ShowHpManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

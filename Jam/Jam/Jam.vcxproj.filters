@@ -13,9 +13,6 @@
     <ClCompile Include="Source\RenderManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ShowHpManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
@@ -86,9 +83,6 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="Source\RenderManager.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ShowHpManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="Source\SingletonTemplate.h">

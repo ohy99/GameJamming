@@ -12,8 +12,7 @@ class DmgHitBoxManager : public Singleton<DmgHitBoxManager>
 public:
 	enum DMG_COLLIDER_TYPE
 	{
-		DEFAULT = 0,
-		PROJECTILE,
+		PROJECTILE = 0,
 		MELEE,
 		DC_COUNT
 	};
@@ -27,7 +26,7 @@ private:
 	//Here set the hitbox to pre-defined scaling
 	void set_hitbox(DmgHitBox& hitbox, DMG_COLLIDER_TYPE type);
 public:
-	DmgHitBox* get_hitbox(DMG_COLLIDER_TYPE type = DMG_COLLIDER_TYPE::DEFAULT);
+	DmgHitBox* get_hitbox(DMG_COLLIDER_TYPE type);
 	void deactivate_all();
 	void update_all_hitbox(double dt);
 protected:

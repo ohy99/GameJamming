@@ -5,15 +5,12 @@
 
 #include "Graphics.h"
 #include "RenderHelper.h"
+#include "FontTypeManager.h"
 
-ShowHpManager::ShowHpManager() : default_scale(3, 3, 0), default_duration(1.f),
-	default_speed(4.f), default_scaling_speed(1.f), default_disappearing_direction(0, 1 ,0)
+ShowHpManager::ShowHpManager() : chiller_font(FontTypeManager::GetInstance()->get_font(FontTypeManager::CHILLER)),
+default_scale(4, 4, 0), default_duration(1.f),
+default_speed(8.f), default_scaling_speed(2.f), default_disappearing_direction(0, 1, 0)
 {
-	chiller_font.text_mesh = MeshList::GetInstance()->getMesh("CHILLER");
-	chiller_font.textWidth = LoadTextData("Image//Chiller Data.csv");
-
-	calibri.text_mesh = MeshList::GetInstance()->getMesh("CALIBRI");
-	calibri.textWidth = LoadTextData("Image//Calibri Data.csv");
 }
 
 ShowHpManager::~ShowHpManager()
@@ -22,14 +19,14 @@ ShowHpManager::~ShowHpManager()
 
 void ShowHpManager::update(double dt)
 {
-	for (std::list<HPTEXT*>::iterator text_iter = hp_text.begin(); text_iter!= hp_text.end();)
+	for (std::list<HPTEXT*>::iterator text_iter = hp_text.begin(); text_iter != hp_text.end();)
 	{
 		HPTEXT* text = (*text_iter);
 		if (text->elapsed_time < text->active_duration)
 		{
 			text->pos += default_disappearing_direction * default_speed * (float)dt;
 			text->scale -= Vector3(default_scaling_speed, default_scaling_speed) * (float)dt;
-			
+
 			text->elapsed_time += dt;
 			++text_iter;
 		}
@@ -56,20 +53,8 @@ void ShowHpManager::generate_hp_text(Vector3 pos, int value, bool is_crit)
 	hp_text.push_back(temp);
 }
 
-FontType & ShowHpManager::get_font()
-{
-	return chiller_font;
-}
-
-FontType & ShowHpManager::get_calibri()
-{
-	// TODO: insert return statement here
-	return this->calibri;
-}
-
-
 ShowHpManager::HPTEXT::HPTEXT(Vector3 pos, int value, double duration) :
-	value(value), 
+	value(value),
 	elapsed_time(0.0),
 	active_duration(duration),
 	pos(pos),
@@ -83,9 +68,18 @@ void ShowHpManager::HPTEXT::render(FontType* font)
 {
 	MS& ms = Graphics::GetInstance()->modelStack;
 
+	//i wan centralize da text
+	float half_width = 0.f;
+	std::string textstr = std::to_string(this->value);
+	for (int i = 0; i < textstr.size(); ++i)
+		half_width += font->textWidth[(int)textstr.at(i)];
+	
+	half_width *= 0.5f;
+
 	ms.PushMatrix();
 	ms.Translate(this->pos);
 	ms.Scale(this->scale);
+	ms.Translate(-half_width);
 	if (this->value < 0)
 		this->value = -this->value;
 	RenderHelper::RenderText(font, std::to_string(this->value), this->color);

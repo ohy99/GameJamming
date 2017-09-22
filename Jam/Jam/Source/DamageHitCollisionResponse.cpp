@@ -28,7 +28,7 @@ bool DamageHitResponse::response(GameObject * other, GameObject* my_owner)
 	if (someguy)
 		if (someguy->faction.side != this->faction_component->side)
 		{
-			someguy->hitpoint.kena_hit(this->damage_component->get_dmg());
+			someguy->hitpoint.kena_hit(this->damage_component->get_dmg(), &other->pos);
 			return true;
 		}
 	return false;

@@ -7,7 +7,7 @@
 #include "DieToDistance.h"
 #include "DieToTimer.h"
 
-Weapon::Weapon() : proj_type((DmgHitBoxManager::DMG_COLLIDER_TYPE)0)
+Weapon::Weapon() : proj_type(DmgHitBoxManager::PROJECTILE)
 {
 }
 
