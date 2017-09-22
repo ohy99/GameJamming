@@ -9,7 +9,7 @@
 #include "Faction.h"
 #include "CharacterBase.h"
 class Weapon;
-class ColliderBase;
+class Collider;
 /********************************************************************************
 
 NOTE:
@@ -20,7 +20,7 @@ class Player : public Singleton<Player>, public CharacterBase, public GameObject
 {
 	friend Singleton<Player>;
 	InputController& inputController;
-	ColliderBase* collider;
+	Collider* collider;
 	Weapon* weapon[2];
 	//Variables
 	float move_speed;

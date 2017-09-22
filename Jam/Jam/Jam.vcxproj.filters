@@ -37,23 +37,11 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="Source\Player.cpp" />
-    <ClCompile Include="Source\PlayerCollisionResponse.cpp">
-      <Filter>Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Projectile.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ProjectileCollisionResponse.cpp">
-      <Filter>Collision</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Weapon.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Source\ParticleManager.cpp">
       <Filter>Managers\Poolers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\AreaOfEffect.cpp">
-      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Source\DmgHitBoxManager.cpp">
       <Filter>Managers\Poolers</Filter>
@@ -64,15 +52,27 @@
     <ClCompile Include="Source\BamBamMelee.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DamageHitCollisionResponse.cpp">
-      <Filter>Collision</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EnemyInfo.cpp" />
     <ClCompile Include="Source\Enemy.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Source\EnemyManager.cpp">
       <Filter>Managers\Poolers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collider.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AOECollisionResponse.cpp">
+      <Filter>Collision\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DamageHitCollisionResponse.cpp">
+      <Filter>Collision\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerCollisionResponse.cpp">
+      <Filter>Collision\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ProjectileCollisionResponse.cpp">
+      <Filter>Collision\Responses</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,21 +124,6 @@
     <ClInclude Include="Source\Collider.h">
       <Filter>Collision</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CollisionResponse.h">
-      <Filter>Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerCollisionResponse.h">
-      <Filter>Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ColliderBase.h">
-      <Filter>Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Projectile.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ProjectileCollisionResponse.h">
-      <Filter>Collision</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Weapon.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -147,9 +132,6 @@
     </ClInclude>
     <ClInclude Include="Source\ParticleManager.h">
       <Filter>Managers\Poolers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\AreaOfEffect.h">
-      <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Source\DmgHitBoxManager.h">
       <Filter>Managers\Poolers</Filter>
@@ -168,9 +150,6 @@
     </ClInclude>
     <ClInclude Include="Source\DieToDistance.h">
       <Filter>GameObject\HitBoxClass\DieCondition</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DamageHitCollisionResponse.h">
-      <Filter>Collision</Filter>
     </ClInclude>
     <ClInclude Include="Source\Enemy.h">
       <Filter>GameObject</Filter>
@@ -198,6 +177,21 @@
     </ClInclude>
     <ClInclude Include="Source\EnemyManager.h">
       <Filter>Managers\Poolers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AOECollisionResponse.h">
+      <Filter>Collision\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DamageHitCollisionResponse.h">
+      <Filter>Collision\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerCollisionResponse.h">
+      <Filter>Collision\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CollisionResponse.h">
+      <Filter>Collision\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ProjectileCollisionResponse.h">
+      <Filter>Collision\Responses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +221,9 @@
     </Filter>
     <Filter Include="AiStates">
       <UniqueIdentifier>{a850808d-e5a7-4566-b877-c6bbf0822133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision\Responses">
+      <UniqueIdentifier>{a9a86336-289a-4b33-a68e-fe390a3c5ade}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

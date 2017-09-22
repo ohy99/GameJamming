@@ -49,7 +49,7 @@ void Enemy::init(Vector3 pos, Vector3 scale, Vector3 dir)
 	//RenderManager::GetInstance()->attach_renderable(this);
 
 	//IMPORTANT. SET COLLISION
-	static_cast< Collider<PlayerResponse>* >(collider)->set(Collision::CollisionType::AABB, &this->pos, -this->scale * 0.5f, this->scale * 0.5f);
+	collider->set_collision(Collision::CollisionType::AABB, &this->pos, -this->scale * 0.5f, this->scale * 0.5f);
 	CollisionManager::GetInstance()->add_collider(this->collider);
 
 	this->faction.side = Faction::ENEMY;
@@ -82,7 +82,7 @@ void Enemy::render_debug()
 
 Enemy::Enemy()
 {
-	this->collider = new Collider<PlayerResponse>(this);
+	this->collider = new Collider(this, new PlayerResponse);
 	RenderManager::GetInstance()->attach_renderable(this);
 
 	//WEAPON

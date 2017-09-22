@@ -6,16 +6,16 @@
 #include <list>
 #include <set>
 //class Collidable;
-class ColliderBase;
+class Collider;
 class CollisionManager : public Singleton<CollisionManager>
 {
 	friend Singleton;
-	std::set<ColliderBase*> colliders;
+	std::set<Collider*> colliders;
 
 public:
 	void update(double dt);
-	void add_collider(ColliderBase* collidable);
-	void remove_collider(ColliderBase* collidable);
+	void add_collider(Collider* collidable);
+	void remove_collider(Collider* collidable);
 	//void add_ground(Collidable* ground);
 	//Collidable* get_ground();
 protected:

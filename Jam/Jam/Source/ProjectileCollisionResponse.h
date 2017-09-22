@@ -1,15 +1,19 @@
 #ifndef PROJECTILECOLLISIONRESPONSE_H
 #define PROJECTILECOLLISIONRESPONSE_H
 
-#include "CollisionResponse.h"
+#include "DamageHitCollisionResponse.h"
 
-class ProjectileResponse : public CollisionResponse
+class ProjectileResponse : public DamageHitResponse
 {
+	bool is_collided;
 public:
 	ProjectileResponse();
-	~ProjectileResponse();
+	virtual ~ProjectileResponse();
 
-	virtual void response(GameObject* other);
+	virtual bool response(GameObject* other, GameObject* my_owner);
+	virtual void reset_response();
+
+	bool get_isCollided() { return is_collided; }
 };
 
 

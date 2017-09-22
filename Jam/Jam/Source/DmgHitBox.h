@@ -7,7 +7,7 @@
 #include "Damage.h"
 #include "Faction.h"
 #include "MyTimer.h"
-class ColliderBase;
+class Collider;
 class DmgHitBoxManager;
 class DieCondition;
 class DmgHitBox : public GameObject
@@ -15,7 +15,7 @@ class DmgHitBox : public GameObject
 private:
 	friend DmgHitBoxManager;
 
-	ColliderBase* collider;
+	Collider* collider;
 	Physics physic;
 	Damage damage;
 	Faction faction;
@@ -31,7 +31,7 @@ public:
 	void set(Vector3 pos, Vector3 dir, Faction::FACTION_SIDE side, float velocity, int damage, DamageType::DMG_TYPE type);
 	void set_die_condition(DieCondition* die) { this->die_condition = die; }
 	Physics* get_physics_component() { return &physic; }
-	ColliderBase* get_collider_component() { return collider; }
+	Collider* get_collider_component() { return collider; }
 };
 
 #endif // !DMGHITBOX_H

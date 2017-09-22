@@ -1,6 +1,5 @@
 #include "Weapon.h"
 
-#include "Projectile.h"
 #include "CollisionManager.h"
 #include "PhysicsManager.h"
 #include "DmgHitBoxManager.h"

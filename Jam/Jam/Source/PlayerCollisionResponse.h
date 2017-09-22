@@ -7,9 +7,9 @@ class PlayerResponse : public CollisionResponse
 {
 public:
 	PlayerResponse();
-	~PlayerResponse();
+	virtual ~PlayerResponse();
 
-	virtual void response(GameObject* other);
+	virtual bool response(GameObject* other, GameObject* my_owner);
 };
 
 

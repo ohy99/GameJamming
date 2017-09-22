@@ -5,7 +5,8 @@ class GameObject;
 class CollisionResponse
 {
 public:
-	virtual void response(GameObject* other) = 0;
+	virtual bool response(GameObject* other, GameObject* my_owner) = 0;
+	virtual void reset_response() {}
 };
 
 #endif // !COLLISION_RESPONSE_H

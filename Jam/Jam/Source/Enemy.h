@@ -4,12 +4,12 @@
 #include "CharacterBase.h"
 #include "GameObject.h"
 #include "Faction.h"
-class ColliderBase;
+class Collider;
 class Weapon;
 
 class Enemy : public CharacterBase, public GameObject
 {
-	ColliderBase* collider;
+	Collider* collider;
 	Weapon* weapon[2];
 	//Variables
 	float move_speed;

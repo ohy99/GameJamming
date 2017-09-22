@@ -4,6 +4,8 @@
 #include "CollisionManager.h"
 #include "PhysicsManager.h"
 #include "DieCondition.h"
+#include "AOECollisionResponse.h"
+#include "ProjectileCollisionResponse.h"
 
 DmgHitBox::DmgHitBox() : collider(nullptr), die_condition(nullptr)
 {
@@ -31,6 +33,12 @@ void DmgHitBox::set_inactive()
 	}
 	CollisionManager::GetInstance()->remove_collider(this->collider);
 	PhysicsManager::GetInstance()->remove_object(this);
+	AOEResponse* aoeresponse = dynamic_cast<AOEResponse*>(this->collider->get_response());
+	if (aoeresponse)
+	{
+		//need to reset collided vector
+		aoeresponse->reset_response();
+	}
 }
 
 void DmgHitBox::update(double dt)
@@ -42,6 +50,12 @@ void DmgHitBox::update(double dt)
 			this->set_inactive();
 	}
 
+	ProjectileResponse* pr = dynamic_cast<ProjectileResponse*>(this->collider->get_response());
+	if (pr)
+	{
+		if (pr->get_isCollided())
+			this->set_inactive();
+	}
 }
 
 void DmgHitBox::set(Vector3 pos, Vector3 dir, Faction::FACTION_SIDE side, float velocity, int damage, DamageType::DMG_TYPE type)

@@ -18,7 +18,7 @@
 Player::Player() : inputController(*InputController::GetInstance()), collider(nullptr)
 {
 	//once only so yea
-	collider = new Collider<PlayerResponse>(this);
+	collider = new Collider(this, new PlayerResponse);
 	this->faction.side = Faction::PLAYER;
 }
 
@@ -38,7 +38,7 @@ void Player::init()
 	RenderManager::GetInstance()->attach_renderable(this);
 
 	//IMPORTANT. SET COLLISION
-	static_cast< Collider<PlayerResponse>* >(collider)->set(Collision::CollisionType::AABB, &this->pos, -this->scale * 0.5f, this->scale * 0.5f);
+	collider->set_collision(Collision::CollisionType::AABB, &this->pos, -this->scale * 0.5f, this->scale * 0.5f);
 	CollisionManager::GetInstance()->add_collider(this->collider);
 
 	//WEAPON
