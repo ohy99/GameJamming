@@ -17,6 +17,7 @@
 #include "MyDebugger.h"
 #include <fstream>
 #include <stdio.h> 
+#include "Loader.h"
 
 EditorScene::EditorScene() : 
 	start_of_pattern("============ Pattern ============"),
@@ -444,6 +445,9 @@ void EditorScene::save_pattern(char* file_path)
 void EditorScene::load_pattern(char * file_path)
 {
 	clear_unsaved_pattern();
+
+	Loader::GetInstance()->load_pattern(loaded_pattern);
+	return;
 
 	//binary : open in binary. app : all output operations are performed at the end of the file
 	std::ifstream fileStream(file_path, std::ios::binary);

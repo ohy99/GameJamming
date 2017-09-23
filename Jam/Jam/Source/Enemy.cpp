@@ -18,6 +18,14 @@
 
 void Enemy::update_movement(double dt)
 {
+	if (!intended_pos)
+		return;
+
+	Vector3 metointended = -this->pos + *intended_pos;
+	if (metointended.LengthSquared() > move_speed * move_speed * (float)dt * (float)dt)
+		this->pos += metointended.Normalized() * move_speed * (float)dt;
+	else
+		this->pos += metointended;
 }
 
 void Enemy::update_weapon(double dt)
@@ -80,7 +88,7 @@ void Enemy::render_debug()
 {
 }
 
-Enemy::Enemy()
+Enemy::Enemy() : intended_pos(nullptr), move_speed(10.f)
 {
 	this->collider = new Collider(this, new PlayerResponse);
 	RenderManager::GetInstance()->attach_renderable(this);

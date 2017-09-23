@@ -172,6 +172,7 @@
     <ClCompile Include="Source\CollisionManager.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\InputController.cpp" />
+    <ClCompile Include="Source\Loader.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Mainmenu.cpp" />
     <ClCompile Include="Source\Options.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="Source\GameScene.h" />
     <ClInclude Include="Source\CollisionManager.h" />
     <ClInclude Include="Source\InputController.h" />
+    <ClInclude Include="Source\Loader.h" />
     <ClInclude Include="Source\Mainmenu.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GlobalVariableManager.h" />

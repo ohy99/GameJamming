@@ -76,6 +76,7 @@
     <ClCompile Include="Source\EditorScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Loader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\EnvironmentManager.h">
@@ -192,6 +193,7 @@
     <ClInclude Include="Source\EditorScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Loader.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Managers">

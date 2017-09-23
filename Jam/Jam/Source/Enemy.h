@@ -13,6 +13,7 @@ class Enemy : public CharacterBase, public GameObject
 	Weapon* weapon[2];
 	//Variables
 	float move_speed;
+	Vector3* intended_pos;
 
 	//Methods
 	void update_movement(double dt);

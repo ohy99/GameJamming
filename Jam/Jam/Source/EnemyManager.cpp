@@ -7,9 +7,28 @@
 #include "MeshList.h"
 #include "RenderHelper.h"
 #include "Graphics.h"
+#include "Loader.h"
 
 void EnemyManager::update(double dt)
 {
+	spawn_interval.update_timer(dt);
+
+	//random pattern
+	static int rand = Math::RandIntMinMax(0, patterns.size() - 1);
+	patterns.at(rand);
+	if (spawn_interval.is_Duration_Passed())
+	{
+		for (int path_index = 0; path_index < patterns.at(rand).size(); ++path_index)
+		{
+			for each (auto &e in enemy_pool)
+				if (e->active)
+				{
+					patterns.at(rand).at(path_index);
+				}
+		}
+		spawn_interval.reset_timer();
+	}
+
 	for each (auto &e in enemy_pool)
 		if (e->active)
 		{
@@ -19,7 +38,6 @@ void EnemyManager::update(double dt)
 		}
 
 
-	//update_save(dt);
 }
 
 void EnemyManager::render()
@@ -42,6 +60,8 @@ EnemyManager::EnemyManager()
 		enemy_pool.push_back(new Enemy);
 	}
 
+	Loader::GetInstance()->load_pattern(patterns);
+	spawn_interval.set_duration(1.0);
 }
 
 EnemyManager::~EnemyManager()
@@ -49,27 +69,4 @@ EnemyManager::~EnemyManager()
 	for each (auto &e in enemy_pool)
 		delete e;
 	enemy_pool.clear();
-}
-
-void EnemyManager::load_patterns(char * file_path)
-{
-	std::ifstream fileStream(file_path, std::ios::binary);
-	if (!fileStream.is_open()) {
-		std::cout << "Impossible to open " << file_path << ". Are you in the right directory ?\n";
-		return;
-	}
-
-	while (!fileStream.eof()) {
-		char buf[256];
-		fileStream.getline(buf, 256);
-		//if (strncmp("Cell Width,", buf, 11) == 0)
-		{
-			//sscanf_s((buf + 11), "%d", &charWidth);
-		}
-	
-		//Vector3
-
-		//patterns.push_back();
-	}
-
 }
