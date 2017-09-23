@@ -23,6 +23,7 @@
 #include "GameScene.h"
 #include "Mainmenu.h"
 #include "Options.h"
+#include "EditorScene.h"
 
 struct AtExit
 {
@@ -157,6 +158,7 @@ void Application::Run()
 	SM->addScene("GAME", new GameScene());
 	SM->addScene("MAIN", new Mainmenu());
 	SM->addScene("OPTIONS", new Options());
+	SM->addScene("Editor", new EditorScene());
 	SM->setCurrScene("GAME");
 
 

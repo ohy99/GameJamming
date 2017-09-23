@@ -162,6 +162,7 @@
     <ClCompile Include="Source\DamageHitCollisionResponse.cpp" />
     <ClCompile Include="Source\DmgHitBox.cpp" />
     <ClCompile Include="Source\DmgHitBoxManager.cpp" />
+    <ClCompile Include="Source\EditorScene.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EnemyInfo.cpp" />
     <ClCompile Include="Source\EnemyManager.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Source\DieToTimer.h" />
     <ClInclude Include="Source\DmgHitBox.h" />
     <ClInclude Include="Source\DmgHitBoxManager.h" />
+    <ClInclude Include="Source\EditorScene.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\EnemyInfo.h" />
     <ClInclude Include="Source\EnemyManager.h" />
@@ -220,7 +222,6 @@
     <ClInclude Include="Source\RenderManager.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneManager.h" />
-    <ClInclude Include="Source\SingletonTemplate.h" />
     <ClInclude Include="Source\StateBase.h" />
     <ClInclude Include="Source\Weapon.h" />
   </ItemGroup>

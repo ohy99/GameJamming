@@ -34,6 +34,7 @@ public:
 	bool IsButtonPressed(unsigned char _slot);
 	bool IsButtonReleased(unsigned char _slot);
 	double GetMouseScrollStatus(SCROLL_TYPE _scrolltype);
+	void ResetMouseScrollStatus(SCROLL_TYPE _scrolltype);
 
 	void GetMousePosition(float& _resultX, float& _resultY);
 	void GetMousePosition(double& _resultX, double& _resultY);

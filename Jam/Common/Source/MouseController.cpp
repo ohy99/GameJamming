@@ -88,6 +88,22 @@ double MouseController::GetMouseScrollStatus(SCROLL_TYPE _scrolltype)
 	}
 }
 
+void MouseController::ResetMouseScrollStatus(SCROLL_TYPE _scrolltype)
+{
+	if (_scrolltype == SCROLL_TYPE_XOFFSET)
+	{
+		xoffset = 0.0;
+	}
+	else if (_scrolltype == SCROLL_TYPE_YOFFSET)
+	{
+		yoffset = 0.0;
+	}
+	else
+	{
+		return;
+	}
+}
+
 void MouseController::GetMousePosition(float& _resultX, float& _resultY)
 {
 	_resultX = (float)curr_posX;

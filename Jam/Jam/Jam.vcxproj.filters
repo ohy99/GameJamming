@@ -49,7 +49,6 @@
     <ClCompile Include="Source\BamBamMelee.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EnemyInfo.cpp" />
     <ClCompile Include="Source\Enemy.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
@@ -71,6 +70,12 @@
     <ClCompile Include="Source\ProjectileCollisionResponse.cpp">
       <Filter>Collision\Responses</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EnemyInfo.cpp">
+      <Filter>Abstracts</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EditorScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\EnvironmentManager.h">
@@ -83,9 +88,6 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="Source\RenderManager.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SingletonTemplate.h">
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="Source\SceneManager.h">
@@ -186,6 +188,9 @@
     </ClInclude>
     <ClInclude Include="Source\ProjectileCollisionResponse.h">
       <Filter>Collision\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EditorScene.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

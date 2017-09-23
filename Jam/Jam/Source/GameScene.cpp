@@ -131,6 +131,12 @@ void GameScene::Update(double dt)
 	//update the show hp thing
 	ShowHpManager::GetInstance()->update(dt);
 
+	if (KeyboardController::GetInstance()->IsKeyPressed(VK_F1))
+	{
+		SceneManager::GetInstance()->setNextScene("Editor");
+	}
+
+
 	fps = 1.0 / dt;
 }
 
