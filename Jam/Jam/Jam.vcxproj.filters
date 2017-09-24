@@ -77,6 +77,9 @@
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\Loader.cpp" />
+    <ClCompile Include="Source\SceneManager.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\EnvironmentManager.h">

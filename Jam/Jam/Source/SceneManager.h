@@ -2,8 +2,8 @@
 #define _SCENEMANAGER_H
 
 #include <map>
-#include "Scene.h"
 #include "SingletonTemplate.h"
+class Scene;
 
 class SceneManager : public Singleton <SceneManager>
 {
@@ -11,49 +11,21 @@ class SceneManager : public Singleton <SceneManager>
 	bool shouldExit = false;
 	std::map < std::string, Scene*> scenes;
 	Scene* curr;
-	SceneManager() {
-	}
+	SceneManager();
+
+	//Called once at start
+	void setCurrScene(std::string a);
 public:
 
-	~SceneManager() {
-		for each(auto p in scenes) {
-			if (p.second)
-			{
-				p.second->Exit();
-				delete p.second;
-				p.second = nullptr;
-			}
-		}
-		scenes.clear();
-	}
-	void addScene(std::string key, Scene* a) {
-		scenes[key] = a;
-	}
-	void update(double dt) {
-		curr->Update(dt);
-		curr->Render();
-	}
+	~SceneManager();
+	void addScene(std::string key, Scene* a);
+	void update(double dt);
 
-	void setNextScene(std::string n) {
-		curr->Exit();
-		curr = scenes[n];
-		curr->Init();
-		curr->Update(0.0);
-	}
-	void setCurrScene(std::string a) {
-		curr = scenes[a];
-		curr->Init();
-	}
-	void setExitGame(bool a) {
-		shouldExit = true;
-	}
-	bool checkShouldExit() {
-		return shouldExit;
-	}
+	void setNextScene(std::string n);
+	void setExitGame(bool a);
+	bool checkShouldExit();
 
-	Scene* get_scene(std::string name) {
-		return scenes.at(name);
-	}
+	Scene* get_scene(std::string name);
 };
 
 #endif

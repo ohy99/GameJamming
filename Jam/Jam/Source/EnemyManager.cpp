@@ -38,7 +38,11 @@ void EnemyManager::update(double dt)
 		std::pair<Enemy*, path_info >  &e = *iter;
 		e.first->update(dt);
 		if (e.first->hitpoint.get_hp_percentage() <= 0.f)
+		{
 			e.first->deactivate();
+			iter = active_enemy.erase(iter);
+			continue;
+		}
 
 		//check if i passed the end of the node
 		if (e.second.current_node_iter != (*e.second.current_path).end())

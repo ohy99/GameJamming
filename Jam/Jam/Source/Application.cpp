@@ -155,11 +155,6 @@ void Application::Run()
 {
 	//Main Loop
 	SceneManager* SM = SceneManager::GetInstance();
-	SM->addScene("GAME", new GameScene());
-	SM->addScene("MAIN", new Mainmenu());
-	SM->addScene("OPTIONS", new Options());
-	SM->addScene("Editor", new EditorScene());
-	SM->setCurrScene("GAME");
 
 
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
