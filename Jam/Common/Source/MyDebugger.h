@@ -29,9 +29,9 @@ template<typename T>
 inline void MyDebugger::watch_this_info(std::string Tag, T info)
 {
 	int count = 0;
-	while (debug_info.find(Tag) != debug_info.end()) {
-		Tag = Tag + std::to_string(++count);
-	}
+	//while (debug_info.find(Tag) != debug_info.end()) {
+	//	Tag = Tag + std::to_string(++count);
+	//}
 	std::stringstream ss;
 	ss << std::fixed;
 	ss.precision(2);

@@ -123,6 +123,84 @@ private:
 
 		return distSq <= (this->radius + Sphere.radius) * (this->radius + Sphere.radius);
 	}
+
+
+	//Unused for now
+	bool isLineIntersectAABB(Vector3& origin, Vector3& dir, Vector3& outNearPoint)
+	{
+		Vector3 MinPt = (*this->mid + this->min);
+		Vector3 MaxPt = (*this->mid + this->max);
+		dir.Normalize();
+		Vector3 invDir(1.0f / dir.x, 1.0f / dir.y, 1.0f / dir.z);
+
+		float lambdaMinX = (MinPt.x - origin.x) * invDir.x;
+		float lambdaMaxX = (MaxPt.x - origin.x) * invDir.x;
+		float lambdaMinY = (MinPt.y - origin.y) * invDir.y;
+		float lambdaMaxY = (MaxPt.y - origin.y) * invDir.y;
+		float lambdaMinZ = (MinPt.z - origin.z) * invDir.z;
+		float lambdaMaxZ = (MaxPt.z - origin.z) * invDir.z;
+
+		//Rearrange the max and min
+		if (lambdaMinX > lambdaMaxX) std::swap(lambdaMinX, lambdaMaxX);
+		if (lambdaMinY > lambdaMaxY) std::swap(lambdaMinY, lambdaMaxY);
+		if (lambdaMinZ > lambdaMaxZ) std::swap(lambdaMinZ, lambdaMaxZ);
+
+		if ((lambdaMinX > lambdaMaxY) || (lambdaMinY > lambdaMaxX))
+			return false;
+
+		if (lambdaMinY > lambdaMinX)
+			lambdaMinX = lambdaMinY;
+
+		if (lambdaMaxY < lambdaMaxX)
+			lambdaMaxX = lambdaMaxY;
+
+		if ((lambdaMinX > lambdaMaxZ) || (lambdaMinZ > lambdaMaxX))
+			return false;
+		if (lambdaMinZ > lambdaMinX)
+			lambdaMinX = lambdaMinZ;
+		if (lambdaMaxZ < lambdaMaxX)
+			lambdaMaxX = lambdaMaxZ;
+
+		outNearPoint = origin + (lambdaMinX * dir);
+		return true;
+	}
+	bool isLineIntersectAABB(Vector3& origin, Vector3& dir)
+	{
+		Vector3 MinPt = (*this->mid + this->min);
+		Vector3 MaxPt = (*this->mid + this->max);
+		dir.Normalize();
+		Vector3 invDir(1.0f / dir.x, 1.0f / dir.y, 1.0f / dir.z);
+
+		float lambdaMinX = (MinPt.x - origin.x) * invDir.x;
+		float lambdaMaxX = (MaxPt.x - origin.x) * invDir.x;
+		float lambdaMinY = (MinPt.y - origin.y) * invDir.y;
+		float lambdaMaxY = (MaxPt.y - origin.y) * invDir.y;
+		float lambdaMinZ = (MinPt.z - origin.z) * invDir.z;
+		float lambdaMaxZ = (MaxPt.z - origin.z) * invDir.z;
+
+		//Rearrange the max and min
+		if (lambdaMinX > lambdaMaxX) std::swap(lambdaMinX, lambdaMaxX);
+		if (lambdaMinY > lambdaMaxY) std::swap(lambdaMinY, lambdaMaxY);
+		if (lambdaMinZ > lambdaMaxZ) std::swap(lambdaMinZ, lambdaMaxZ);
+
+		if ((lambdaMinX > lambdaMaxY) || (lambdaMinY > lambdaMaxX))
+			return false;
+
+		if (lambdaMinY > lambdaMinX)
+			lambdaMinX = lambdaMinY;
+
+		if (lambdaMaxY < lambdaMaxX)
+			lambdaMaxX = lambdaMaxY;
+
+		if ((lambdaMinX > lambdaMaxZ) || (lambdaMinZ > lambdaMaxX))
+			return false;
+		if (lambdaMinZ > lambdaMinX)
+			lambdaMinX = lambdaMinZ;
+		if (lambdaMaxZ < lambdaMaxX)
+			lambdaMaxX = lambdaMaxZ;
+
+		return true;
+	}
 };
 
 #endif

@@ -138,6 +138,7 @@ void GameScene::Update(double dt)
 
 
 	fps = 1.0 / dt;
+	MyDebugger::GetInstance()->watch_this_info("fps", fps);
 }
 
 

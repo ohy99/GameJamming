@@ -25,6 +25,8 @@ public:
 	//overwrite virtuals from gameobj
 	void update(double dt);
 	void render();
+	void set_intended_pos(Vector3* pos);
+	Vector3 get_intended_pos() { return Vector3(*intended_pos); }
 
 	void render_debug();
 	Enemy();

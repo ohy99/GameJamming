@@ -8,11 +8,12 @@
 
 class Loader : public Singleton<Loader>
 {
-	friend Singleton;
-	
+public :
 	typedef std::vector<Vector3> vec;//path
 	typedef std::vector<vec> vecVec;//pattern
 	typedef std::vector<vecVec> vecVecVec;//all patterns
+private:
+	friend Singleton;
 	
 	void load_this_pattern(vecVecVec & vec, std::ifstream& fileStream, char * buf);
 	void load_this_path(vecVecVec & vec, std::ifstream& fileStream, char * buf);

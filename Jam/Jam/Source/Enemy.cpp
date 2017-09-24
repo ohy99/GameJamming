@@ -22,10 +22,15 @@ void Enemy::update_movement(double dt)
 		return;
 
 	Vector3 metointended = -this->pos + *intended_pos;
+	if (metointended.LengthSquared() == 0.f)
+		return;
+
 	if (metointended.LengthSquared() > move_speed * move_speed * (float)dt * (float)dt)
 		this->pos += metointended.Normalized() * move_speed * (float)dt;
 	else
 		this->pos += metointended;
+
+	this->dir = metointended.Normalized();
 }
 
 void Enemy::update_weapon(double dt)
@@ -40,7 +45,7 @@ void Enemy::update_weapon(double dt)
 	Vector3 metoplayer = -this->pos + Player::GetInstance()->pos;
 	weapon[0]->pos = this->pos;
 	weapon[0]->dir = metoplayer;
-	this->dir = metoplayer;
+	//this->dir = metoplayer;
 
 	weapon[0]->discharge();
 }
@@ -69,6 +74,13 @@ void Enemy::deactivate()
 {
 	this->active = false;
 	CollisionManager::GetInstance()->remove_collider(this->collider);
+
+	if (intended_pos)
+	{
+		delete intended_pos;
+		intended_pos = nullptr;
+	}
+
 }
 
 void Enemy::update(double dt)
@@ -82,6 +94,11 @@ void Enemy::render()
 	GameObject::render();
 
 	hitpoint.render_hpbar(Vector3(pos.x, pos.y + scale.y, pos.z), Vector3(scale.x, 1));
+}
+
+void Enemy::set_intended_pos(Vector3 * pos)
+{
+	this->intended_pos = new Vector3(*pos);
 }
 
 void Enemy::render_debug()
@@ -112,4 +129,10 @@ Enemy::~Enemy()
 	delete collider;
 	for (int i = 0; i < sizeof(weapon)/sizeof(weapon[0]); ++i)
 		delete weapon[i];
+
+	if (intended_pos)
+	{
+		delete intended_pos;
+		intended_pos = nullptr;
+	}
 }

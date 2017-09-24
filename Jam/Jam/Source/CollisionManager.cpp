@@ -23,8 +23,8 @@ void CollisionManager::update(double dt)
 			//response is activated inside the function if true
 			(*first_iter)->check_collision(*second_iter);
 
-			MyDebugger::GetInstance()->watch_this_info("first col", &(*first_iter));
-			MyDebugger::GetInstance()->watch_this_info("second col", &(*second_iter));
+			//MyDebugger::GetInstance()->watch_this_info("first col", &(*first_iter));
+			//MyDebugger::GetInstance()->watch_this_info("second col", &(*second_iter));
 		}
 	}
 
