@@ -12,7 +12,7 @@ SceneManager::SceneManager() {
 	this->addScene("OPTIONS", new Options());
 	this->addScene("Editor", new EditorScene());
 
-	this->setCurrScene("GAME");
+	this->setCurrScene("MAIN");
 
 }
 

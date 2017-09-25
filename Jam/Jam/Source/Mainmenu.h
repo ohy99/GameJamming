@@ -7,6 +7,8 @@
 #include "Camera.h"
 #include "Button.h"
 #include "AudioPlayer.h"
+#include <map>
+#include "MyTimer.h"
 class Mesh;
 
 class Mainmenu : public Scene
@@ -25,13 +27,10 @@ protected:
 	double fps;
 
 	Mesh* axis;
-	Button title;
-	Mesh* quit;
-	Mesh* option;
-	Button playbutt;
-	Button optionbutt;
-	Button quitbutt;
-	Button levelselectbutt;
+
+	std::map<std::string , Button*> buttons;
+	MyTimer feedback_timer;
+	const std::string* next_scene;
 	AudioPlayer audioPlayer;
 	//Mesh* background;
 	float worldHeight;

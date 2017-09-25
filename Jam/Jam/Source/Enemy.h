@@ -4,6 +4,7 @@
 #include "CharacterBase.h"
 #include "GameObject.h"
 #include "Faction.h"
+#include "MyTimer.h"
 class Collider;
 class Weapon;
 
@@ -14,6 +15,7 @@ class Enemy : public CharacterBase, public GameObject
 	//Variables
 	float move_speed;
 	Vector3* intended_pos;
+	MyTimer slower_fire_rate;
 
 	//Methods
 	void update_movement(double dt);

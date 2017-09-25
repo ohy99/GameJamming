@@ -35,16 +35,19 @@ void Enemy::update_movement(double dt)
 
 void Enemy::update_weapon(double dt)
 {
-	double et = 0.0;
-	et += dt;
-	if (et < 0.75)
+	weapon[0]->update(dt);
+
+
+	slower_fire_rate.update_timer(dt);
+
+	if (!slower_fire_rate.is_Duration_Passed())
 		return;
 
-	et = 0.0;
+	slower_fire_rate.reset_timer();
 
 	Vector3 metoplayer = -this->pos + Player::GetInstance()->pos;
 	weapon[0]->pos = this->pos;
-	weapon[0]->dir = metoplayer;
+	weapon[0]->dir = metoplayer.Normalized();
 	//this->dir = metoplayer;
 
 	weapon[0]->discharge();
@@ -65,10 +68,12 @@ void Enemy::init(Vector3 pos, Vector3 scale, Vector3 dir)
 	collider->set_collision(Collision::CollisionType::AABB, &this->pos, -this->scale * 0.5f, this->scale * 0.5f);
 	CollisionManager::GetInstance()->add_collider(this->collider);
 
-	this->faction.side = Faction::ENEMY;
+
 	//variables
 	move_speed = 10.f;
 	this->hitpoint.init_hp(100);
+
+	slower_fire_rate.set_duration(0.75);
 }
 void Enemy::deactivate()
 {
@@ -110,6 +115,7 @@ Enemy::Enemy() : intended_pos(nullptr), move_speed(10.f)
 	this->collider = new Collider(this, new PlayerResponse);
 	RenderManager::GetInstance()->attach_renderable(this);
 
+	this->faction.side = Faction::ENEMY;
 	//WEAPON
 	weapon[0] = new PewPew(this->faction.side);
 	weapon[0]->scale.Set(1, 1);

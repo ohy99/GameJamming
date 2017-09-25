@@ -50,30 +50,26 @@ void Mainmenu::Init()
 
 	worldHeight = 100;
 	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
+	worldWidth = worldHeight * 4.f / 3.f;
 
 	Math::InitRNG();
 
-	axis = MeshList::GetInstance()->getMesh("MENUBACKGROUND");
-	playbutt.pos.Set(0, 9, 0);
-	playbutt.resize_button(20, 10);
-	playbutt.mesh = MeshList::GetInstance()->getMesh("PLAYBUTTON");
-	optionbutt.pos.Set(0, -25, 0);
-	optionbutt.resize_button(35, 10);
-	optionbutt.mesh = MeshList::GetInstance()->getMesh("OPTIONSBUTTON");
-	quitbutt.pos.Set(0, -40.5, 0);
-	quitbutt.resize_button(20, 10);
-	quitbutt.mesh = MeshList::GetInstance()->getMesh("QUITBUTTON");
-	levelselectbutt.pos.Set(0, -7.5, 0);
-	levelselectbutt.resize_button(40, 10);
-	levelselectbutt.mesh = MeshList::GetInstance()->getMesh("LEVELSELECTBUTTON");
-	title.pos.Set(0, 35, 0);
-	title.resize_button(80, 30);
-	title.mesh = MeshList::GetInstance()->getMesh("TITLE");
+	//axis = MeshList::GetInstance()->getMesh("MENUBACKGROUND");
 
-	audioPlayer.playlist.push_back(new Sound("Audio//Level1.mp3"));
-	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
+	Vector3 middle_pt(worldWidth * 0.5f, worldHeight * 0.5f);
 
-	audioPlayer.playLoop(audioPlayer.playlist[0]->fileName_);
+	Button* temp = new Button();
+	temp->mesh = MeshList::GetInstance()->getMesh("Quad");
+	temp->pos = middle_pt;
+	temp->default_scale.Set(35, 10);
+	temp->resize_button(temp->default_scale);
+
+	buttons.insert(std::make_pair("GAME", temp));
+
+	MouseController::GetInstance()->SetKeepMouseCentered(false);
+	next_scene = nullptr;
+	feedback_timer.set_duration(0.5);
+	feedback_timer.reset_timer();
 }
 
 
@@ -84,41 +80,63 @@ void Mainmenu::Update(double dt)
 	double x, y;
 	MouseController::GetInstance()->GetMousePosition(x, y);
 
-	PhysicsManager::GetInstance()->update(dt);
-	//Update collisions
-	CollisionManager::GetInstance()->update(dt);
-
 	int w = Application::GetWindowWidth();
 	int h = Application::GetWindowHeight();
 	//std::cout << float(x / w * worldWidth) << std::endl;
 	fps = 1.0 / dt;
 	//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
 
-	Vector3 cursor_point_in_world_space(x / w * worldWidth - worldWidth * 0.5f, (Application::GetWindowHeight() - y) / h * worldHeight - worldHeight * 0.5f);
+	Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
 	Collision cursor_collider;
 	cursor_collider.collisionType = Collision::POINT;
 	cursor_collider.mid = &cursor_point_in_world_space;
-	if (MouseController::GetInstance()->IsButtonPressed(0))
+
+
+	for each (auto &butt in buttons)
 	{
-		if (playbutt.collision.isCollide(cursor_collider))
+		if (butt.second->collision.isCollide(cursor_collider))
 		{
-			SceneManager::GetInstance()->setNextScene("GAME");
+			if (MouseController::GetInstance()->IsButtonPressed(MouseController::LMB))
+			{
+				butt.second->is_triggered = true;
+			}
+			else if (MouseController::GetInstance()->IsButtonDown(MouseController::LMB))
+			{
+				butt.second->is_triggered = true;
+				butt.second->scale.Set(butt.second->default_scale.x * 0.9f, butt.second->default_scale.y * 0.95f);
+			}
+			else if (MouseController::GetInstance()->IsButtonReleased(MouseController::LMB) && butt.second->is_triggered)
+			{
+				//switch scene babi
+				next_scene = &butt.first;
+				//got is triggered because if u click outside and release on the button, this shit will trigger
+				//this bool  prevents it from happening
+				butt.second->is_triggered = false;
+			}
+			else if (MouseController::GetInstance()->IsButtonUp(MouseController::LMB))
+			{
+				butt.second->resize_button(butt.second->default_scale.x * 1.1f, butt.second->default_scale.y * 1.2f);
+			}
 		}
-		if (levelselectbutt.collision.isCollide(cursor_collider))
+		else
 		{
-			SceneManager::GetInstance()->setNextScene("LEVELSELECT");
+			butt.second->is_triggered = false;
+			butt.second->resize_button(butt.second->default_scale);
 		}
-		if (optionbutt.collision.isCollide(cursor_collider))
+	}
+	
+	if (next_scene)
+	{
+		//next scene set alr
+		feedback_timer.update_timer(dt);
+
+		if (feedback_timer.is_Duration_Passed())
 		{
-			SceneManager::GetInstance()->setNextScene("OPTIONS");
-		}	
-		if (quitbutt.collision.isCollide(cursor_collider))
-		{
-			SceneManager::GetInstance()->setExitGame(true);
+			SceneManager::GetInstance()->setNextScene(*next_scene);
 		}
 	}
 
-	//std::cout<<"main:"<<audioPlayer.getCurrentVolume()<<std::endl;
+
 }
 
 
@@ -129,7 +147,7 @@ void Mainmenu::Render()
 
 	// Projection matrix : Orthographic Projection
 	Mtx44 projection;
-	projection.SetToOrtho(-worldWidth * 0.5f, worldWidth * 0.5f, -worldHeight * 0.5f, worldHeight * 0.5f, -10, 10);
+	projection.SetToOrtho(0, worldWidth, 0, worldHeight, -10, 10);
 	Graphics::GetInstance()->projectionStack.LoadMatrix(projection);
 
 	// Camera matrix
@@ -144,22 +162,28 @@ void Mainmenu::Render()
 
 	MS& ms = Graphics::GetInstance()->modelStack;
 	ms.PushMatrix();
-	ms.Scale(135, 100, 1);
+	//ms.Scale(135, 100, 1);
 	RenderHelper::RenderMesh(axis, false);
 	ms.PopMatrix();
 
 
-	playbutt.render_button();
-	optionbutt.render_button();
-	quitbutt.render_button();
-	levelselectbutt.render_button();
-	title.render_button();
+	for each (auto &butt in buttons)
+	{
+		butt.second->render_button();
+	}
 }
 
 void Mainmenu::Exit()
 {
-	audioPlayer.pause();
+	//audioPlayer.pause();
 
-
+	//delete all buttons
+	for each (auto butt in buttons)
+	{
+		delete butt.second;
+		butt.second = nullptr;
+	}
+	buttons.clear();
+	next_scene = nullptr;
 
 }

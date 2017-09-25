@@ -9,6 +9,7 @@
 #include "Graphics.h"
 #include "Loader.h"
 #include "GlobalVariableManager.h"
+#include "Player.h"
 
 EnemyManager::EnemyManager()
 {
@@ -36,7 +37,11 @@ void EnemyManager::update(double dt)
 	for (std::list< std::pair<Enemy*, path_info > >::iterator iter = active_enemy.begin(); iter != active_enemy.end();)
 	{
 		std::pair<Enemy*, path_info >  &e = *iter;
+
+		//update its own timer etc
 		e.first->update(dt);
+
+
 		if (e.first->hitpoint.get_hp_percentage() <= 0.f)
 		{
 			e.first->deactivate();

@@ -1,7 +1,7 @@
 #include "PhysicsManager.h"
 
 #include "GameObject.h"
-
+#include "MyDebugger.h"
 
 PhysicsManager::PhysicsManager() //: gravity(0, -10, 0)
 {
@@ -38,6 +38,7 @@ void PhysicsManager::update(double dt) {
 		//	proj->pos += proj->velocity * (float)dt;
 
 		//}
+
 	}
 }
 
