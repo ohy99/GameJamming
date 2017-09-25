@@ -14,6 +14,7 @@ public:
 	void update_timer(double dt) { elapsed_time = Math::Min(elapsed_time + dt, duration); }
 	bool is_Duration_Passed() { return elapsed_time >= duration; }
 	void reset_timer() { elapsed_time = 0.0; }
+	double get_current_percent() { return elapsed_time / duration; }
 };
 
 #endif // !MYTIMER_H

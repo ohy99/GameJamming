@@ -133,6 +133,7 @@ void GameScene::Update(double dt)
 	CollisionManager::GetInstance()->update(dt);
 	//update the show hp thing
 	ShowHpManager::GetInstance()->update(dt);
+	CameraManager::GetInstance()->update(dt);
 
 	if (KeyboardController::GetInstance()->IsKeyPressed(VK_F1))
 	{
