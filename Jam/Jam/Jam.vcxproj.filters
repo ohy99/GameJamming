@@ -80,6 +80,15 @@
     <ClCompile Include="Source\SceneManager.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EnemyCollisionResponse.cpp">
+      <Filter>Collision\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\HUD.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CameraManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\EnvironmentManager.h">
@@ -197,6 +206,15 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\Loader.h" />
+    <ClInclude Include="Source\EnemyCollisionResponse.h">
+      <Filter>Collision\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CameraManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HUD.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Managers">

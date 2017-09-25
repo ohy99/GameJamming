@@ -28,6 +28,8 @@
 #include "DmgHitBoxManager.h"
 #include "EnemyManager.h"
 #include "Enemy.h"
+#include "CameraManager.h"
+#include "HUD.h"
 
 GameScene::GameScene()
 {
@@ -80,6 +82,7 @@ void GameScene::Init()
 	MouseController::GetInstance()->SetKeepMouseCentered(false);
 
 	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
+	CameraManager::GetInstance()->attach_camera(&camera);
 	axis = MeshBuilder::GenerateAxes("", 100, 100, 100);
 
 	worldHeight = 100;
@@ -169,6 +172,7 @@ void GameScene::Render()
 
 	ShowHpManager::GetInstance()->render_all_hp_text();
 	RenderManager::GetInstance()->post_render();
+	HUD::GetInstance()->render();
 
 	MyDebugger::GetInstance()->render_debug_info();
 	//hax

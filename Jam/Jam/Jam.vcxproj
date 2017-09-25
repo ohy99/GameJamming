@@ -158,12 +158,14 @@
     <ClCompile Include="Source\AOECollisionResponse.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\BamBamMelee.cpp" />
+    <ClCompile Include="Source\CameraManager.cpp" />
     <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\DamageHitCollisionResponse.cpp" />
     <ClCompile Include="Source\DmgHitBox.cpp" />
     <ClCompile Include="Source\DmgHitBoxManager.cpp" />
     <ClCompile Include="Source\EditorScene.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\EnemyCollisionResponse.cpp" />
     <ClCompile Include="Source\EnemyInfo.cpp" />
     <ClCompile Include="Source\EnemyManager.cpp" />
     <ClCompile Include="Source\EnvironmentManager.cpp" />
@@ -171,6 +173,7 @@
     <ClCompile Include="Source\GameScene.cpp" />
     <ClCompile Include="Source\CollisionManager.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
+    <ClCompile Include="Source\HUD.cpp" />
     <ClCompile Include="Source\InputController.cpp" />
     <ClCompile Include="Source\Loader.cpp" />
     <ClCompile Include="Source\main.cpp" />
@@ -190,6 +193,7 @@
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\AttackState.h" />
     <ClInclude Include="Source\BamBamMelee.h" />
+    <ClInclude Include="Source\CameraManager.h" />
     <ClInclude Include="Source\CharacterBase.h" />
     <ClInclude Include="Source\Collider.h" />
     <ClInclude Include="Source\CollisionResponse.h" />
@@ -202,6 +206,7 @@
     <ClInclude Include="Source\DmgHitBoxManager.h" />
     <ClInclude Include="Source\EditorScene.h" />
     <ClInclude Include="Source\Enemy.h" />
+    <ClInclude Include="Source\EnemyCollisionResponse.h" />
     <ClInclude Include="Source\EnemyInfo.h" />
     <ClInclude Include="Source\EnemyManager.h" />
     <ClInclude Include="Source\EnvironmentManager.h" />
@@ -209,6 +214,7 @@
     <ClInclude Include="Source\GameObjectManager.h" />
     <ClInclude Include="Source\GameScene.h" />
     <ClInclude Include="Source\CollisionManager.h" />
+    <ClInclude Include="Source\HUD.h" />
     <ClInclude Include="Source\InputController.h" />
     <ClInclude Include="Source\Loader.h" />
     <ClInclude Include="Source\Mainmenu.h" />

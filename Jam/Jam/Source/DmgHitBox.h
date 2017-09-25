@@ -32,6 +32,7 @@ public:
 	void set_die_condition(DieCondition* die) { this->die_condition = die; }
 	Physics* get_physics_component() { return &physic; }
 	Collider* get_collider_component() { return collider; }
+	Faction* get_faction_component() { return &faction; }
 };
 
 #endif // !DMGHITBOX_H

@@ -60,6 +60,8 @@ void Player::init()
 	//variables
 	move_speed = 10.f;
 	this->hitpoint.init_hp(100);
+	this->point_multiplier = 1.f;
+	this->point = 0;
 }
 
 void Player::update(double dt)
@@ -128,6 +130,16 @@ void Player::render_debug()
 	ms.Translate(this->pos);
 
 	ms.PopMatrix();
+}
+
+void Player::add_point(pt point)
+{
+	this->point += (pt)(point * point_multiplier);
+}
+
+Player::pt Player::get_point()
+{
+	return this->point;
 }
 
 void Player::render()

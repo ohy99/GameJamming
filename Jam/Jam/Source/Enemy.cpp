@@ -15,6 +15,7 @@
 #include "BamBamMelee.h"
 #include "MyDebugger.h"
 #include "Player.h"
+#include "EnemyCollisionResponse.h"
 
 void Enemy::update_movement(double dt)
 {
@@ -112,7 +113,7 @@ void Enemy::render_debug()
 
 Enemy::Enemy() : intended_pos(nullptr), move_speed(10.f)
 {
-	this->collider = new Collider(this, new PlayerResponse);
+	this->collider = new Collider(this, new EnemyResponse);
 	RenderManager::GetInstance()->attach_renderable(this);
 
 	this->faction.side = Faction::ENEMY;

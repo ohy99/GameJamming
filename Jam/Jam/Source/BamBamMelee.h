@@ -8,7 +8,7 @@ class BamBam : public Weapon
 {
 public:
 	BamBam(Faction::FACTION_SIDE side) {
-		this->set(15, 20, 1, DmgHitBoxManager::DMG_COLLIDER_TYPE::MELEE, 0, side);
+		this->set(80, 120, 1, DmgHitBoxManager::DMG_COLLIDER_TYPE::MELEE, 0, side);
 		this->mesh = MeshList::GetInstance()->getMesh("REDLINE");
 	}
 	~BamBam() {}

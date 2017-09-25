@@ -25,6 +25,11 @@ class Player : public Singleton<Player>, public CharacterBase, public GameObject
 	//Variables
 	float move_speed;
 
+	//LOLL
+	typedef unsigned int pt;
+	pt point;
+	float point_multiplier;
+
 	//Methods
 	void update_movement(double dt);
 	void update_weapon(double dt);
@@ -36,6 +41,9 @@ public:
 	void render();
 
 	void render_debug();
+
+	void add_point(pt point);
+	pt get_point();
 protected:
 	Player();
 	~Player();

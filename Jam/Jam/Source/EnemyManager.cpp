@@ -45,6 +45,7 @@ void EnemyManager::update(double dt)
 		if (e.first->hitpoint.get_hp_percentage() <= 0.f)
 		{
 			e.first->deactivate();
+			Player::GetInstance()->add_point(100);
 			iter = active_enemy.erase(iter);
 			continue;
 		}
