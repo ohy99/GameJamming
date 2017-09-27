@@ -32,6 +32,8 @@ void Enemy::update_movement(double dt)
 		this->pos += metointended;
 
 	this->dir = metointended.Normalized();
+
+	weapon[0]->pos = this->pos;
 }
 
 void Enemy::update_weapon(double dt)

@@ -8,7 +8,7 @@ class PewPew : public Weapon
 {
 public:
 	PewPew(Faction::FACTION_SIDE side) { 
-		this->set(17, 31, 5, DmgHitBoxManager::DMG_COLLIDER_TYPE::PROJECTILE, 100, side);
+		this->set(8, 10, 5, DmgHitBoxManager::DMG_COLLIDER_TYPE::PROJECTILE, 25, side);
 		this->mesh = MeshList::GetInstance()->getMesh("BLUELINE");
 	}
 	~PewPew() {}

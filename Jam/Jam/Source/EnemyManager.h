@@ -28,6 +28,8 @@ private:
 
 
 	std::list< std::pair<Enemy*, path_info > > active_enemy;
+	float max_movespd;
+	float acceleration;
 
 	std::vector< std::vector< std::vector<Vector3> > > patterns;
 
