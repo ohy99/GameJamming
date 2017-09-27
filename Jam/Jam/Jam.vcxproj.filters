@@ -34,9 +34,6 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="Source\Player.cpp" />
-    <ClCompile Include="Source\Weapon.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Source\ParticleManager.cpp">
       <Filter>Managers\Poolers</Filter>
     </ClCompile>
@@ -45,9 +42,6 @@
     </ClCompile>
     <ClCompile Include="Source\DmgHitBox.cpp">
       <Filter>GameObject\HitBoxClass</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\BamBamMelee.cpp">
-      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Source\Enemy.cpp">
       <Filter>GameObject</Filter>
@@ -88,6 +82,12 @@
     </ClCompile>
     <ClCompile Include="Source\CameraManager.cpp">
       <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BamBamMelee.cpp">
+      <Filter>GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Weapon.cpp">
+      <Filter>GameObject\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,20 +133,11 @@
     <ClInclude Include="Source\Collider.h">
       <Filter>Collision</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Weapon.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PewPewGun.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Source\ParticleManager.h">
       <Filter>Managers\Poolers</Filter>
     </ClInclude>
     <ClInclude Include="Source\DmgHitBoxManager.h">
       <Filter>Managers\Poolers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\BamBamMelee.h">
-      <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Source\DmgHitBox.h">
       <Filter>GameObject\HitBoxClass</Filter>
@@ -215,6 +206,18 @@
     <ClInclude Include="Source\HUD.h">
       <Filter>Managers</Filter>
     </ClInclude>
+    <ClInclude Include="Source\BamBamMelee.h">
+      <Filter>GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PewPewGun.h">
+      <Filter>GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MachineGun.h">
+      <Filter>GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Weapon.h">
+      <Filter>GameObject\Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Managers">
@@ -246,6 +249,9 @@
     </Filter>
     <Filter Include="Collision\Responses">
       <UniqueIdentifier>{a9a86336-289a-4b33-a68e-fe390a3c5ade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Weapon">
+      <UniqueIdentifier>{f2f99825-18d5-433e-9ffb-b6341d24950d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -11,7 +11,7 @@
 #include "GlobalVariableManager.h"
 #include "Player.h"
 
-EnemyManager::EnemyManager()
+EnemyManager::EnemyManager() : max_movespd(25.f), acceleration(10.f)
 {
 	for (int i = 0; i < 50; ++i)
 	{
@@ -40,7 +40,7 @@ void EnemyManager::update(double dt)
 
 		//update its own timer etc
 		e.first->update(dt);
-
+		e.first->inc_movespd(this->acceleration * (float)dt, this->max_movespd);
 
 		if (e.first->hitpoint.get_hp_percentage() <= 0.f)
 		{
@@ -74,7 +74,6 @@ void EnemyManager::update(double dt)
 					e.first->set_intended_pos(&(*e.second.current_node_iter));
 				}
 			}
-
 
 		}
 		else

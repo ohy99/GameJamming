@@ -14,6 +14,7 @@
 #include "PewPewGun.h"
 #include "BamBamMelee.h"
 #include "MyDebugger.h"
+#include "MachineGun.h"
 
 Player::Player() : inputController(*InputController::GetInstance()), collider(nullptr)
 {
@@ -45,8 +46,9 @@ void Player::init()
 	CollisionManager::GetInstance()->add_collider(this->collider);
 
 	//WEAPON
-	weapon[0] = new PewPew(this->faction.side);
+	weapon[0] = new MachineGun(this->faction.side);
 	weapon[0]->scale.Set(1, 1);
+	
 	RenderManager::GetInstance()->attach_renderable(weapon[0], 1);
 	weapon[0]->active = true;
 	weapon[0]->name = "GUN";
@@ -58,7 +60,7 @@ void Player::init()
 	weapon[1]->name = "GUN";
 
 	//variables
-	move_speed = 10.f;
+	move_speed = 30.f;
 	this->hitpoint.init_hp(100);
 	this->point_multiplier = 1.f;
 	this->point = 0;

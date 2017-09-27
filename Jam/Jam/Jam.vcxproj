@@ -217,6 +217,7 @@
     <ClInclude Include="Source\HUD.h" />
     <ClInclude Include="Source\InputController.h" />
     <ClInclude Include="Source\Loader.h" />
+    <ClInclude Include="Source\MachineGun.h" />
     <ClInclude Include="Source\Mainmenu.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GlobalVariableManager.h" />
