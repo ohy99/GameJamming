@@ -95,7 +95,7 @@ void GameScene::Init()
 	Player::GetInstance()->init();
 
 	//ProjectileManager::GetInstance();
-	EnemyManager::GetInstance();
+	EnemyManager::GetInstance()->init();
 	DmgHitBoxManager::GetInstance();
 	ShowHpManager::GetInstance();
 }

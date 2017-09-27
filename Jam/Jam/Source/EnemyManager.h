@@ -30,18 +30,26 @@ private:
 	std::list< std::pair<Enemy*, path_info > > active_enemy;
 	float max_movespd;
 	float acceleration;
+	float initial_movespd;
+	float max_hp;
 
 	std::vector< std::vector< std::vector<Vector3> > > patterns;
 
 	MyTimer spawn_interval;
+	MyTimer pattern_interval;
 
 	void check_spawn(double dt);
+	float find_longest_distance(int pattern_index);
+	int current_pattern;
+	void rand_pattern(double dt);
 	Vector3 get_nearest_spawn(Vector3 origin, Vector3 dir);
 public:
-	
+	void init();
 	void update(double dt);
 	void render();
+
 	Enemy* get_inactive();
+	void deactivate_all();
 protected:
 	EnemyManager();
 	~EnemyManager();

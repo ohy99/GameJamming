@@ -14,6 +14,7 @@ Header file for math helper functions
 #include <exception>
 #include <ctime>
 #include <cstdlib>
+#include <vector>
 
 /******************************************************************************/
 /*!
@@ -249,6 +250,27 @@ Return a random float between min and max
 		float num = (max - min) * RandFloat ();
 		return (num + min);
 	}//end of RandFloatMinMax function
+
+
+	inline std::vector<float> Quadratic(float a, float b, float c)
+	{
+		float discriminant = b * b - 4 * a * c;
+		std::vector<float> result;
+		if (discriminant > 0)
+		{
+			float root = (-b + sqrtf(discriminant)) / 2 * a;
+			result.push_back(root);
+			root = (-b - sqrtf(discriminant)) / 2 * a;
+			result.push_back(root);
+		}
+		else if (discriminant == 0)
+		{
+			float root = -b / 2 * a;
+			result.push_back(root);
+		}
+
+		return result;
+	}
 
 }//end namespace Math
 

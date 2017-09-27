@@ -22,7 +22,7 @@ class Enemy : public CharacterBase, public GameObject
 	void update_weapon(double dt);
 
 public:
-	void init(Vector3 pos, Vector3 scale, Vector3 dir);
+	void init(Vector3 pos, Vector3 scale, Vector3 dir, float move_spd = 10.f, float hp = 100.f);
 	void deactivate();
 	//overwrite virtuals from gameobj
 	void update(double dt);
