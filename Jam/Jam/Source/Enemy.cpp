@@ -56,7 +56,7 @@ void Enemy::update_weapon(double dt)
 	weapon[0]->discharge();
 }
 
-void Enemy::init(Vector3 pos, Vector3 scale, Vector3 dir)
+void Enemy::init(Vector3 pos, Vector3 scale, Vector3 dir, float move_spd, float hp)
 {
 	this->pos = pos;
 	this->scale = scale;
@@ -73,8 +73,8 @@ void Enemy::init(Vector3 pos, Vector3 scale, Vector3 dir)
 
 
 	//variables
-	move_speed = 10.f;
-	this->hitpoint.init_hp(100);
+	move_speed = move_spd;
+	this->hitpoint.init_hp(hp);
 
 	slower_fire_rate.set_duration(0.75);
 }
