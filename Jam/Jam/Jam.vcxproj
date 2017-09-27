@@ -158,9 +158,14 @@
     <ClCompile Include="Source\AOECollisionResponse.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\BamBamMelee.cpp" />
+    <ClCompile Include="Source\BasePart.cpp" />
+    <ClCompile Include="Source\Boss.cpp" />
     <ClCompile Include="Source\CameraManager.cpp" />
     <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\DamageHitCollisionResponse.cpp" />
+    <ClCompile Include="Source\DefaultLeft.cpp" />
+    <ClCompile Include="Source\DefaultMiddle.cpp" />
+    <ClCompile Include="Source\DefaultRight.cpp" />
     <ClCompile Include="Source\DmgHitBox.cpp" />
     <ClCompile Include="Source\DmgHitBoxManager.cpp" />
     <ClCompile Include="Source\EditorScene.cpp" />
@@ -193,6 +198,8 @@
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\AttackState.h" />
     <ClInclude Include="Source\BamBamMelee.h" />
+    <ClInclude Include="Source\BasePart.h" />
+    <ClInclude Include="Source\Boss.h" />
     <ClInclude Include="Source\CameraManager.h" />
     <ClInclude Include="Source\CharacterBase.h" />
     <ClInclude Include="Source\Collider.h" />

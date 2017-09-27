@@ -29,7 +29,6 @@
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\InputController.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
@@ -88,6 +87,24 @@
     </ClCompile>
     <ClCompile Include="Source\Weapon.cpp">
       <Filter>GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Boss.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BasePart.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DefaultLeft.cpp">
+      <Filter>Boss\BossPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DefaultRight.cpp">
+      <Filter>Boss\BossPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DefaultMiddle.cpp">
+      <Filter>Boss\BossPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Application.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +235,12 @@
     <ClInclude Include="Source\Weapon.h">
       <Filter>GameObject\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="Source\BasePart.h">
+      <Filter>Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Boss.h">
+      <Filter>Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Managers">
@@ -252,6 +275,12 @@
     </Filter>
     <Filter Include="GameObject\Weapon">
       <UniqueIdentifier>{f2f99825-18d5-433e-9ffb-b6341d24950d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Boss">
+      <UniqueIdentifier>{4ad479f0-e91c-4b23-b0cb-c5d9272e1c3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Boss\BossPart">
+      <UniqueIdentifier>{d7512200-feb7-4fc2-96ce-c43ab4be3f92}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
