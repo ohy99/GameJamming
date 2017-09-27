@@ -91,18 +91,22 @@ void Player::update_movement(double dt)
 	}
 	
 	if (inputController.isInputDown(InputController::MOVE_FRONT)) {
-		this->pos += this->dir * move_speed * (float)dt;
+		//this->pos += this->dir * move_speed * (float)dt;
+		this->pos += Vector3(0,1,0) * move_speed * (float)dt;
 	}
 	if (inputController.isInputDown(InputController::MOVE_BACK)) {
-		this->pos += -this->dir * move_speed * (float)dt;
+		//this->pos += -this->dir * move_speed * (float)dt;
+		this->pos += -Vector3(0, 1, 0) * move_speed * (float)dt;
 	}
 	if (inputController.isInputDown(InputController::MOVE_LEFT)) {
-		Vector3 right = this->dir.Cross(Vector3(0, 0, 1)).Normalize();
-		this->pos += -right * move_speed * (float)dt;
+		//Vector3 right = this->dir.Cross(Vector3(0, 0, 1)).Normalize();
+		//this->pos += -right * move_speed * (float)dt;
+		this->pos += -Vector3(1, 0, 0) * move_speed * (float)dt;
 	}
 	if (inputController.isInputDown(InputController::MOVE_RIGHT)) {
-		Vector3 right = this->dir.Cross(Vector3(0, 0, 1)).Normalize();
-		this->pos += right * move_speed * (float)dt;
+		//Vector3 right = this->dir.Cross(Vector3(0, 0, 1)).Normalize();
+		//this->pos += right * move_speed * (float)dt;
+		this->pos += Vector3(1, 0, 0) * move_speed * (float)dt;
 	}
 }
 
