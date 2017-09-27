@@ -39,7 +39,7 @@ void Loader::load_this_pattern(vecVecVec & vec, std::ifstream & fileStream, char
 {
 	//mark the start of pattern
 	vec.push_back(vecVec());
-	while (std::strcmp(buf, (end_of_pattern).c_str()) != 0)
+	while (std::strcmp(buf, (end_of_pattern).c_str()) != 0 && std::strcmp(buf, (end_of_pattern + "\r").c_str()) != 0)
 	{
 		fileStream.getline(buf, 256);
 		load_this_path(vec, fileStream, buf);
@@ -60,6 +60,8 @@ void Loader::load_this_path(vecVecVec & vec_, std::ifstream & fileStream, char *
 			current_path->push_back(temp);
 			fileStream.getline(buf, 256);
 		}
+		else
+			break;
 	}
 
 
