@@ -29,6 +29,8 @@ public:
 
 	static SpriteAnimation* GenerateSpriteAnimation(const std::string& meshName, unsigned numRow, unsigned numCol, float alpha);
 	static SpriteAnimation* GenerateOppositeSpriteAnimation(const std::string& meshName, unsigned numRow, unsigned numCol, float alpha);
+
+	static Mesh* GenerateCircle(const std::string &meshName, Color color, unsigned numSlice, float angle = 360.f);
 };
 
 #endif
