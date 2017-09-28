@@ -142,7 +142,6 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene.h" />
-    <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\InputController.h">
       <Filter>Managers</Filter>
     </ClInclude>
@@ -240,6 +239,9 @@
     </ClInclude>
     <ClInclude Include="Source\Boss.h">
       <Filter>Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Application.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

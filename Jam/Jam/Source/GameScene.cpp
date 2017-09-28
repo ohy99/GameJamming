@@ -30,6 +30,7 @@
 #include "Enemy.h"
 #include "CameraManager.h"
 #include "HUD.h"
+#include "Loader.h"
 
 GameScene::GameScene()
 {
@@ -57,6 +58,8 @@ GameScene::~GameScene()
 	MyDebugger::Destroy();
 	MouseController::Destroy();
 	KeyboardController::Destroy();
+	HUD::Destroy();
+	Loader::Destroy();
 }
 
 void GameScene::Init()

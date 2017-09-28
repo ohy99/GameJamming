@@ -32,7 +32,7 @@ protected:
 	Mesh* axis;
 	Mesh* bar;
 	int vol;
-	AudioPlayer audioPlayer;
+	//AudioPlayer audioPlayer;
 	//Mesh* background;
 	float worldHeight;
 	float worldWidth;

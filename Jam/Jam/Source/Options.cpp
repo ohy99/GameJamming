@@ -52,7 +52,7 @@ void Options::Init()
 
 	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
 	vol = 0;
-	vol = (100 - audioPlayer.getCurrentVolume()) / 10;
+	//vol = (100 - audioPlayer.getCurrentVolume()) / 10;
 	worldHeight = 100;
 	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
 
@@ -77,10 +77,10 @@ void Options::Init()
 	back.resize_button(30, 15);
 	back.mesh = MeshList::GetInstance()->getMesh("BACK");
 
-	audioPlayer.playlist.push_back(new Sound("Audio//Level1.mp3"));
-	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
+	//audioPlayer.playlist.push_back(new Sound("Audio//Level1.mp3"));
+	//audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
 
-	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
+//	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
 }
 
 
@@ -114,14 +114,14 @@ void Options::Update(double dt)
 			{
 				--vol;
 			}
-			audioPlayer.increaseVolume();
+			//audioPlayer.increaseVolume();
 		}
 		if (minusbutt.collision.isCollide(cursor_collider))
 		{
 			if (vol<10)
 			++vol;
 
-			audioPlayer.decreaseVolume();
+		//	audioPlayer.decreaseVolume();
 		}
 		if (back.collision.isCollide(cursor_collider))
 			SceneManager::GetInstance()->setNextScene("MAIN");
@@ -178,7 +178,7 @@ void Options::Render()
 
 void Options::Exit()
 {
-	audioPlayer.pause();
+	//audioPlayer.pause();
 	//if (axis)
 	//{
 	//	delete axis;

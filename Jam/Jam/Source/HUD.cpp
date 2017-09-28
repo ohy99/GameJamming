@@ -26,6 +26,8 @@ HUD::~HUD()
 		delete combo_circle[i];
 	}
 	delete combo_circle;
+
+	delete combo;
 }
 
 void HUD::render()

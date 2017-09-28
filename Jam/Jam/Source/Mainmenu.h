@@ -31,7 +31,7 @@ protected:
 	std::map<std::string , Button*> buttons;
 	MyTimer feedback_timer;
 	const std::string* next_scene;
-	AudioPlayer audioPlayer;
+	//AudioPlayer audioPlayer;
 	//Mesh* background;
 	float worldHeight;
 	float worldWidth;
