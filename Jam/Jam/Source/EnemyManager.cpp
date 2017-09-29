@@ -165,8 +165,10 @@ void EnemyManager::check_spawn(double dt)
 		}
 	}
 
-
-	spawn_interval.set_duration((double)Math::RandFloatMinMax(0.5f, 2.0f));
+	unsigned int num_of_path = patterns.at(current_pattern).size();
+	float min_time = num_of_path * 1.0f;
+	float max_time = num_of_path * 0.75f * 3.0f;
+	spawn_interval.set_duration((double)Math::RandFloatMinMax(min_time, max_time));
 	spawn_interval.reset_timer();
 }
 

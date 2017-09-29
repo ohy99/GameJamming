@@ -77,6 +77,8 @@ void Enemy::init(Vector3 pos, Vector3 scale, Vector3 dir, float move_spd, float 
 	this->hitpoint.init_hp(hp);
 
 	slower_fire_rate.set_duration(0.75);
+
+	weapon[0]->active = true;
 }
 void Enemy::deactivate()
 {
@@ -88,7 +90,7 @@ void Enemy::deactivate()
 		delete intended_pos;
 		intended_pos = nullptr;
 	}
-
+	weapon[0]->active = false;
 }
 
 void Enemy::update(double dt)
@@ -129,7 +131,7 @@ Enemy::Enemy() : intended_pos(nullptr), move_speed(10.f)
 	weapon[1] = new BamBam(this->faction.side);
 	weapon[1]->scale.Set(1, 1);
 	RenderManager::GetInstance()->attach_renderable(weapon[1], 1);
-	weapon[1]->active = true;
+	weapon[1]->active = false;
 	weapon[1]->name = "GUN";
 }
 

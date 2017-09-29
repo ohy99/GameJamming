@@ -356,6 +356,7 @@ void EditorScene::render_view_patterns()
 {
 	if (!loaded_pattern.size())
 		return;
+	current_pattern = Math::Wrap(current_pattern, 0, (int)loaded_pattern.size() - 1);
 
 	for (int path_index = 0; path_index < loaded_pattern.at(current_pattern).size(); ++path_index)
 	{

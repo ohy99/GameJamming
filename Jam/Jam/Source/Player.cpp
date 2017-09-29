@@ -15,6 +15,7 @@
 #include "BamBamMelee.h"
 #include "MyDebugger.h"
 #include "MachineGun.h"
+#include "ShotGun.h"
 
 Player::Player() : inputController(*InputController::GetInstance()), collider(nullptr)
 {
@@ -28,6 +29,12 @@ Player::~Player()
 	delete collider;
 	for (int i = 0; i < sizeof(weapon) / sizeof(weapon[0]); ++i)
 		delete weapon[i];
+
+	for each (auto w in weapon_list)
+	{
+		delete w;
+		w = nullptr;
+	}
 }
 
 void Player::init()
@@ -58,6 +65,26 @@ void Player::init()
 	RenderManager::GetInstance()->attach_renderable(weapon[1], 1);
 	weapon[1]->active = true;
 	weapon[1]->name = "GUN";
+
+	Weapon* weap = new MachineGun(this->faction.side);
+	weap->scale.Set(1, 1);
+	weapon_list.push_back(weap);
+
+	weap = new BamBam(this->faction.side);
+	weap->scale.Set(1, 1);
+	RenderManager::GetInstance()->attach_renderable(weap, 1);
+	weap->active = true;
+	weap->name = "GUN";
+	weapon_list.push_back(weap);
+
+	weap = new ShotGun(this->faction.side);
+	weap->scale.Set(1, 1);
+	RenderManager::GetInstance()->attach_renderable(weap, 1);
+	weap->active = true;
+	weap->name = "GUN";
+	weapon_list.push_back(weap);
+
+	curr_weap = 0;
 
 	//variables
 	move_speed = 30.f;
@@ -110,6 +137,7 @@ void Player::update_movement(double dt)
 	}
 }
 
+#include "KeyboardController.h"
 void Player::update_weapon(double dt)
 {
 	weapon[0]->update(dt);
@@ -118,14 +146,31 @@ void Player::update_weapon(double dt)
 	weapon[1]->update(dt);
 	weapon[1]->pos = this->pos;
 	weapon[1]->dir = this->dir;
-
-	//MyDebugger::GetInstance()->watch_this_info("SHOOT", inputController.isInputDown(InputController::SHOOT));
-	
-	if (inputController.isInputDown(InputController::SHOOT)) {
-		weapon[0]->discharge();
+	for each(auto &w in weapon_list)
+	{
+		w->update(dt);
+		w->pos = this->pos;
+		w->dir = this->dir;
 	}
+
+	
+	//if (inputController.isInputDown(InputController::SHOOT)) {
+	//	weapon[0]->discharge();
+	//}
+
+
 	if (inputController.isInputDown(InputController::MELEE)) {
 		weapon[1]->discharge();
+	}
+
+	//JUST DEBUG
+	if (KeyboardController::GetInstance()->IsKeyPressed('Q'))
+		curr_weap = Math::Wrap(curr_weap - 1, (unsigned)0, weapon_list.size() - 1);
+	if (KeyboardController::GetInstance()->IsKeyPressed('E'))
+		curr_weap = Math::Wrap(curr_weap + 1, (unsigned)0, weapon_list.size() - 1);
+
+	if (inputController.isInputDown(InputController::SHOOT)) {
+		weapon_list.at(curr_weap)->discharge();
 	}
 }
 

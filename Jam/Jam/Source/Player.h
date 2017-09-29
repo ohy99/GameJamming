@@ -22,6 +22,8 @@ class Player : public Singleton<Player>, public CharacterBase, public GameObject
 	InputController& inputController;
 	Collider* collider;
 	Weapon* weapon[2];
+	std::vector <Weapon*> weapon_list;
+	unsigned curr_weap;
 	//Variables
 	float move_speed;
 
