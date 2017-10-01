@@ -8,6 +8,7 @@
 #include "GameObject.h"
 #include "Faction.h"
 #include "CharacterBase.h"
+#include "MyTimer.h"
 class Weapon;
 class Collider;
 /********************************************************************************
@@ -31,6 +32,8 @@ class Player : public Singleton<Player>, public CharacterBase, public GameObject
 	typedef unsigned int pt;
 	pt point;
 	float point_multiplier;
+	MyTimer combo_timer;
+	double combo_duration;
 
 	//Methods
 	void update_movement(double dt);
@@ -46,6 +49,9 @@ public:
 
 	void add_point(pt point);
 	pt get_point();
+	MyTimer get_combo_timer();
+	void add_combo();
+	float get_multiplier();
 protected:
 	Player();
 	~Player();

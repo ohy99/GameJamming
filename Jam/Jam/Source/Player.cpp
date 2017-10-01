@@ -91,12 +91,22 @@ void Player::init()
 	this->hitpoint.init_hp(100);
 	this->point_multiplier = 1.f;
 	this->point = 0;
+
+	combo_duration = 1.0;
+	combo_timer.set_duration(combo_duration);
+	combo_timer.update_timer(combo_duration);
 }
 
 void Player::update(double dt)
 {
 	update_movement(dt);
 	update_weapon(dt);
+
+	//update combo
+	if (!combo_timer.is_Duration_Passed())
+		combo_timer.update_timer(dt);
+	else
+		point_multiplier = 1.0f;
 
 }
 
@@ -191,6 +201,22 @@ void Player::add_point(pt point)
 Player::pt Player::get_point()
 {
 	return this->point;
+}
+
+MyTimer Player::get_combo_timer()
+{
+	return MyTimer(this->combo_timer);
+}
+
+void Player::add_combo()
+{
+	combo_timer.reset_timer();
+	this->point_multiplier += 0.1f;
+}
+
+float Player::get_multiplier()
+{
+	return this->point_multiplier;
 }
 
 void Player::render()

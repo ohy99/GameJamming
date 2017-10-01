@@ -9,6 +9,7 @@ class MyTimer
 	double duration;
 public:
 	MyTimer() : elapsed_time(0.0), duration(0.0) {}
+	MyTimer(const MyTimer& other) { this->elapsed_time = other.elapsed_time; this->duration = other.duration; }
 	~MyTimer() {}
 	void set_duration(double duration) { this->duration = duration; }
 	void update_timer(double dt) { elapsed_time = Math::Min(elapsed_time + dt, duration); }

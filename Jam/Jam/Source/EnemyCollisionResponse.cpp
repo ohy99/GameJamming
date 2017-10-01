@@ -22,6 +22,7 @@ bool EnemyResponse::response(GameObject * other, GameObject * my_owner)
 		{
 			//shake shake shake
 			CameraManager::GetInstance()->shake_cam(CameraManager::LIGHT);
+			Player::GetInstance()->add_combo();
 		}
 	}
 	return false;
