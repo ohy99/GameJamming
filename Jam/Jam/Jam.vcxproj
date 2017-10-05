@@ -184,6 +184,7 @@
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Mainmenu.cpp" />
     <ClCompile Include="Source\Options.cpp" />
+    <ClCompile Include="Source\Particle.cpp" />
     <ClCompile Include="Source\ParticleManager.cpp" />
     <ClCompile Include="Source\PhysicsManager.cpp" />
     <ClCompile Include="Source\Player.cpp" />
@@ -231,6 +232,7 @@
     <ClInclude Include="Source\GlobalVariableManager.h" />
     <ClInclude Include="Source\MoveState.h" />
     <ClInclude Include="Source\Options.h" />
+    <ClInclude Include="Source\Particle.h" />
     <ClInclude Include="Source\ParticleManager.h" />
     <ClInclude Include="Source\PewPewGun.h" />
     <ClInclude Include="Source\PhysicsManager.h" />

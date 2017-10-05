@@ -1,23 +1,32 @@
 #ifndef PARTICLEMANAGER_H
 #define PARTICLEMANAGER_H
 
-#include "GameObject.h"
-#include "SpriteAnimation.h"
-class Particle : public GameObject
+#include "SingletonTemplate.h"
+#include <vector>
+#include <list>
+#include "Vector3.h"
+class Particle;
+class ParticleManager : public Singleton<ParticleManager>
 {
 public:
-	Animation anim;
-	virtual void update(double dt);
-	void init();
-	virtual void render();
-	Particle() {};
-	~Particle() {};
-	void set_duration(double duration);
+	enum TYPE
+	{
+		HIT_ENEMY,
+	};
 private:
-	double active_elapsed;
-	double active_duration;
+	friend Singleton;
+	std::vector<Particle*> particle_pool;
+	std::list<Particle*> active_particle;
 
+	//returns active = true particle
+	Particle* get_inactive();
+public:
+	void update(double dt);
+
+	void spawn_particle(TYPE type, Vector3 pos);
 protected:
+	ParticleManager();
+	~ParticleManager();
 };
 
 #endif // 

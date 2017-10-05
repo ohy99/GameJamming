@@ -4,13 +4,14 @@
 #include "SingletonTemplate.h"
 #include <vector>
 #include <map>
+#include <list>
 
 class GameObject;
 
 class RenderManager :public Singleton<RenderManager>
 {
 	friend Singleton;
-	std::map<int, std::vector<GameObject*> >objects;
+	std::map<int, std::list<GameObject*> >objects;
 	GameObject* last_to_render;
 public:
 	void attach_renderable(GameObject* , int layer = 0);

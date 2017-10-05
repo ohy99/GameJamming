@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "DmgHitBox.h"
 #include "CameraManager.h"
+#include "ParticleManager.h"
 
 EnemyResponse::EnemyResponse()
 {
@@ -23,6 +24,8 @@ bool EnemyResponse::response(GameObject * other, GameObject * my_owner)
 			//shake shake shake
 			CameraManager::GetInstance()->shake_cam(CameraManager::LIGHT);
 			Player::GetInstance()->add_combo();
+			ParticleManager::GetInstance()->spawn_particle(ParticleManager::TYPE::HIT_ENEMY, other->pos);
+			return true;
 		}
 	}
 	return false;

@@ -6,6 +6,7 @@
 #include "DieCondition.h"
 #include "AOECollisionResponse.h"
 #include "ProjectileCollisionResponse.h"
+#include "RenderManager.h"
 
 DmgHitBox::DmgHitBox() : collider(nullptr), die_condition(nullptr)
 {
@@ -36,6 +37,7 @@ void DmgHitBox::set_inactive()
 	}
 	CollisionManager::GetInstance()->remove_collider(this->collider);
 	PhysicsManager::GetInstance()->remove_object(this);
+	RenderManager::GetInstance()->remove_renderable(this);
 	AOEResponse* aoeresponse = dynamic_cast<AOEResponse*>(this->collider->get_response());
 	if (aoeresponse)
 	{

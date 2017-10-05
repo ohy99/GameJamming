@@ -5,6 +5,7 @@
 #include "CollisionManager.h"
 #include "PhysicsManager.h"
 #include "Mtx44.h"
+#include "RenderManager.h"
 
 void ShotGun::discharge()
 {
@@ -37,6 +38,7 @@ void ShotGun::discharge()
 
 		PhysicsManager::GetInstance()->add_object(proj, proj->get_physics_component());
 		CollisionManager::GetInstance()->add_collider(proj->get_collider_component());
+		RenderManager::GetInstance()->attach_renderable(proj, 1);
 		//must reset timer
 	}
 

@@ -6,6 +6,7 @@
 #include "DmgHitBox.h"
 #include "DieToDistance.h"
 #include "DieToTimer.h"
+#include "RenderManager.h"
 
 Weapon::Weapon() : proj_type(DmgHitBoxManager::PROJECTILE)
 {
@@ -37,6 +38,7 @@ void Weapon::discharge()
 
 	PhysicsManager::GetInstance()->add_object(temp_proj, temp_proj->get_physics_component());
 	CollisionManager::GetInstance()->add_collider(temp_proj->get_collider_component());
+	RenderManager::GetInstance()->attach_renderable(temp_proj, 1);
 	//must reset timer
 	attackspeed_timer.reset_timer();
 }

@@ -21,7 +21,7 @@ void DmgHitBoxManager::pool_vector(std::vector<DmgHitBox*>& vec, DmgHitBox * hit
 		return;
 
 	vec.push_back(hitbox);
-	RenderManager::GetInstance()->attach_renderable(hitbox);
+	//RenderManager::GetInstance()->attach_renderable(hitbox);
 	//number -1 coz 1 is there ^
 	for (unsigned int i = 0; i < number - 1; ++i) {
 		DmgHitBox* temp_hitbox = new DmgHitBox(*hitbox);
@@ -32,7 +32,7 @@ void DmgHitBoxManager::pool_vector(std::vector<DmgHitBox*>& vec, DmgHitBox * hit
 		dhr->attach_faction_component(&temp_hitbox->faction);
 		temp_hitbox->collider->set_response(dhr);
 
-		RenderManager::GetInstance()->attach_renderable(temp_hitbox);
+		//RenderManager::GetInstance()->attach_renderable(temp_hitbox);
 	}
 }
 

@@ -11,7 +11,7 @@ class Weapon;
 class Enemy : public CharacterBase, public GameObject
 {
 	Collider* collider;
-	Weapon* weapon[2];
+	Weapon* weapon;
 	//Variables
 	float move_speed;
 	Vector3* intended_pos;

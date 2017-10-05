@@ -31,6 +31,7 @@
 #include "CameraManager.h"
 #include "HUD.h"
 #include "Loader.h"
+#include "ParticleManager.h"
 
 GameScene::GameScene()
 {
@@ -60,6 +61,7 @@ GameScene::~GameScene()
 	KeyboardController::Destroy();
 	HUD::Destroy();
 	Loader::Destroy();
+	ParticleManager::Destroy();
 }
 
 void GameScene::Init()
@@ -101,6 +103,7 @@ void GameScene::Init()
 	EnemyManager::GetInstance()->init();
 	DmgHitBoxManager::GetInstance();
 	ShowHpManager::GetInstance();
+	ParticleManager::GetInstance();
 }
 
 
@@ -137,6 +140,7 @@ void GameScene::Update(double dt)
 	//update the show hp thing
 	ShowHpManager::GetInstance()->update(dt);
 	CameraManager::GetInstance()->update(dt);
+	ParticleManager::GetInstance()->update(dt);
 
 	if (KeyboardController::GetInstance()->IsKeyPressed(VK_F1))
 	{

@@ -33,12 +33,12 @@ void Enemy::update_movement(double dt)
 
 	this->dir = metointended.Normalized();
 
-	weapon[0]->pos = this->pos;
+	weapon->pos = this->pos;
 }
 
 void Enemy::update_weapon(double dt)
 {
-	weapon[0]->update(dt);
+	weapon->update(dt);
 
 
 	slower_fire_rate.update_timer(dt);
@@ -49,11 +49,11 @@ void Enemy::update_weapon(double dt)
 	slower_fire_rate.reset_timer();
 
 	Vector3 metoplayer = -this->pos + Player::GetInstance()->pos;
-	weapon[0]->pos = this->pos;
-	weapon[0]->dir = metoplayer.Normalized();
+	weapon->pos = this->pos;
+	weapon->dir = metoplayer.Normalized();
 	//this->dir = metoplayer;
 
-	weapon[0]->discharge();
+	weapon->discharge();
 }
 
 void Enemy::init(Vector3 pos, Vector3 scale, Vector3 dir, float move_spd, float hp)
@@ -65,7 +65,8 @@ void Enemy::init(Vector3 pos, Vector3 scale, Vector3 dir, float move_spd, float 
 
 	this->mesh = MeshList::GetInstance()->getMesh("Quad");
 
-	//RenderManager::GetInstance()->attach_renderable(this);
+	RenderManager::GetInstance()->attach_renderable(this, 0);
+	RenderManager::GetInstance()->attach_renderable(weapon, 1);
 
 	//IMPORTANT. SET COLLISION
 	collider->set_collision(Collision::CollisionType::AABB, &this->pos, -this->scale * 0.5f, this->scale * 0.5f);
@@ -78,19 +79,20 @@ void Enemy::init(Vector3 pos, Vector3 scale, Vector3 dir, float move_spd, float 
 
 	slower_fire_rate.set_duration(0.75);
 
-	weapon[0]->active = true;
+	weapon->active = true;
 }
 void Enemy::deactivate()
 {
 	this->active = false;
 	CollisionManager::GetInstance()->remove_collider(this->collider);
-
+	RenderManager::GetInstance()->remove_renderable(this);
+	RenderManager::GetInstance()->remove_renderable(weapon);
 	if (intended_pos)
 	{
 		delete intended_pos;
 		intended_pos = nullptr;
 	}
-	weapon[0]->active = false;
+	weapon->active = false;
 }
 
 void Enemy::update(double dt)
@@ -118,28 +120,21 @@ void Enemy::render_debug()
 Enemy::Enemy() : intended_pos(nullptr), move_speed(10.f)
 {
 	this->collider = new Collider(this, new EnemyResponse);
-	RenderManager::GetInstance()->attach_renderable(this);
+	//RenderManager::GetInstance()->attach_renderable(this);
 
 	this->faction.side = Faction::ENEMY;
 	//WEAPON
-	weapon[0] = new PewPew(this->faction.side);
-	weapon[0]->scale.Set(1, 1);
-	RenderManager::GetInstance()->attach_renderable(weapon[0], 1);
-	weapon[0]->active = true;
-	weapon[0]->name = "GUN";
+	weapon = new PewPew(this->faction.side);
+	weapon->scale.Set(1, 1);
+	weapon->active = true;
+	weapon->name = "GUN";
 
-	weapon[1] = new BamBam(this->faction.side);
-	weapon[1]->scale.Set(1, 1);
-	RenderManager::GetInstance()->attach_renderable(weapon[1], 1);
-	weapon[1]->active = false;
-	weapon[1]->name = "GUN";
 }
 
 Enemy::~Enemy()
 {
 	delete collider;
-	for (int i = 0; i < sizeof(weapon)/sizeof(weapon[0]); ++i)
-		delete weapon[i];
+	delete weapon;
 
 	if (intended_pos)
 	{

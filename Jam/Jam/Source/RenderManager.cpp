@@ -14,13 +14,12 @@ RenderManager::~RenderManager()
 
 void RenderManager::render_all_active_objects()
 {
-	EnvironmentManager::GetInstance()->render_environment();
+	//EnvironmentManager::GetInstance()->render_environment();
 
 	for each (auto &gopair in objects)
 	{
 		//if (go->active)
 		for each (auto &go in gopair.second)
-			if (go->active)
 				go->render();
 	}
 }
@@ -42,12 +41,13 @@ GameObject * RenderManager::remove_renderable(GameObject * obj)
 {
 	for each (auto &gopair in objects)
 	{
-		for (std::vector<GameObject*>::iterator it = objects.at(gopair.first).begin();
+		for (std::list<GameObject*>::iterator it = objects.at(gopair.first).begin();
 			it != objects.at(gopair.first).end(); ++it)
 			if ((*it) == obj)
 			{
+				GameObject* ret = *it;
 				it = objects.at(gopair.first).erase(it);
-				return (*it);
+				return ret;
 			}
 	}
 }

@@ -3,6 +3,7 @@
 #include "DmgHitBox.h"
 #include "CollisionManager.h"
 #include "DieToTimer.h"
+#include "RenderManager.h"
 
 void BamBam::discharge()
 {
@@ -21,6 +22,7 @@ void BamBam::discharge()
 
 	//PhysicsManager::GetInstance()->add_object(temp_melee, temp_melee->get_physics_component());
 	CollisionManager::GetInstance()->add_collider(temp_melee->get_collider_component());
+	RenderManager::GetInstance()->attach_renderable(temp_melee, 1);
 	//must reset timer
 	attackspeed_timer.reset_timer();
 }
