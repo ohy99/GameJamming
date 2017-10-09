@@ -5,7 +5,7 @@
 #include "MeshList.h"
 ParticleManager::ParticleManager()
 {
-	for (int i = 0; i < 100; ++i)
+	for (int i = 0; i < 500; ++i)
 	{
 		Particle* p = new Particle();
 		particle_pool.push_back(p);

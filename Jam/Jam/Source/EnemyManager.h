@@ -26,6 +26,7 @@ private:
 	friend Singleton<EnemyManager>;
 	std::vector<Enemy*> enemy_pool;
 
+	Vector3 enemy_scale;
 
 	std::list< std::pair<Enemy*, path_info > > active_enemy;
 	float max_movespd;
@@ -43,10 +44,20 @@ private:
 	int current_pattern;
 	void rand_pattern(double dt);
 	Vector3 get_nearest_spawn(Vector3 origin, Vector3 dir);
+
+	int wave_number;
+	int max_wave;
+
+	bool spawn_wave;
 public:
 	void init();
 	void update(double dt);
 	void render();
+
+	void set_max_wave(int num);
+	//int get_wave_number();
+	bool is_wave_ended();
+	void reset_wave(bool active);
 
 	Enemy* get_inactive();
 	void deactivate_all();

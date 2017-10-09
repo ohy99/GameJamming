@@ -91,15 +91,6 @@
     <ClCompile Include="Source\BasePart.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DefaultLeft.cpp">
-      <Filter>Boss\BossPart</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DefaultRight.cpp">
-      <Filter>Boss\BossPart</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DefaultMiddle.cpp">
-      <Filter>Boss\BossPart</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Application.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
@@ -111,6 +102,12 @@
     </ClCompile>
     <ClCompile Include="Source\ParticleManager.cpp">
       <Filter>Managers\Poolers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFlowController.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BossDefaultGun.cpp">
+      <Filter>GameObject\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -254,6 +251,21 @@
     </ClInclude>
     <ClInclude Include="Source\Particle.h">
       <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFlowController.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DefaultMiddle.h">
+      <Filter>Boss\BossPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DefaultLeft.h">
+      <Filter>Boss\BossPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DefaultRight.h">
+      <Filter>Boss\BossPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BossDefaultGun.h">
+      <Filter>GameObject\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

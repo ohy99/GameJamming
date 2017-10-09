@@ -4,14 +4,25 @@
 #include "Collider.h"
 #include "CharacterBase.h"
 #include "GameObject.h"
-
-class BasePart : public CharacterBase, public GameObject{
+#include "Weapon.h"
+class Boss;
+class BasePart : public CharacterBase, public GameObject {
+	friend Boss;
 public:
 	Collider* hitbox;
 	std::string name;
+	Weapon* weapon;
 
+	virtual void update(double dt);
+	virtual void render();
+
+	void Activate();
+	void Deactivate();
 private:
 	
+protected:
+	BasePart();
+	virtual ~BasePart();
 };
 
 #endif

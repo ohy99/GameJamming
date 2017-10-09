@@ -11,8 +11,10 @@
 #include "GlobalVariableManager.h"
 #include "Player.h"
 #include <iostream>
+#include "MyDebugger.h"
 
-EnemyManager::EnemyManager() : max_movespd(25.f), acceleration(10.f), initial_movespd(10.f)
+EnemyManager::EnemyManager() : max_movespd(25.f), acceleration(10.f), initial_movespd(10.f),
+spawn_wave(true), enemy_scale(3, 3, 1), wave_number(0), max_wave(0)
 {
 	for (int i = 0; i < 50; ++i)
 	{
@@ -40,11 +42,17 @@ void EnemyManager::init()
 	pattern_interval.reset_timer();
 	spawn_interval.set_duration(0.0);
 	spawn_interval.reset_timer();
+	spawn_wave = true;
+	wave_number = 0;
 }
 
 void EnemyManager::update(double dt)
 {
-	check_spawn(dt);
+	if (spawn_wave)
+		check_spawn(dt);
+
+	if (spawn_wave)
+		MyDebugger::GetInstance()->watch_this_info("Wave Num", wave_number);
 
 	//Updating active enemies
 	//let enemies move along nodes
@@ -113,6 +121,29 @@ void EnemyManager::render()
 
 }
 
+void EnemyManager::set_max_wave(int num)
+{
+	this->max_wave = num;
+}
+
+//int EnemyManager::get_wave_number()
+//{
+//	return this->wave_number;
+//}
+
+bool EnemyManager::is_wave_ended()
+{
+	//if wave counter exceeds max and nothing is alive
+	return this->wave_number > this->max_wave && !this->active_enemy.size();
+}
+
+void EnemyManager::reset_wave(bool active)
+{
+	this->spawn_wave = active;
+	if (active)
+		this->init();
+}
+
 void EnemyManager::check_spawn(double dt)
 {
 	spawn_interval.update_timer(dt);
@@ -131,38 +162,31 @@ void EnemyManager::check_spawn(double dt)
 		if (!e)
 			break;
 
+		Vector3 spawn_pos;
+		Vector3 spawn_dir;
 		//step1: get the spawn point by using the first 2 points as guide.
 		//meaning: spawn point, point1 and point 2 are one straight line.
 		if (patterns.at(current_pattern).at(path_index).size() >= 2) {
-			Vector3 p2top1 = -patterns.at(current_pattern).at(path_index).at(1) + patterns.at(current_pattern).at(path_index).at(0);
-			e->pos = get_nearest_spawn(patterns.at(current_pattern).at(path_index).at(0), p2top1);
-			//hide the guy 
-			e->pos += e->scale.Length() * p2top1.Normalized();
-			e->set_intended_pos(&patterns.at(current_pattern).at(path_index).at(0));
-			e->init(e->pos, Vector3(3, 3, 0), Vector3(0, 1, 0));
-			
-			path_info temp;
-			temp.current_path = &patterns.at(current_pattern).at(path_index);
-			temp.current_node_iter = temp.current_path->begin();
-			//active_enemy.insert(std::make_pair(e, temp));
-			active_enemy.push_back(std::make_pair(e, temp));
+			spawn_dir = -patterns.at(current_pattern).at(path_index).at(1) + patterns.at(current_pattern).at(path_index).at(0);
+			spawn_pos = get_nearest_spawn(patterns.at(current_pattern).at(path_index).at(0), spawn_dir);
 		}
 		else
 		{
 			//only got 1 point
-			e->pos = get_nearest_spawn(patterns.at(current_pattern).at(path_index).at(0), Vector3());
-			Vector3 dir = e->pos - patterns.at(current_pattern).at(path_index).at(0);
-			//hide the guy 
-			e->pos += e->scale.Length() * dir.Normalized();
-			e->set_intended_pos(&patterns.at(current_pattern).at(path_index).at(0));
-			e->init(e->pos, Vector3(3, 3, 0), Vector3(0, 1, 0));
-
-			path_info temp;
-			temp.current_path = &patterns.at(current_pattern).at(path_index);
-			temp.current_node_iter = temp.current_path->begin();
-			//active_enemy.insert(std::make_pair(e, temp));
-			active_enemy.push_back(std::make_pair(e, temp));
+			spawn_pos = get_nearest_spawn(patterns.at(current_pattern).at(path_index).at(0), Vector3());
+			spawn_dir = spawn_pos - patterns.at(current_pattern).at(path_index).at(0);
 		}
+
+		//hide the guy 
+		spawn_pos += enemy_scale.Length() * spawn_dir.Normalized();
+		e->set_intended_pos(&patterns.at(current_pattern).at(path_index).at(0));
+		e->init(spawn_pos, enemy_scale, Vector3(0, 1, 0));
+
+		path_info temp;
+		temp.current_path = &patterns.at(current_pattern).at(path_index);
+		temp.current_node_iter = temp.current_path->begin();
+		//active_enemy.insert(std::make_pair(e, temp));
+		active_enemy.push_back(std::make_pair(e, temp));
 	}
 
 	unsigned int num_of_path = patterns.at(current_pattern).size();
@@ -222,6 +246,10 @@ void EnemyManager::rand_pattern(double dt)
 	//pattern_interval.set_duration((double)longest_time);
 	pattern_interval.set_duration(10.0);
 	pattern_interval.reset_timer();
+
+	++wave_number;
+	if (wave_number > max_wave)
+		reset_wave(false);
 }
 
 Vector3 EnemyManager::get_nearest_spawn(Vector3 origin, Vector3 dir)
@@ -346,7 +374,6 @@ Vector3 EnemyManager::get_nearest_spawn(Vector3 origin, Vector3 dir)
 	}
 	return Vector3();
 }
-
 
 Enemy * EnemyManager::get_inactive()
 {

@@ -32,6 +32,7 @@
 #include "HUD.h"
 #include "Loader.h"
 #include "ParticleManager.h"
+#include "GameFlowController.h"
 
 GameScene::GameScene()
 {
@@ -62,6 +63,7 @@ GameScene::~GameScene()
 	HUD::Destroy();
 	Loader::Destroy();
 	ParticleManager::Destroy();
+	GameFlowController::Destroy();
 }
 
 void GameScene::Init()
@@ -104,6 +106,7 @@ void GameScene::Init()
 	DmgHitBoxManager::GetInstance();
 	ShowHpManager::GetInstance();
 	ParticleManager::GetInstance();
+	GameFlowController::GetInstance()->init();
 }
 
 
@@ -114,22 +117,8 @@ void GameScene::Update(double dt)
 	//Update Player
 	Player::GetInstance()->update(dt);
 	//Update enemies
-
-	if (KeyboardController::GetInstance()->IsKeyPressed(VK_SPACE))
-	{
-		double x, y;
-		MouseController::GetInstance()->GetMousePosition(x, y);
-		float w = Application::GetWindowWidth();
-		float h = Application::GetWindowHeight();
-		float worldWidth = GlobalVariables::GetInstance()->get_worldWidth();
-		float worldHeight = GlobalVariables::GetInstance()->get_worldHeight();
-		Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
-
-		Enemy* e = EnemyManager::GetInstance()->get_inactive();
-		e->active = true;
-		e->init(cursor_point_in_world_space, Vector3(3, 3, 0), Vector3(0, 1, 0));
-	}
-	EnemyManager::GetInstance()->update(dt);
+	GameFlowController::GetInstance()->update(dt);
+	//EnemyManager::GetInstance()->update(dt);
 
 	//Update all hitbox entities
 	DmgHitBoxManager::GetInstance()->update_all_hitbox(dt);

@@ -14,6 +14,7 @@ public:
 	{
 		PROJECTILE = 0,
 		MELEE,
+		BOSS_PROJ,
 		DC_COUNT
 	};
 private:

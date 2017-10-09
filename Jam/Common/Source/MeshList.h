@@ -47,6 +47,12 @@ class MeshList : public Singleton <MeshList>
 		assignMesh(temp);
 		temp = MeshBuilder::GenerateLine("BLUELINE", Color(0, 0, 1), 1);
 		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("RedQuad", Color(1, 0, 0), 1);
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("GreenQuad", Color(0, 1, 0), 1);
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("BlueQuad", Color(0, 0, 1), 1);
+		assignMesh(temp);
 
 		
 		temp = MeshBuilder::GenerateQuad("REDHPBAR", Color(1, 1, 1), 1);

@@ -14,30 +14,39 @@
 #include "MyDebugger.h"
 
 //DmgHitBox* DEBUG_FIRST;
-
-void DmgHitBoxManager::pool_vector(std::vector<DmgHitBox*>& vec, DmgHitBox * hitbox, unsigned int number)
+DmgHitBoxManager::DmgHitBoxManager()
 {
-	if (hitbox == nullptr)//aint gona store 100 nullptrs for u man
-		return;
+	DmgHitBox* default_hitbox = new DmgHitBox;
+	default_hitbox->scale.Set(1, 1, 0);
+	default_hitbox->collider = new Collider(default_hitbox, new ProjectileResponse);
+	default_hitbox->get_collider_component()->set_collision(Collision::CollisionType::SPHERE, &default_hitbox->pos, default_hitbox->scale.x);
+	//default_hitbox->mesh = MeshList::GetInstance()->getMesh("Sphere");
+	DamageHitResponse* dhr = dynamic_cast<ProjectileResponse*>(default_hitbox->collider->get_response());
+	dhr->attach_damage_component(&default_hitbox->damage);
+	dhr->attach_faction_component(&default_hitbox->faction);
 
-	vec.push_back(hitbox);
-	//RenderManager::GetInstance()->attach_renderable(hitbox);
-	//number -1 coz 1 is there ^
-	for (unsigned int i = 0; i < number - 1; ++i) {
-		DmgHitBox* temp_hitbox = new DmgHitBox(*hitbox);
-		vec.push_back(temp_hitbox);
-
-		DamageHitResponse* dhr = new ProjectileResponse;
-		dhr->attach_damage_component(&temp_hitbox->damage);
-		dhr->attach_faction_component(&temp_hitbox->faction);
-		temp_hitbox->collider->set_response(dhr);
-
-		//RenderManager::GetInstance()->attach_renderable(temp_hitbox);
+	for (int i = 0; i < DC_COUNT; ++i)
+	{
+		dmg_hitbox_mesh[i] = MeshList::GetInstance()->getMesh("Quad");
 	}
+	dmg_hitbox_mesh[PROJECTILE] = MeshList::GetInstance()->getMesh("Sphere");
+	dmg_hitbox_mesh[MELEE] = MeshList::GetInstance()->getMesh("Quad");
+	dmg_hitbox_mesh[BOSS_PROJ] = MeshList::GetInstance()->getMesh("Sphere");
+	pool_vector(hit_box_pool, default_hitbox);
+}
+
+DmgHitBoxManager::~DmgHitBoxManager()
+{
+	for each (auto &m in hit_box_pool)
+	{
+		delete m;
+	}
+	hit_box_pool.clear();
 }
 
 void DmgHitBoxManager::set_hitbox(DmgHitBox& hitbox, DMG_COLLIDER_TYPE type)
 {
+	//Here set scaling, collider
 	switch (type)
 	{
 	case PROJECTILE:
@@ -48,11 +57,18 @@ void DmgHitBoxManager::set_hitbox(DmgHitBox& hitbox, DMG_COLLIDER_TYPE type)
 		hitbox.collider->set_collision(Collision::CollisionType::SPHERE, &hitbox.pos, hitbox.scale.x);
 		break;
 	case MELEE:
-		hitbox.scale.Set(5, 5, 1);
+		hitbox.scale.Set(7.5, 7.5, 1);
 		if (!dynamic_cast<AOEResponse*>(hitbox.collider->get_response()))//if not the collider i want
 			hitbox.collider->set_response(new AOEResponse);
 		
 		hitbox.collider->set_collision(Collision::CollisionType::AABB, &hitbox.pos, -hitbox.scale * 0.5f, hitbox.scale * 0.5f);
+		break;
+	case BOSS_PROJ:
+		hitbox.scale.Set(0.75f, 0.75f, 1);
+		if (!dynamic_cast<ProjectileResponse*>(hitbox.collider->get_response()))
+			hitbox.collider->set_response(new ProjectileResponse);
+
+		hitbox.collider->set_collision(Collision::CollisionType::SPHERE, &hitbox.pos, hitbox.scale.x);
 		break;
 	default:
 		std::cout << "BO SET UH" << std::endl;
@@ -83,6 +99,27 @@ DmgHitBox * DmgHitBoxManager::get_hitbox(DMG_COLLIDER_TYPE type)
 		}
 	}
 	return nullptr;
+}
+
+void DmgHitBoxManager::pool_vector(std::vector<DmgHitBox*>& vec, DmgHitBox * hitbox, unsigned int number)
+{
+	if (hitbox == nullptr)//aint gona store 100 nullptrs for u man
+		return;
+
+	vec.push_back(hitbox);
+	//RenderManager::GetInstance()->attach_renderable(hitbox);
+	//number -1 coz 1 is there ^
+	for (unsigned int i = 0; i < number - 1; ++i) {
+		DmgHitBox* temp_hitbox = new DmgHitBox(*hitbox);
+		vec.push_back(temp_hitbox);
+
+		DamageHitResponse* dhr = new ProjectileResponse;
+		dhr->attach_damage_component(&temp_hitbox->damage);
+		dhr->attach_faction_component(&temp_hitbox->faction);
+		temp_hitbox->collider->set_response(dhr);
+
+		//RenderManager::GetInstance()->attach_renderable(temp_hitbox);
+	}
 }
 
 void DmgHitBoxManager::deactivate_all()
@@ -116,28 +153,3 @@ void DmgHitBoxManager::update_all_hitbox(double dt)
 	//}
 }
 
-DmgHitBoxManager::DmgHitBoxManager()
-{
-	DmgHitBox* default_hitbox = new DmgHitBox;
-	default_hitbox->scale.Set(1, 1, 0);
-	default_hitbox->collider = new Collider(default_hitbox, new ProjectileResponse);
-	default_hitbox->get_collider_component()->set_collision(Collision::CollisionType::SPHERE, &default_hitbox->pos, default_hitbox->scale.x);
-	//default_hitbox->mesh = MeshList::GetInstance()->getMesh("Sphere");
-	DamageHitResponse* dhr = dynamic_cast<ProjectileResponse*>(default_hitbox->collider->get_response());
-	dhr->attach_damage_component(&default_hitbox->damage);
-	dhr->attach_faction_component(&default_hitbox->faction);
-
-	//dmg_hitbox_mesh[DEFAULT] = MeshList::GetInstance()->getMesh("Sphere");
-	dmg_hitbox_mesh[PROJECTILE] = MeshList::GetInstance()->getMesh("Sphere");
-	dmg_hitbox_mesh[MELEE] = MeshList::GetInstance()->getMesh("Quad");
-	pool_vector(hit_box_pool, default_hitbox);
-}
-
-DmgHitBoxManager::~DmgHitBoxManager()
-{
-	for each (auto &m in hit_box_pool)
-	{
-		delete m;
-	}
-	hit_box_pool.clear();
-}

@@ -84,8 +84,8 @@ void HUD::render()
 		half_width += font.textWidth[(int)textstr.at(i)];
 	half_width *= 0.5f;
 
-	ms.Translate(-half_width, -2, 0);
-	ms.Scale(4, 4, 1);
+	ms.Scale(3, 3, 1);
+	ms.Translate(-half_width, -0.5, 0);
 	RenderHelper::RenderText(&font, ss.str(), Color(0.5f, 0.5f, 0.5f));
 	ms.PopMatrix();
 
