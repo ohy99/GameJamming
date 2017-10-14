@@ -17,7 +17,7 @@ void RenderHelper::RenderText(FontType* mesh, std::string text, Color color)
 
 	//glDisable(GL_DEPTH_TEST);
 	glUniform1i(g->m_parameters[Graphics::U_TEXT_ENABLED], 1);
-	glUniform3fv(g->m_parameters[Graphics::U_TEXT_COLOR], 1, &color.r);
+	glUniform4fv(g->m_parameters[Graphics::U_TEXT_COLOR], 1, &color.r);
 	glUniform1i(g->m_parameters[Graphics::U_LIGHTENABLED], 0);
 	glUniform1i(g->m_parameters[Graphics::U_COLOR_TEXTURE_ENABLED], 1);
 	glActiveTexture(GL_TEXTURE0);
@@ -59,7 +59,7 @@ void RenderHelper::RenderTextOnScreen(FontType* mesh, std::string text, Color co
 	g->modelStack.Translate(x, y, 0);
 	g->modelStack.Scale(size, size, size);
 	glUniform1i(g->m_parameters[Graphics::U_TEXT_ENABLED], 1);
-	glUniform3fv(g->m_parameters[Graphics::U_TEXT_COLOR], 1, &color.r);
+	glUniform4fv(g->m_parameters[Graphics::U_TEXT_COLOR], 1, &color.r);
 	glUniform1i(g->m_parameters[Graphics::U_LIGHTENABLED], 0);
 	glUniform1i(g->m_parameters[Graphics::U_COLOR_TEXTURE_ENABLED], 1);
 	glActiveTexture(GL_TEXTURE0);

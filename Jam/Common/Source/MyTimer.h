@@ -16,6 +16,10 @@ public:
 	bool is_Duration_Passed() { return elapsed_time >= duration; }
 	void reset_timer() { elapsed_time = 0.0; }
 	double get_current_percent() { return elapsed_time / duration; }
+
+	//getter
+	double get_elapsed_time() { return elapsed_time; }
+	double get_duration() { return duration; }
 };
 
 #endif // !MYTIMER_H

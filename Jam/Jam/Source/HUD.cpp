@@ -90,4 +90,37 @@ void HUD::render()
 	ms.PopMatrix();
 
 	
+	//second wind thing
+	if (Player::GetInstance()->second_wind_active)
+	{
+		ss.str("");
+		half_width = 0.f;
+		ss << "Second Wind!";
+		textstr = ss.str();
+		for (unsigned int i = 0; i < textstr.size(); ++i)
+			half_width += font.textWidth[(int)textstr.at(i)];
+		half_width *= 0.5f;
+
+		ms.PushMatrix();
+		ms.Translate(worldWidth * 0.5f, worldHeight * 0.6f, 0);
+		ms.Scale(10, 10, 1);
+		ms.Translate(-half_width, -0.5, 0);
+		RenderHelper::RenderText(&font, ss.str(), Color(0.8f, 0.2f, 0.2f, 0.6f));
+		ms.PopMatrix();
+
+		ss.str("");
+		half_width = 0.f;
+		ss << int(Player::GetInstance()->second_wind_timer.get_duration() - Player::GetInstance()->second_wind_timer.get_elapsed_time());
+		textstr = ss.str();
+		for (unsigned int i = 0; i < textstr.size(); ++i)
+			half_width += font.textWidth[(int)textstr.at(i)];
+		half_width *= 0.5f;
+
+		ms.PushMatrix();
+		ms.Translate(worldWidth * 0.5f, worldHeight * 0.5f, 0);
+		ms.Scale(15, 15, 1);
+		ms.Translate(-half_width, -0.5, 0);
+		RenderHelper::RenderText(&font, ss.str(), Color(0.8f, 0.2f, 0.2f, 0.8f));
+		ms.PopMatrix();
+	}
 }

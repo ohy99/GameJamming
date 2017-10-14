@@ -29,6 +29,11 @@ bool DamageHitResponse::response(GameObject * other, GameObject* my_owner)
 		if (someguy->faction.side != this->faction_component->side)
 		{
 			someguy->hitpoint.kena_hit(this->damage_component->get_dmg(), &other->pos);
+			if (someguy->faction.side == Faction::FACTION_SIDE::ENEMY)
+			{
+				//if i hit tio enemy
+				Player::GetInstance()->kill_feedback(someguy->hitpoint.get_hp_percentage() <= 0.f);
+			}
 			return true;
 		}
 	return false;

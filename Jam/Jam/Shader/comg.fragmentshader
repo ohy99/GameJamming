@@ -59,7 +59,7 @@ uniform int numLights;
 uniform bool colorTextureEnabled;
 uniform sampler2D colorTexture;
 uniform bool textEnabled;
-uniform vec3 textColor;
+uniform vec4 textColor;
 
 void main(){
 	if(lightEnabled == true)
@@ -119,7 +119,7 @@ void main(){
 		if(colorTextureEnabled == true)
 		{
 			if(textEnabled == true)
-				color = texture2D( colorTexture, texCoord ) * vec4( textColor, 1 );
+				color = texture2D( colorTexture, texCoord ) * vec4( textColor );
 			else
 				color = texture2D( colorTexture, texCoord );
 		}

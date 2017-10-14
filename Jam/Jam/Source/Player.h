@@ -11,6 +11,7 @@
 #include "MyTimer.h"
 class Weapon;
 class Collider;
+class HUD;
 /********************************************************************************
 
 NOTE:
@@ -20,12 +21,14 @@ NOTE:
 class Player : public Singleton<Player>, public CharacterBase, public GameObject
 {
 	friend Singleton<Player>;
+	friend HUD;
 	InputController& inputController;
 	Collider* collider;
 	Weapon* weapon[2];
 	std::vector <Weapon*> weapon_list;
 	unsigned curr_weap;
 	//Variables
+	float default_move_speed;
 	float move_speed;
 
 	//LOLL
@@ -39,6 +42,13 @@ class Player : public Singleton<Player>, public CharacterBase, public GameObject
 	void update_movement(double dt);
 	void update_weapon(double dt);
 
+	//second wind
+	bool second_wind_available;
+	bool second_wind_active;
+	MyTimer second_wind_timer;
+	void update_second_wind(double dt);
+	void go_down();
+	void revive();
 public:
 	void init();
 	//overwrite virtuals from gameobj
@@ -52,6 +62,8 @@ public:
 	MyTimer get_combo_timer();
 	void add_combo();
 	float get_multiplier();
+
+	void kill_feedback(bool killed);
 protected:
 	Player();
 	~Player();

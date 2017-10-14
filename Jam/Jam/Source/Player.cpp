@@ -88,6 +88,7 @@ void Player::init()
 
 	//variables
 	move_speed = 30.f;
+	default_move_speed = move_speed;
 	this->hitpoint.init_hp(100);
 	this->point_multiplier = 1.f;
 	this->point = 0;
@@ -95,6 +96,10 @@ void Player::init()
 	combo_duration = 1.0;
 	combo_timer.set_duration(combo_duration);
 	combo_timer.update_timer(combo_duration);
+
+	second_wind_available = true;
+	second_wind_active = false;
+	second_wind_timer.set_duration(10.0);
 }
 
 void Player::update(double dt)
@@ -107,6 +112,9 @@ void Player::update(double dt)
 		combo_timer.update_timer(dt);
 	else
 		point_multiplier = 1.0f;
+
+	//update second wind
+	update_second_wind(dt);
 
 }
 
@@ -217,6 +225,45 @@ void Player::add_combo()
 float Player::get_multiplier()
 {
 	return this->point_multiplier;
+}
+
+void Player::kill_feedback(bool killed)
+{
+	if (!killed)
+		return;
+
+	if (second_wind_active)
+	{
+		//revive this guy
+		revive();
+	}
+}
+
+void Player::update_second_wind(double dt)
+{
+	if (this->hitpoint.get_hp_percentage() <= 0.f && second_wind_available)
+	{
+		second_wind_active = true;
+		second_wind_available = false;
+		this->go_down();
+	}
+	if (second_wind_active)
+	{
+		second_wind_timer.update_timer(dt);
+	}
+}
+
+void Player::go_down()
+{
+	this->move_speed = default_move_speed * 0.25f;
+}
+
+void Player::revive()
+{
+	this->move_speed = default_move_speed;
+	this->hitpoint.kena_heal_maxhp(1.0f);
+	second_wind_active = false;
+	//idw reset timer leh how
 }
 
 void Player::render()
