@@ -9,6 +9,7 @@
 #include "Faction.h"
 #include "CharacterBase.h"
 #include "MyTimer.h"
+#include "Physics.h"
 class Weapon;
 class Collider;
 class HUD;
@@ -25,6 +26,7 @@ class Player : public Singleton<Player>, public CharacterBase, public GameObject
 	InputController& inputController;
 	Collider* collider;
 	Weapon* weapon[2];
+	Physics physic;
 	std::vector <Weapon*> weapon_list;
 	unsigned curr_weap;
 	//Variables

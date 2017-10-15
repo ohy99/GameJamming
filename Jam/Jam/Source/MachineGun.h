@@ -12,6 +12,8 @@ public:
 		this->mesh = MeshList::GetInstance()->getMesh("BLUELINE");
 	}
 	~MachineGun() {}
+
+	virtual void discharge();
 };
 
 #endif // !MACHINEGUN_H

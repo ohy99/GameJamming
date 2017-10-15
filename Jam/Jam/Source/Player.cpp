@@ -16,6 +16,7 @@
 #include "MyDebugger.h"
 #include "MachineGun.h"
 #include "ShotGun.h"
+#include "PhysicsManager.h"
 
 Player::Player() : inputController(*InputController::GetInstance()), collider(nullptr)
 {
@@ -51,6 +52,7 @@ void Player::init()
 	//IMPORTANT. SET COLLISION
 	collider->set_collision(Collision::CollisionType::AABB, &this->pos, -this->scale * 0.5f, this->scale * 0.5f);
 	CollisionManager::GetInstance()->add_collider(this->collider);
+	//PhysicsManager::GetInstance()->add_object(this, &this->physic);
 
 	//WEAPON
 	weapon[0] = new MachineGun(this->faction.side);
@@ -134,25 +136,45 @@ void Player::update_movement(double dt)
 	catch (DivideByZero) {
 		this->dir.Set(0, 1, 0);
 	}
-	
+	float acc = 20.f;
+
+	//deceleration = 0.5sec
+
+
 	if (inputController.isInputDown(InputController::MOVE_FRONT)) {
 		//this->pos += this->dir * move_speed * (float)dt;
 		this->pos += Vector3(0,1,0) * move_speed * (float)dt;
+		//this->physic.velocity += Vector3(0, 1, 0) * acc * (float)dt;
 	}
+	//else
+	//	this->physic.velocity.y = Math::Min(this->physic.velocity.y - acc * 2.f * float(dt), 0.0f);
 	if (inputController.isInputDown(InputController::MOVE_BACK)) {
 		//this->pos += -this->dir * move_speed * (float)dt;
 		this->pos += -Vector3(0, 1, 0) * move_speed * (float)dt;
+		//this->physic.velocity += -Vector3(0, 1, 0) * acc * (float)dt;
 	}
+	//else
+	//	this->physic.velocity.y = Math::Max(this->physic.velocity.y + acc * 2.f * float(dt), 0.0f);
+
 	if (inputController.isInputDown(InputController::MOVE_LEFT)) {
 		//Vector3 right = this->dir.Cross(Vector3(0, 0, 1)).Normalize();
 		//this->pos += -right * move_speed * (float)dt;
 		this->pos += -Vector3(1, 0, 0) * move_speed * (float)dt;
+		//this->physic.velocity += -Vector3(1, 0, 0) * acc * (float)dt;
 	}
+	//else
+	//	this->physic.velocity.x = Math::Max(this->physic.velocity.x + acc * 2.f * float(dt), 0.0f);
 	if (inputController.isInputDown(InputController::MOVE_RIGHT)) {
-		//Vector3 right = this->dir.Cross(Vector3(0, 0, 1)).Normalize();
 		//this->pos += right * move_speed * (float)dt;
 		this->pos += Vector3(1, 0, 0) * move_speed * (float)dt;
+		//this->physic.velocity += Vector3(1, 0, 0) * acc * (float)dt;
 	}
+	//else
+	//	this->physic.velocity.x = Math::Min(this->physic.velocity.x - acc * 2.f * float(dt), 0.0f);
+	//if (this->physic.velocity.LengthSquared() > move_speed * move_speed)
+	//{
+	//	this->physic.velocity.Normalize() *= move_speed;
+	//}
 }
 
 #include "KeyboardController.h"
