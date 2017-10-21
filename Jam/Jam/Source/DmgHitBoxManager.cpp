@@ -32,7 +32,7 @@ DmgHitBoxManager::DmgHitBoxManager()
 	dmg_hitbox_mesh[PROJECTILE] = MeshList::GetInstance()->getMesh("Sphere");
 	dmg_hitbox_mesh[MELEE] = MeshList::GetInstance()->getMesh("Quad");
 	dmg_hitbox_mesh[BOSS_PROJ] = MeshList::GetInstance()->getMesh("Sphere");
-	pool_vector(hit_box_pool, default_hitbox);
+	pool_vector(hit_box_pool, default_hitbox, 200);
 }
 
 DmgHitBoxManager::~DmgHitBoxManager()

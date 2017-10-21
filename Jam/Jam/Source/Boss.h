@@ -11,6 +11,14 @@ class Boss : public Singleton<Boss>{
 	friend Singleton<Boss>;
 	Boss();
 	~Boss();
+
+	enum ATTACK_STATE
+	{
+		DEFAULT_SHOOT_AT_ME,
+		A1
+
+	} attack_state;
+	MyTimer attack_timer;
 public:
 
 	enum SIDE {

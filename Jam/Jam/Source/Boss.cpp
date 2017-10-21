@@ -5,6 +5,7 @@
 
 #include "Player.h"
 #include "GlobalVariableManager.h"
+#include "Mtx44.h"
 
 #include "DefaultLeft.h"
 #include "DefaultMiddle.h"
@@ -74,6 +75,9 @@ void Boss::init()
 	middlePart->pos.Set(worldWidth + 10, worldHeight * 0.5f, 0);
 	intendedPos.Set(worldWidth - 10,
 		worldHeight * 0.5f, 0);
+
+	attack_state = (ATTACK_STATE)1;
+	attack_timer.set_duration(3.0);
 }
 
 BasePart * Boss::GetRandomPart(SIDE side)
@@ -84,9 +88,12 @@ BasePart * Boss::GetRandomPart(SIDE side)
 void Boss::update(double dt)
 {
 	//update the internal components
+	attack_timer.update_timer(dt);
 	UpdatePart(leftPart, dt);
 	UpdatePart(middlePart, dt);
 	UpdatePart(rightPart, dt);
+	if (attack_timer.is_Duration_Passed())
+		attack_timer.reset_timer();
 
 	Vector3 dirToIntended = -middlePart->pos + intendedPos;
 	if (dirToIntended.LengthSquared() >= 0.f)
@@ -112,11 +119,20 @@ void Boss::update(double dt)
 
 	//deactivating condition
 	if (leftPart->hitpoint.get_hp_percentage() <= 0.f)
+	{
 		leftPart->active = false;
+		CollisionManager::GetInstance()->remove_collider(leftPart->hitbox);
+	}
 	if (middlePart->hitpoint.get_hp_percentage() <= 0.f)
+	{
 		middlePart->active = false;
+		CollisionManager::GetInstance()->remove_collider(middlePart->hitbox);
+	}
 	if (rightPart->hitpoint.get_hp_percentage() <= 0.f)
+	{
 		rightPart->active = false;
+		CollisionManager::GetInstance()->remove_collider(rightPart->hitbox);
+	}
 }
 
 bool Boss::RegisterPart(BasePart* part, SIDE side)
@@ -173,7 +189,34 @@ void Boss::UpdatePart(BasePart * part, double dt)
 	if (!part->active)
 		return;
 
-	part->update(dt);
-	part->weapon->dir = (-part->pos + Player::GetInstance()->pos).Normalize();
-	part->weapon->discharge();
+	switch (attack_state)
+	{
+	case A1:
+	{
+		if (part == leftPart || part == rightPart)
+		{
+			part->update(dt);
+			part->weapon->dir.Set(-1, 0, 0);
+			float angle = 45.f * sin(attack_timer.get_current_percent() * Math::TWO_PI);
+			Mtx44 rotation;
+			rotation.SetToRotation(angle, 0, 0, 1);
+			part->weapon->dir = rotation * part->weapon->dir;
+			part->weapon->dir.Normalize();
+			part->weapon->discharge();
+		}
+		else
+		{
+			part->update(dt);
+			part->weapon->dir = (-part->pos + Player::GetInstance()->pos).Normalize();
+			part->weapon->discharge();
+		}
+
+		break;
+	}
+	default:
+		//this is the default aka attack_state == 0
+		part->update(dt);
+		part->weapon->dir = (-part->pos + Player::GetInstance()->pos).Normalize();
+		part->weapon->discharge();
+	}
 }

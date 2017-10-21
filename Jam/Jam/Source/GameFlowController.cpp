@@ -31,11 +31,12 @@ void GameFlowController::update(double dt)
 {
 	if (KeyboardController::GetInstance()->IsKeyPressed(VK_SPACE))
 	{
-		EnemyManager::GetInstance()->reset_wave(false);
+		//EnemyManager::GetInstance()->reset_wave(false);
+		change_state(STATE::TRANSITION);
 	}
 	if (KeyboardController::GetInstance()->IsKeyReleased(VK_SPACE))
 	{
-		EnemyManager::GetInstance()->reset_wave(true);
+		//EnemyManager::GetInstance()->reset_wave(true);
 	}
 
 	check_change_in_state();
