@@ -72,6 +72,70 @@ GameScene::~GameScene()
 	GameFlowController::Destroy();
 }
 
+void GameScene::RenderBackground()
+{
+	static int frame = 0;
+	static float bg1X = worldWidth* 0.5f;
+	static float bg2X = worldWidth* 1.5f;
+
+	++frame;
+
+	const float movement = 0.2;
+
+	if (bg1X < worldWidth * -0.5)
+		bg1X = worldWidth * 1.5f;
+	if (bg2X < worldWidth * -0.5f)
+		bg2X = worldWidth * 1.5f;
+
+	MS& ms = Graphics::GetInstance()->modelStack;
+	ms.PushMatrix();
+	ms.Translate(bg1X -= movement, worldHeight * 0.5f, 0);
+	ms.Scale(worldWidth, worldHeight, 1);
+	RenderHelper::RenderMesh(backGround, false);
+	ms.PopMatrix();
+
+	ms.PushMatrix();
+	ms.Translate(bg2X -= movement, worldHeight * 0.5f, 0);
+	ms.Scale(worldWidth, worldHeight, 1);
+	RenderHelper::RenderMesh(backGround, false);
+	ms.PopMatrix();
+
+	if (frame >= 30) {
+		int chanceForAsteroid = Math::RandIntMinMax(0, 100);
+		if (chanceForAsteroid <= 10) {
+			GameObject* go = nullptr;
+			for (auto it : backgroundObjects) {
+				if (!it->active) {
+					go = it;
+					break;
+				}
+			}
+			if (go == nullptr)
+				return;
+			float scale = Math::RandFloatMinMax(20, 30);
+			go->scale.Set(scale, scale, 1);
+			float vel = Math::RandFloatMinMax(0.2, 0.5);
+			go->dir.Set(-vel, 0, 0);
+			float y = Math::RandFloatMinMax(0, worldHeight);
+			go->pos.Set(worldWidth + scale, y, 1);
+			go->active = true;
+		}
+		frame = 0;
+	}
+	for (auto it : backgroundObjects) {
+		if (it->active) {
+			ms.PushMatrix();
+			ms.Translate(it->pos.x += it->dir.x, it->pos.y, 0);
+			ms.Scale(it->scale.x, it->scale.y, 1);
+			RenderHelper::RenderMesh(it->mesh, false);
+			ms.PopMatrix();
+
+			if (it->pos.x < -it->scale.x)
+				it->active = false;
+		}
+	}
+}
+
 void GameScene::Init()
 {
 
@@ -117,6 +181,12 @@ void GameScene::Init()
 
 	//Cursor										GLFW_CURSOR 0x00033001   GLFW_CURSOR_HIDDEN 0x00034002
 	glfwSetInputMode(Application::GetInstance().getWindowPtr(), 0x00033001, 0x00034002);
+
+	for (int i = 0; i < 10; ++i) {
+		GameObject* go = new GameObject();
+		go->mesh = MeshList::GetInstance()->getMesh("RedQuad");
+		backgroundObjects.push_back(go);
+	}
 }
 
 
@@ -147,6 +217,12 @@ void GameScene::Update(double dt)
 	}
 	if (KeyboardController::GetInstance()->IsKeyPressed('B')) {
 		MessageDispatcher::GetInstance()->Send("MachineGun", new MessageWeapon(MessageWeapon::APPLY_DAMAGE_BOOST));
+	}
+
+	if (Player::GetInstance()->GetDead()) {
+		if (KeyboardController::GetInstance()->IsKeyPressed('R')) {
+			SceneManager::GetInstance()->setNextScene("MAIN");
+		}
 	}
 
 	if (KeyboardController::GetInstance()->IsKeyPressed(VK_F1))
@@ -184,11 +260,8 @@ void GameScene::Render()
 
 	ms.PushMatrix();
 
-	ms.PushMatrix();
-	ms.Translate(worldWidth* 0.5f, worldHeight * 0.5f, 0);
-	ms.Scale(worldWidth, worldHeight, 1);
-	RenderHelper::RenderMesh(backGround, false);
-	ms.PopMatrix();
+	RenderBackground();
+	
 
 	RenderManager::GetInstance()->render_all_active_objects();
 
@@ -216,5 +289,11 @@ void GameScene::Exit()
 	RenderManager::Destroy();
 
 	ShowHpManager::GetInstance()->clear_hptext();
+
+	for (auto it : backgroundObjects) {
+		delete it;
+		it = nullptr;
+	}
+	backgroundObjects.clear();
 }
 
