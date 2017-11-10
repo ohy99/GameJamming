@@ -25,6 +25,8 @@ public:
 
 	static void MouseButtonCallbacks(GLFWwindow* window, int button, int action, int mods);
 	static void MouseScrollCallbacks(GLFWwindow* window, double xoffset, double yoffset);
+
+	GLFWwindow* getWindowPtr() { return m_window; }
 private:
 	Application();
 	~Application();

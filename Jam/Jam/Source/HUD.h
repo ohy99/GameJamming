@@ -15,7 +15,7 @@ class HUD : public Singleton <HUD>
 	float end_angle;
 	Color circle_color;
 
-
+	std::pair<Mesh*, Mesh*> frontBackHp;
 public:
 	void render();
 protected:

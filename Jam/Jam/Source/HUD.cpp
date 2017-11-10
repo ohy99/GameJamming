@@ -20,6 +20,9 @@ HUD::HUD() : num_of_combo_circles(20), start_angle(0), end_angle(360), circle_co
 			((float)(i + 1) / (float)num_of_combo_circles) * total_angle);
 	}
 	combo = MeshBuilder::GenerateCircle("", Color(1, 1, 1), 20);
+
+	frontBackHp.first = MeshList::GetInstance()->getMesh("HpFront");
+	frontBackHp.second = MeshList::GetInstance()->getMesh("HpBack");
 }
 
 HUD::~HUD()
@@ -35,9 +38,28 @@ HUD::~HUD()
 
 void HUD::render()
 {
-	FontType& font = FontTypeManager::GetInstance()->get_font(FontTypeManager::CALIBRI);
+	MS& ms = Graphics::GetInstance()->modelStack;
 	float worldWidth = GlobalVariables::GetInstance()->get_worldWidth();
 	float worldHeight = GlobalVariables::GetInstance()->get_worldHeight();
+	//Render HP
+	ms.PushMatrix();
+	ms.Translate(20, 90, 0);
+	
+	ms.PushMatrix();
+	ms.Scale(30, 10, 1);
+	RenderHelper::RenderMesh(frontBackHp.second, false);
+	ms.PopMatrix();
+
+	ms.PushMatrix();
+	ms.Scale(20.f * Player::GetInstance()->hitpoint.get_hp_percentage(), 10, 1);
+
+	RenderHelper::RenderMesh(frontBackHp.first, false);
+	ms.PopMatrix();
+
+	ms.PopMatrix();
+
+
+	FontType& font = FontTypeManager::GetInstance()->get_font(FontTypeManager::CALIBRI);
 	Vector3 text_scale(5, 5, 1);
 
 	float half_width = 0.f;
@@ -47,7 +69,7 @@ void HUD::render()
 
 	half_width *= 0.5f;
 
-	MS& ms = Graphics::GetInstance()->modelStack;
+	
 
 	ms.PushMatrix();
 	ms.Translate(worldWidth * 0.5f, worldHeight * 0.95f, 0);

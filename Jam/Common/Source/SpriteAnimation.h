@@ -29,6 +29,41 @@ struct Animation
 
 	float m_currentTime;
 	int m_currentFrame;
+
+	void Update(double dt)
+	{
+		if (this == NULL)
+			return;
+		//If animation is active
+		if (this->animActive == false)
+			return;
+		//Working
+		this->m_currentTime += static_cast<float>(dt);
+		int numFrame = Math::Max(1, this->endFrame - this->startFrame + 1);
+
+		float frameTime = this->animTime / numFrame;
+
+		this->m_currentFrame = Math::Min(this->endFrame, this->startFrame +
+			static_cast<int>(this->m_currentTime / frameTime));
+
+		if (this->m_currentTime >= this->animTime)
+		{
+			if (this->repeatCount == 0)
+			{
+				this->animActive = false;
+				this->m_currentTime = 0.0f;
+				this->m_currentFrame = this->startFrame;
+				this->ended = true;
+			}
+
+			if (this->repeatCount >= 1)
+			{
+				this->m_currentTime = 0.0f;
+				this->m_currentFrame = this->startFrame;
+
+			}
+		}
+	}
 };
 
 //THis works as the template for sprite animation

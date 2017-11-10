@@ -66,12 +66,6 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image//chiller.tga");
 		assignMesh(temp);
 		
-		//temp = MeshBuilder::GenerateSpriteAnimation("BLACKDRAGON", 1, 6, 1.f);
-		//temp->textureID = LoadTGA("Image//blackdragon.tga");
-		//assignMesh(temp);
-		//temp = MeshBuilder::GenerateSpriteAnimation("BLACKATTACK", 1, 6, 1.f);
-		//temp->textureID = LoadTGA("Image//blackattack.tga");
-		//assignMesh(temp);
 		temp = MeshBuilder::GenerateQuad("PlayerBullet", Color(1, 1, 1, 1.f), 1);
 		temp->textureID = LoadTGA("Image\\Protagonist_Bullet.tga");
 		assignMesh(temp);
@@ -97,6 +91,26 @@ class MeshList : public Singleton <MeshList>
 		assignMesh(temp);
 		temp = MeshBuilder::GenerateQuad("node_highlight", Color(1, 1, 1, 1.f), 1);
 		temp->textureID = LoadTGA("Image\\node_highlight.tga");
+		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateSpriteAnimation("SheepIdle", 1, 2, 1.f);
+		temp->textureID = LoadTGA("Image\\Sheep_idle.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("SheepFire", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\Sheep_fire.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("HpBack", Color(1,1,1), 1.f);
+		temp->textureID = LoadTGA("Image\\ui_health11.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("HpFront", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\ui_health22.tga");
+		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateSpriteAnimation("reticle", 2, 3, 1.f);
+		temp->textureID = LoadTGA("Image\\Recticle.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateSpriteAnimation("sky", 2, 3, 1.f);
+		temp->textureID = LoadTGA("Image\\bg_sky.tga");
 		assignMesh(temp);
 	}
 

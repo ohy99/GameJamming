@@ -10,6 +10,8 @@
 #include "CharacterBase.h"
 #include "MyTimer.h"
 #include "Physics.h"
+#include <utility>
+#include "SpriteAnimation.h"
 class Weapon;
 class Collider;
 class HUD;
@@ -27,7 +29,7 @@ class Player : public Singleton<Player>, public CharacterBase, public GameObject
 	Collider* collider;
 	Weapon* weapon[2];
 	Physics physic;
-	std::vector <Weapon*> weapon_list;
+	std::vector <Weapon*> weapon_list; 
 	unsigned curr_weap;
 	//Variables
 	float default_move_speed;
@@ -52,6 +54,17 @@ class Player : public Singleton<Player>, public CharacterBase, public GameObject
 	void update_second_wind(double dt);
 	void go_down();
 	void revive();
+
+	//for animation
+	std::pair<Mesh*, Animation> reticle;
+	enum MESHSTATE
+	{
+		IDLE,
+		FIRE,
+		MESHSTATECOUNT
+	} currMeshState;
+	std::pair<Mesh*, Animation> meshArray[MESHSTATECOUNT];
+	void changeState(MESHSTATE state);
 public:
 	void init();
 	//overwrite virtuals from gameobj
