@@ -3,6 +3,7 @@
 
 #include "Mesh.h"
 #include <vector>
+#include "MyMath.h"
 
 //this runs the template
 struct Animation

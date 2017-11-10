@@ -17,6 +17,9 @@
 #include "KeyboardController.h"
 #include "MouseController.h"
 
+#include "GL\glew.h"
+#include "GLFW\glfw3.h"
+
 Mainmenu::Mainmenu()
 {
 	axis = nullptr;
@@ -72,6 +75,9 @@ void Mainmenu::Init()
 	feedback_timer.reset_timer();
 
 	AudioPlayer::GetInstance()->PlayBackground2D("Pim Poy", 0.2);
+
+	//Cursor										GLFW_CURSOR 0x00033001   GLFW_CURSOR_NORMAL 0x00034001
+	glfwSetInputMode(Application::GetInstance().getWindowPtr(), 0x00033001, 0x00034001);
 }
 
 
