@@ -2,12 +2,14 @@
 
 #include "Boss.h"
 #include "BossTwo.h"
+#include "BossThree.h"
 
 BossManager::BossManager()
 {
-	currType = BOSSTYPE::BOSSTWO;
+	currType = BOSSTYPE::BOSSTHREE;
 	bossArray[DEFAULT] = new Boss();
 	bossArray[BOSSTWO] = new BossTwo();
+	bossArray[BOSSTHREE] = new BossThree();
 }
 
 BossManager::~BossManager()

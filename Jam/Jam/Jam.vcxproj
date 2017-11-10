@@ -162,6 +162,7 @@
     <ClCompile Include="Source\Boss.cpp" />
     <ClCompile Include="Source\BossDefaultGun.cpp" />
     <ClCompile Include="Source\BossManager.cpp" />
+    <ClCompile Include="Source\BossThree.cpp" />
     <ClCompile Include="Source\BossTwo.cpp" />
     <ClCompile Include="Source\CameraManager.cpp" />
     <ClCompile Include="Source\Collider.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="Source\BossBase.h" />
     <ClInclude Include="Source\BossDefaultGun.h" />
     <ClInclude Include="Source\BossManager.h" />
+    <ClInclude Include="Source\BossThree.h" />
     <ClInclude Include="Source\BossTwo.h" />
     <ClInclude Include="Source\CameraManager.h" />
     <ClInclude Include="Source\CharacterBase.h" />

@@ -222,6 +222,9 @@ void Boss::UpdatePart(BasePart * part, double dt)
 		//this is the default aka attack_state == 0
 		part->update(dt);
 		part->weapon->dir = (-part->pos + Player::GetInstance()->pos).Normalize();
-		part->weapon->discharge();
+		if (attack_timer.get_current_percent() >= 1) {
+			part->weapon->discharge();
+			attack_timer.reset_timer();
+		}
 	}
 }
