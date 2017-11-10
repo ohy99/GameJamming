@@ -36,6 +36,10 @@
 #include "MessageDispatcher.h"
 #include "ConcreteMessage.h"
 
+#include "GLFW\glfw3.h"
+#include "GL\glew.h"
+#include "Application.h"
+
 GameScene::GameScene()
 {
 }
@@ -93,6 +97,7 @@ void GameScene::Init()
 	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
 	CameraManager::GetInstance()->attach_camera(&camera);
 	axis = MeshBuilder::GenerateAxes("", 100, 100, 100);
+	backGround = MeshList::GetInstance()->getMesh("sky");
 
 	worldHeight = 100;
 	worldWidth = worldHeight * Application::GetWindowWidth() / Application::GetWindowHeight();
@@ -109,6 +114,9 @@ void GameScene::Init()
 	ShowHpManager::GetInstance();
 	ParticleManager::GetInstance();
 	GameFlowController::GetInstance()->init();
+
+	//Cursor										GLFW_CURSOR 0x00033001   GLFW_CURSOR_HIDDEN 0x00034002
+	glfwSetInputMode(Application::GetInstance().getWindowPtr(), 0x00033001, 0x00034002);
 }
 
 
@@ -175,6 +183,13 @@ void GameScene::Render()
 	RenderHelper::RenderMesh(axis, false);
 
 	ms.PushMatrix();
+
+	ms.PushMatrix();
+	ms.Translate(worldWidth* 0.5f, worldHeight * 0.5f, 0);
+	ms.Scale(worldWidth, worldHeight, 1);
+	RenderHelper::RenderMesh(backGround, false);
+	ms.PopMatrix();
+
 	RenderManager::GetInstance()->render_all_active_objects();
 
 	ShowHpManager::GetInstance()->render_all_hp_text();

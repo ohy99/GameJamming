@@ -27,6 +27,7 @@ protected:
 	double fps;
 	//AudioPlayer audioPlayer;
 	Mesh* axis;
+	Mesh* backGround;
 
 	//Mesh* background;
 	float worldHeight;

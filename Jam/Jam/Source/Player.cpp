@@ -25,6 +25,15 @@ Player::Player() : inputController(*InputController::GetInstance()), collider(nu
 	//once only so yea
 	collider = new Collider(this, new PlayerResponse);
 	this->faction.side = Faction::PLAYER;
+	currMeshState = MESHSTATE::IDLE;
+	meshArray[IDLE].first = MeshList::GetInstance()->getMesh("SheepIdle");
+	meshArray[IDLE].second.Set(0, 1, 1, 0.5f, true);
+	meshArray[FIRE].first = MeshList::GetInstance()->getMesh("SheepFire");
+	reticle.first = MeshList::GetInstance()->getMesh("reticle");
+	reticle.second.Set(0, 5, 1, 0.5f, true);
+	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(reticle.first);
+	if (sa)
+		sa->m_anim = &reticle.second;
 }
 
 Player::~Player()
@@ -43,7 +52,7 @@ Player::~Player()
 void Player::init()
 {
 	this->pos.Set(GlobalVariables::GetInstance()->get_worldWidth() * 0.5f, GlobalVariables::GetInstance()->get_worldHeight() * 0.5f);
-	this->scale.Set(3, 3, 3);
+	this->scale.Set(7.5f, 7.5f, 1);
 	this->dir.Set(0, 1, 0);
 	this->active = true;
 
@@ -124,12 +133,37 @@ void Player::update(double dt)
 	//update second wind
 	update_second_wind(dt);
 
+	//Animation
+	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(meshArray[currMeshState].first);
+	if (sa) {
+		sa->m_anim = &meshArray[currMeshState].second;
+		sa->Update(dt);
+	}
+	this->mesh = meshArray[currMeshState].first;
+
+	
+
 	if (legitDead)
 	{
 		//boom
 		ParticleManager::GetInstance()->spawn_particle(ParticleManager::TYPE::DEADPLAYER, this->pos);
 	}
-		
+	
+}
+
+void Player::changeState(MESHSTATE state)
+{
+	currMeshState = state;
+	switch (currMeshState)
+	{
+	case IDLE:
+		reticle.second.m_currentTime = 0.f;
+		reticle.second.m_currentFrame = 0;
+		break;
+	case FIRE:
+		meshArray[currMeshState].second.m_currentTime = 0.f;
+		break;
+	}
 }
 
 void Player::update_movement(double dt)
@@ -223,6 +257,14 @@ void Player::update_weapon(double dt)
 
 	if (inputController.isInputDown(InputController::SHOOT)) {
 		weapon_list.at(curr_weap)->discharge();
+		this->changeState(MESHSTATE::FIRE);
+
+		//reticle update
+		reticle.second.Update(dt);
+	}
+	else
+	{
+		this->changeState(MESHSTATE::IDLE);
 	}
 }
 
@@ -283,8 +325,8 @@ void Player::update_second_wind(double dt)
 			second_wind_available = false;
 			this->go_down();
 		}
-		else
-			this->legitDead;
+		else if (second_wind_active == false)
+			this->legitDead = true;
 	}
 	if (second_wind_active)
 	{
@@ -312,5 +354,20 @@ void Player::render()
 	GameObject::render();
 
 	hitpoint.render_hpbar(Vector3(pos.x, pos.y + scale.y, pos.z), Vector3(scale.x, 1));
+
+	double x, y;
+	MouseController::GetInstance()->GetMousePosition(x, y);
+	float w = Application::GetWindowWidth();
+	float h = Application::GetWindowHeight();
+	float worldWidth = GlobalVariables::GetInstance()->get_worldWidth();
+	float worldHeight = GlobalVariables::GetInstance()->get_worldHeight();
+	Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
+
+	MS& ms = Graphics::GetInstance()->modelStack;
+	ms.PushMatrix();
+	ms.Translate(cursor_point_in_world_space);
+	ms.Scale(5, 5, 1);
+	RenderHelper::RenderMesh(reticle.first, false);
+	ms.PopMatrix();
 }
 
