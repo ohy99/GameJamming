@@ -17,6 +17,8 @@ public:
 	GameScene();
 	~GameScene();
 
+	void RenderBackground();
+
 	virtual void Init();
 	virtual void Update(double dt);
 	virtual void Render();
@@ -33,6 +35,7 @@ protected:
 	float worldHeight;
 	float worldWidth;
 
+	std::vector<GameObject*> backgroundObjects;
 };
 
 #endif

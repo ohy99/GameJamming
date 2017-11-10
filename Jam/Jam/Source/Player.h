@@ -79,6 +79,8 @@ public:
 	void add_combo();
 	float get_multiplier();
 
+	inline bool GetDead() { return legitDead; }
+
 	void kill_feedback(bool killed);
 protected:
 	Player();

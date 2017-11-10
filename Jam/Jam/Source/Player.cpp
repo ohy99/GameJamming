@@ -193,41 +193,42 @@ void Player::update_movement(double dt)
 
 	//deceleration = 0.5sec
 
+	if (!legitDead) {
+		if (inputController.isInputDown(InputController::MOVE_FRONT)) {
+			//this->pos += this->dir * move_speed * (float)dt;
+			this->pos += Vector3(0, 1, 0) * move_speed * (float)dt;
+			//this->physic.velocity += Vector3(0, 1, 0) * acc * (float)dt;
+		}
+		//else
+		//	this->physic.velocity.y = Math::Min(this->physic.velocity.y - acc * 2.f * float(dt), 0.0f);
+		if (inputController.isInputDown(InputController::MOVE_BACK)) {
+			//this->pos += -this->dir * move_speed * (float)dt;
+			this->pos += -Vector3(0, 1, 0) * move_speed * (float)dt;
+			//this->physic.velocity += -Vector3(0, 1, 0) * acc * (float)dt;
+		}
+		//else
+		//	this->physic.velocity.y = Math::Max(this->physic.velocity.y + acc * 2.f * float(dt), 0.0f);
 
-	if (inputController.isInputDown(InputController::MOVE_FRONT)) {
-		//this->pos += this->dir * move_speed * (float)dt;
-		this->pos += Vector3(0,1,0) * move_speed * (float)dt;
-		//this->physic.velocity += Vector3(0, 1, 0) * acc * (float)dt;
+		if (inputController.isInputDown(InputController::MOVE_LEFT)) {
+			//Vector3 right = this->dir.Cross(Vector3(0, 0, 1)).Normalize();
+			//this->pos += -right * move_speed * (float)dt;
+			this->pos += -Vector3(1, 0, 0) * move_speed * (float)dt;
+			//this->physic.velocity += -Vector3(1, 0, 0) * acc * (float)dt;
+		}
+		//else
+		//	this->physic.velocity.x = Math::Max(this->physic.velocity.x + acc * 2.f * float(dt), 0.0f);
+		if (inputController.isInputDown(InputController::MOVE_RIGHT)) {
+			//this->pos += right * move_speed * (float)dt;
+			this->pos += Vector3(1, 0, 0) * move_speed * (float)dt;
+			//this->physic.velocity += Vector3(1, 0, 0) * acc * (float)dt;
+		}
+		//else
+		//	this->physic.velocity.x = Math::Min(this->physic.velocity.x - acc * 2.f * float(dt), 0.0f);
+		//if (this->physic.velocity.LengthSquared() > move_speed * move_speed)
+		//{
+		//	this->physic.velocity.Normalize() *= move_speed;
+		//}
 	}
-	//else
-	//	this->physic.velocity.y = Math::Min(this->physic.velocity.y - acc * 2.f * float(dt), 0.0f);
-	if (inputController.isInputDown(InputController::MOVE_BACK)) {
-		//this->pos += -this->dir * move_speed * (float)dt;
-		this->pos += -Vector3(0, 1, 0) * move_speed * (float)dt;
-		//this->physic.velocity += -Vector3(0, 1, 0) * acc * (float)dt;
-	}
-	//else
-	//	this->physic.velocity.y = Math::Max(this->physic.velocity.y + acc * 2.f * float(dt), 0.0f);
-
-	if (inputController.isInputDown(InputController::MOVE_LEFT)) {
-		//Vector3 right = this->dir.Cross(Vector3(0, 0, 1)).Normalize();
-		//this->pos += -right * move_speed * (float)dt;
-		this->pos += -Vector3(1, 0, 0) * move_speed * (float)dt;
-		//this->physic.velocity += -Vector3(1, 0, 0) * acc * (float)dt;
-	}
-	//else
-	//	this->physic.velocity.x = Math::Max(this->physic.velocity.x + acc * 2.f * float(dt), 0.0f);
-	if (inputController.isInputDown(InputController::MOVE_RIGHT)) {
-		//this->pos += right * move_speed * (float)dt;
-		this->pos += Vector3(1, 0, 0) * move_speed * (float)dt;
-		//this->physic.velocity += Vector3(1, 0, 0) * acc * (float)dt;
-	}
-	//else
-	//	this->physic.velocity.x = Math::Min(this->physic.velocity.x - acc * 2.f * float(dt), 0.0f);
-	//if (this->physic.velocity.LengthSquared() > move_speed * move_speed)
-	//{
-	//	this->physic.velocity.Normalize() *= move_speed;
-	//}
 }
 
 #include "KeyboardController.h"
@@ -251,27 +252,28 @@ void Player::update_weapon(double dt)
 	//	weapon[0]->discharge();
 	//}
 
+	if (!legitDead) {
+		if (inputController.isInputDown(InputController::MELEE)) {
+			weapon[1]->discharge();
+		}
 
-	if (inputController.isInputDown(InputController::MELEE)) {
-		weapon[1]->discharge();
-	}
+		//JUST DEBUG
+		if (KeyboardController::GetInstance()->IsKeyPressed('Q'))
+			curr_weap = Math::Wrap(curr_weap - 1, (unsigned)0, weapon_list.size() - 1);
+		if (KeyboardController::GetInstance()->IsKeyPressed('E'))
+			curr_weap = Math::Wrap(curr_weap + 1, (unsigned)0, weapon_list.size() - 1);
 
-	//JUST DEBUG
-	if (KeyboardController::GetInstance()->IsKeyPressed('Q'))
-		curr_weap = Math::Wrap(curr_weap - 1, (unsigned)0, weapon_list.size() - 1);
-	if (KeyboardController::GetInstance()->IsKeyPressed('E'))
-		curr_weap = Math::Wrap(curr_weap + 1, (unsigned)0, weapon_list.size() - 1);
+		if (inputController.isInputDown(InputController::SHOOT)) {
+			weapon_list.at(curr_weap)->discharge();
+			this->changeState(MESHSTATE::FIRE);
 
-	if (inputController.isInputDown(InputController::SHOOT)) {
-		weapon_list.at(curr_weap)->discharge();
-		this->changeState(MESHSTATE::FIRE);
-
-		//reticle update
-		reticle.second.Update(dt);
-	}
-	else
-	{
-		this->changeState(MESHSTATE::IDLE);
+			//reticle update
+			reticle.second.Update(dt);
+		}
+		else
+		{
+			this->changeState(MESHSTATE::IDLE);
+		}
 	}
 }
 

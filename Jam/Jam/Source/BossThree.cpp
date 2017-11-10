@@ -194,12 +194,12 @@ void BossThree::UpdatePart(BasePart * part, double dt)
 			static int countLeft = 0;
 			part->update(dt);		
 			if (attack_timer.get_current_percent() >= 0.2) {
-				if (countLeft > 5) {
+				if (countLeft > 3) {
 					//attack_timer.reset_timer();
 					part->weapon->dir.Set(0, 1, 0);
 					countLeft = 0;
 				}
-				float angle = 90/5;
+				float angle = 90/3;
 				Mtx44 rotation;
 				rotation.SetToRotation(angle, 0, 0, 1);
 				part->weapon->dir = rotation * part->weapon->dir;
@@ -212,12 +212,12 @@ void BossThree::UpdatePart(BasePart * part, double dt)
 			static int countRight = 0;
 			part->update(dt);
 			if (attack_timer.get_current_percent() >= 0.2) {
-				if (countRight > 5) {
+				if (countRight > 3) {
 					attack_timer.reset_timer();
 					part->weapon->dir.Set(-1, 1, 0);
 					countRight = 0;
 				}
-				float angle = 90 / 5;
+				float angle = 90 / 3;
 				Mtx44 rotation;
 				rotation.SetToRotation(angle, 0, 0, 1);
 				part->weapon->dir = rotation * part->weapon->dir;
