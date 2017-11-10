@@ -115,6 +115,10 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateSpriteAnimation("sky", 2, 3, 1.f);
 		temp->textureID = LoadTGA("Image\\bg_sky.tga");
 		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateQuad("Meteor", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\bg_meteor.tga");
+		assignMesh(temp);
 	}
 
 	void assignMesh(Mesh* a) {

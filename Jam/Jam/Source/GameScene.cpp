@@ -184,7 +184,7 @@ void GameScene::Init()
 
 	for (int i = 0; i < 10; ++i) {
 		GameObject* go = new GameObject();
-		go->mesh = MeshList::GetInstance()->getMesh("RedQuad");
+		go->mesh = MeshList::GetInstance()->getMesh("Meteor");
 		backgroundObjects.push_back(go);
 	}
 }
