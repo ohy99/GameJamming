@@ -10,6 +10,8 @@
 
 Weapon::Weapon() : proj_type(DmgHitBoxManager::PROJECTILE)
 {
+	buff = fast = false;
+	fastTimer = buffTimer = 0;
 }
 
 Weapon::~Weapon()
@@ -23,6 +25,8 @@ void Weapon::update(double dt)
 
 void Weapon::set(int min_dmg, int max_dmg, double attacks_per_sec, DmgHitBoxManager::DMG_COLLIDER_TYPE type, float force, Faction::FACTION_SIDE side)
 {
+	defaultMinDmg = min_dmg;
+	defaultMaxDmg = max_dmg;
 	this->damage.set(min_dmg, max_dmg);
 	this->attackspeed_timer.set_duration(1.0 / attacks_per_sec);
 	this->proj_type = type;

@@ -7,18 +7,36 @@
 #include "DieToDistance.h"
 #include "DieToTimer.h"
 #include "RenderManager.h"
+#include "ConcreteMessage.h"
 
 void MachineGun::update(double dt)
 {
 	attackspeed_timer.update_timer(dt);
-	if (chargeTime >= dt) {
-		chargeTime -= dt;
+	if (!fast) {
+		if (chargeTime >= dt) {
+			chargeTime -= dt;
+		}
+		if (chargeTime >= 2) {
+			attackspeed_timer.set_duration(0.15);
+		}
+		else
+			attackspeed_timer.set_duration(0.1);
 	}
-	if (chargeTime >= 2) {
-		attackspeed_timer.set_duration(0.15);
+	else {
+		fastTimer += dt;
+		if (fastTimer >= 5) {
+			fastTimer = 0;
+			fast = false;
+		}
+		attackspeed_timer.set_duration(0.08);
 	}
-	else
-		attackspeed_timer.set_duration(0.1);
+	if (buff) {
+		buffTimer += dt;
+		if (buffTimer >= 5) {
+			buffTimer = 0;
+			buff = false;
+		}
+	}
 }
 
 void MachineGun::discharge()
@@ -30,7 +48,10 @@ void MachineGun::discharge()
 	DmgHitBox* temp_proj = DmgHitBoxManager::GetInstance()->get_hitbox(proj_type);
 	if (!temp_proj)
 		return;
-	temp_proj->set(this->pos, this->dir, this->faction.side, power.force, damage.get_damage(), damage.get_type());
+	if(!buff)
+		temp_proj->set(this->pos, this->dir, this->faction.side, power.force, damage.get_damage(), damage.get_type());
+	else
+		temp_proj->set(this->pos, this->dir, this->faction.side, power.force, damage.get_damage() * 2, damage.get_type());
 
 	//i let u travel 50units bah
 	temp_proj->set_die_condition(new DieToDistance(70, power.force));
@@ -42,7 +63,8 @@ void MachineGun::discharge()
 
 	AudioPlayer::GetInstance()->PlaySound2D("MachineGun", 0.2);
 
-	chargeTime += attackspeed_timer.get_duration() * 1.5;
+	if (!fast)
+		chargeTime += attackspeed_timer.get_duration() * 1.5;
 	//printf("timer: %f\n", attackspeed_timer.get_duration());
 	//must reset timer
 	attackspeed_timer.reset_timer();
@@ -50,4 +72,18 @@ void MachineGun::discharge()
 
 void MachineGun::Handle(BaseMessage* msg)
 {
+	MessageWeapon* messageWeapon = dynamic_cast<MessageWeapon*>(msg);
+	if (messageWeapon) {
+		switch (messageWeapon->type) {
+		case MessageWeapon::APPLY_DAMAGE_BOOST:
+			buff = true;
+			break;
+		case MessageWeapon::APPLY_FIRERATE_BOOST:
+			fast = true;
+			break;
+		}
+		delete messageWeapon;
+		return;
+	}
+	delete msg;
 }

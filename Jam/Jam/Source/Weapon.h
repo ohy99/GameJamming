@@ -18,6 +18,14 @@ protected:
 	DmgHitBoxManager::DMG_COLLIDER_TYPE proj_type;//type ejected
 	Physics power;								//force / spd of proj ejected
 	Faction faction;							//which side this belongs to
+
+	bool fast;
+	bool buff;
+	float fastTimer;
+	float buffTimer;
+
+	int defaultMinDmg;
+	int defaultMaxDmg;
 public:
 	std::string name;
 

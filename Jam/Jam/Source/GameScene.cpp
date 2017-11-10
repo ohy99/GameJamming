@@ -134,8 +134,11 @@ void GameScene::Update(double dt)
 	ParticleManager::GetInstance()->update(dt);
 
 	//debug purposes
-	if (KeyboardController::GetInstance()->IsKeyPressed(VK_SPACE)) {
+	if (KeyboardController::GetInstance()->IsKeyPressed('P')) {
 		MessageDispatcher::GetInstance()->Send("MachineGun", new MessageWeapon(MessageWeapon::APPLY_FIRERATE_BOOST));
+	}
+	if (KeyboardController::GetInstance()->IsKeyPressed('B')) {
+		MessageDispatcher::GetInstance()->Send("MachineGun", new MessageWeapon(MessageWeapon::APPLY_DAMAGE_BOOST));
 	}
 
 	if (KeyboardController::GetInstance()->IsKeyPressed(VK_F1))
