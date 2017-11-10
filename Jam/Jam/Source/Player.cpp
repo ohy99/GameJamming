@@ -18,6 +18,7 @@
 #include "ShotGun.h"
 #include "PhysicsManager.h"
 #include "ParticleManager.h"
+#include "MessageDispatcher.h"
 
 Player::Player() : inputController(*InputController::GetInstance()), collider(nullptr)
 {
@@ -80,10 +81,12 @@ void Player::init()
 
 	Weapon* weap = new MachineGun(this->faction.side);
 	weap->scale.Set(1, 1);
+	MessageDispatcher::GetInstance()->Register("MachineGun", weap);
 	weapon_list.push_back(weap);
 
 	weap = new BamBam(this->faction.side);
 	weap->scale.Set(1, 1);
+	MessageDispatcher::GetInstance()->Register("BamBam", weap);
 	RenderManager::GetInstance()->attach_renderable(weap, 1);
 	weap->active = true;
 	weap->name = "GUN";
@@ -91,6 +94,7 @@ void Player::init()
 
 	weap = new ShotGun(this->faction.side);
 	weap->scale.Set(1, 1);
+	MessageDispatcher::GetInstance()->Register("Shotgun", weap);
 	RenderManager::GetInstance()->attach_renderable(weap, 1);
 	weap->active = true;
 	weap->name = "GUN";

@@ -14,7 +14,7 @@ public:
 	~BossDefaultGun() {}
 
 	virtual void discharge();
-
+	virtual void Handle(BaseMessage* msg);
 };
 
 #endif // !PEWPEWGUN_H

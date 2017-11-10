@@ -7,9 +7,9 @@
 //#include "ProjectileManager.h"
 #include "Physics.h"
 #include "Faction.h"
+#include "AudioPlayer.h"
 
 #include "DmgHitBoxManager.h"
-
 class Weapon : public GameObject
 {
 protected:
@@ -18,6 +18,14 @@ protected:
 	DmgHitBoxManager::DMG_COLLIDER_TYPE proj_type;//type ejected
 	Physics power;								//force / spd of proj ejected
 	Faction faction;							//which side this belongs to
+
+	bool fast;
+	bool buff;
+	float fastTimer;
+	float buffTimer;
+
+	int defaultMinDmg;
+	int defaultMaxDmg;
 public:
 	std::string name;
 
@@ -25,7 +33,7 @@ public:
 	virtual ~Weapon();
 	virtual void update(double dt);
 
-	virtual void discharge();
+	virtual void discharge() = 0;
 	void set(int min_dmg, int max_dmg, double attacks_per_sec, DmgHitBoxManager::DMG_COLLIDER_TYPE type, float force, Faction::FACTION_SIDE side);
 };
 

@@ -6,6 +6,7 @@
 #include "DmgHitBox.h"
 #include "CharacterBase.h"
 #include "Faction.h"
+#include "AudioPlayer.h"
 
 DamageHitResponse::DamageHitResponse(Damage* damage_component) : damage_component(damage_component)
 {
@@ -33,6 +34,8 @@ bool DamageHitResponse::response(GameObject * other, GameObject* my_owner)
 			{
 				//if i hit tio enemy
 				Player::GetInstance()->kill_feedback(someguy->hitpoint.get_hp_percentage() <= 0.f);
+
+				AudioPlayer::GetInstance()->PlaySound2D("Hit", 0.2);
 			}
 			return true;
 		}

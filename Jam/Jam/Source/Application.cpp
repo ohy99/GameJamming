@@ -124,7 +124,6 @@ void Application::Init()
 
 	printf("Initializing AudioPlayer...\n");
 	AudioPlayer::GetInstance()->Init();
-	AudioPlayer::GetInstance()->PlayBackground2D("Yaruta");
 	//AudioPlayer::GetInstance()->PlaySound2D("Yaruta", 0.1);
 
 	//If the window couldn't be created

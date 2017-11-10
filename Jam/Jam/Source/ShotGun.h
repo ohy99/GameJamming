@@ -16,6 +16,7 @@ public:
 	~ShotGun() {}
 
 	virtual void discharge();
+	virtual void Handle(BaseMessage* msg);
 };
 
 #endif // !ShotGun

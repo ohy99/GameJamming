@@ -112,11 +112,17 @@
     <ClCompile Include="Source\MachineGun.cpp">
       <Filter>GameObject\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PewPewGun.cpp">
+      <Filter>GameObject\Weapon</Filter>
+    </ClCompile>
     <ClCompile Include="Source\BossManager.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
     <ClCompile Include="Source\BossTwo.cpp">
       <Filter>Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MessageDispatcher.cpp">
+      <Filter>Message</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -285,6 +291,18 @@
     <ClInclude Include="Source\BossTwo.h">
       <Filter>Boss</Filter>
     </ClInclude>
+    <ClInclude Include="Source\BaseMessage.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ConcreteMessage.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MessageHandle.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MessageDispatcher.h">
+      <Filter>Message</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Managers">
@@ -325,6 +343,9 @@
     </Filter>
     <Filter Include="Boss\BossPart">
       <UniqueIdentifier>{d7512200-feb7-4fc2-96ce-c43ab4be3f92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Message">
+      <UniqueIdentifier>{15025dee-9571-4706-84d6-8a2e4cd34f0a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

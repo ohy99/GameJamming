@@ -33,6 +33,8 @@
 #include "Loader.h"
 #include "ParticleManager.h"
 #include "GameFlowController.h"
+#include "MessageDispatcher.h"
+#include "ConcreteMessage.h"
 
 #include "GLFW\glfw3.h"
 #include "GL\glew.h"
@@ -138,6 +140,14 @@ void GameScene::Update(double dt)
 	ShowHpManager::GetInstance()->update(dt);
 	CameraManager::GetInstance()->update(dt);
 	ParticleManager::GetInstance()->update(dt);
+
+	//debug purposes
+	if (KeyboardController::GetInstance()->IsKeyPressed('P')) {
+		MessageDispatcher::GetInstance()->Send("MachineGun", new MessageWeapon(MessageWeapon::APPLY_FIRERATE_BOOST));
+	}
+	if (KeyboardController::GetInstance()->IsKeyPressed('B')) {
+		MessageDispatcher::GetInstance()->Send("MachineGun", new MessageWeapon(MessageWeapon::APPLY_DAMAGE_BOOST));
+	}
 
 	if (KeyboardController::GetInstance()->IsKeyPressed(VK_F1))
 	{

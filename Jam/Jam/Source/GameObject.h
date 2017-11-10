@@ -3,8 +3,9 @@
 
 #include "Vector3.h"
 #include "Mesh.h"
+#include "MessageHandle.h"
 
-class GameObject
+class GameObject : public MessageHandle
 {
 public:
 	Mesh* mesh;
@@ -20,6 +21,7 @@ public:
 
 	virtual void render();
 	virtual void update(double dt);
+	virtual void Handle(BaseMessage* msg) {}
 };
 
 #endif

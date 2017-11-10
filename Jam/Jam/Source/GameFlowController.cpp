@@ -5,6 +5,7 @@
 //#include "Boss.h"
 #include "MyDebugger.h"
 #include "BossManager.h"
+#include "AudioPlayer.h"
 
 GameFlowController::GameFlowController() :
 	max_wave_before_boss(3),
@@ -23,6 +24,7 @@ GameFlowController::~GameFlowController()
 void GameFlowController::init()
 {
 	//called when start game scene
+	AudioPlayer::GetInstance()->PlayBackground2D("Arcade Funk", 0.2);
 	currState = STATE::WAVE;
 	prevState = STATE::WAVE;
 	max_wave_before_boss = 3;
@@ -84,10 +86,12 @@ void GameFlowController::change_state(STATE state)
 	{
 	case WAVE:
 		EnemyManager::GetInstance()->init();
+		AudioPlayer::GetInstance()->PlayBackground2D("Arcade Funk", 0.2);
 		break;
 	case TRANSITION:
 		break;
 	case BOSS:
+		AudioPlayer::GetInstance()->PlayBackground2D("Defense Line", 0.2);
 		BossManager::GetInstance()->Init();
 		break;
 	}

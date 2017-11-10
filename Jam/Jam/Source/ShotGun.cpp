@@ -39,8 +39,13 @@ void ShotGun::discharge()
 		PhysicsManager::GetInstance()->add_object(proj, proj->get_physics_component());
 		CollisionManager::GetInstance()->add_collider(proj->get_collider_component());
 		RenderManager::GetInstance()->attach_renderable(proj, 1);
-		//must reset timer
+		//must reset timers
 	}
+	AudioPlayer::GetInstance()->PlaySound2D("Shotgun", 0.2);
 
 	attackspeed_timer.reset_timer();
+}
+
+void ShotGun::Handle(BaseMessage* msg)
+{
 }
