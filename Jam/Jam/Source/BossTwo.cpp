@@ -25,7 +25,7 @@ void BossTwo::Init()
 		&this->pos, -this->scale * 0.5f, this->scale * 0.5f);
 
 	hitpoint.init_hp(1000);
-	faction.side = Faction::FACTION_SIDE::ENEMY;
+	this->faction.side = Faction::FACTION_SIDE::ENEMY;
 
 	this->mesh = MeshList::GetInstance()->getMesh("RedQuad");
 

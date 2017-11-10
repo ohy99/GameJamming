@@ -16,8 +16,14 @@ public:
 		ENEMYPROJ1,
 		ENEMYPROJ2,
 		ENEMYPROJ3,
+		LASER,
 		MELEE,
 		BOSS_PROJ,
+
+		DMGBOOST,
+		ATTSPDBOOST,
+		HPBOOST,
+
 		DC_COUNT
 	};
 private:

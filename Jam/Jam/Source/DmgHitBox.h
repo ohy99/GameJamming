@@ -21,12 +21,15 @@ private:
 	Faction faction;
 
 	DieCondition* die_condition;
+
 public:
+	//0 default, 1 dmg, 2 attspd, 3 hp
+	int type;
 	DmgHitBox();
 	DmgHitBox(const DmgHitBox& other);
 	virtual ~DmgHitBox();
 	void set_inactive();
-	void update(double dt);
+	virtual void update(double dt);
 	//call this function to initialize the values of hitbox
 	void set(Vector3 pos, Vector3 dir, Faction::FACTION_SIDE side, float velocity, int damage, DamageType::DMG_TYPE type);
 	void set_die_condition(DieCondition* die) { this->die_condition = die; }

@@ -11,6 +11,7 @@ struct Collision
 		AABB,
 		SPHERE,
 		POINT,
+		LINE,
 	};
 
 	CollisionType collisionType;
@@ -72,6 +73,12 @@ struct Collision
 			//NO this is not possible unless...
 			return (*this->mid + this->point) == (*other.mid + other.point);
 		}
+		else if (this->collisionType == LINE && other.collisionType == AABB) {
+			return this->isCollideLine_AABB(other);
+		}
+		else if (this->collisionType == AABB && other.collisionType == LINE) {
+			return other.isCollideLine_AABB(*this);
+		}
 		return false;
 	}
 
@@ -122,6 +129,50 @@ private:
 			(this->mid->z - Sphere.mid->z) * (this->mid->z - Sphere.mid->z);
 
 		return distSq <= (this->radius + Sphere.radius) * (this->radius + Sphere.radius);
+	}
+
+	bool isCollideLine_AABB(Collision& other)
+	{
+		Vector3 line_start(*this->mid - this->point * radius * 0.5f);
+		Vector3 line_end(*this->mid + this->point * radius * 0.5f);
+		Vector3 minAABB(other.min + *other.mid);
+		Vector3 maxAABB(other.max + *other.mid);
+		Vector3 Hit;
+
+		if ((GetIntersection(line_start.x - minAABB.x, line_end.x - minAABB.x,
+			line_start, line_end, Hit) && InBox(Hit, minAABB, maxAABB, 1))
+			|| (GetIntersection(line_start.y - minAABB.y, line_end.y -
+				minAABB.y, line_start, line_end, Hit) && InBox(Hit, minAABB, maxAABB, 2))
+			|| (GetIntersection(line_start.z - minAABB.z, line_end.z -
+				minAABB.z, line_start, line_end, Hit) && InBox(Hit, minAABB, maxAABB, 3))
+			|| (GetIntersection(line_start.x - maxAABB.x, line_end.x -
+				maxAABB.x, line_start, line_end, Hit) && InBox(Hit, minAABB, maxAABB, 1))
+			|| (GetIntersection(line_start.y - maxAABB.y, line_end.y -
+				maxAABB.y, line_start, line_end, Hit) && InBox(Hit, minAABB, maxAABB, 2))
+			|| (GetIntersection(line_start.z - maxAABB.z, line_end.z -
+				maxAABB.z, line_start, line_end, Hit) && InBox(Hit, minAABB, maxAABB, 3)))
+			return true;
+		return false;
+
+	}
+
+	bool GetIntersection(const float fDst1, const float fDst2, Vector3 P1, Vector3 P2, Vector3 & Hit)
+	{
+		if ((fDst1 * fDst2) >= 0.0f)
+			return false;
+		if (fDst1 == fDst2)
+			return false;
+		Hit = P1 + (P2 - P1) * (-fDst1 / (fDst2 - fDst1));
+		return true;
+	}
+
+	bool InBox(Vector3 Hit, Vector3 B1, Vector3 B2, const int Axis)
+	{
+
+		if (Axis == 1 && Hit.z > B1.z && Hit.z < B2.z && Hit.y > B1.y && Hit.y < B2.y) return true;
+		if (Axis == 2 && Hit.z > B1.z && Hit.z < B2.z && Hit.x > B1.x && Hit.x < B2.x) return true;
+		if (Axis == 3 && Hit.x > B1.x && Hit.x < B2.x && Hit.y > B1.y && Hit.y < B2.y) return true;
+		return false;
 	}
 
 

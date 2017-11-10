@@ -124,6 +124,12 @@
     <ClCompile Include="Source\MessageDispatcher.cpp">
       <Filter>Message</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PowerUp.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LaserGun.cpp">
+      <Filter>GameObject\Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\EnvironmentManager.h">
@@ -302,6 +308,12 @@
     </ClInclude>
     <ClInclude Include="Source\MessageDispatcher.h">
       <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PowerUp.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LaserGun.h">
+      <Filter>GameObject\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

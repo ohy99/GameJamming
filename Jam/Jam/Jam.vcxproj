@@ -181,6 +181,7 @@
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\HUD.cpp" />
     <ClCompile Include="Source\InputController.cpp" />
+    <ClCompile Include="Source\LaserGun.cpp" />
     <ClCompile Include="Source\Loader.cpp" />
     <ClCompile Include="Source\MachineGun.cpp" />
     <ClCompile Include="Source\main.cpp" />
@@ -193,6 +194,7 @@
     <ClCompile Include="Source\PhysicsManager.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\PlayerCollisionResponse.cpp" />
+    <ClCompile Include="Source\PowerUp.cpp" />
     <ClCompile Include="Source\ProjectileCollisionResponse.cpp" />
     <ClCompile Include="Source\RenderManager.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
@@ -239,6 +241,7 @@
     <ClInclude Include="Source\CollisionManager.h" />
     <ClInclude Include="Source\HUD.h" />
     <ClInclude Include="Source\InputController.h" />
+    <ClInclude Include="Source\LaserGun.h" />
     <ClInclude Include="Source\Loader.h" />
     <ClInclude Include="Source\MachineGun.h" />
     <ClInclude Include="Source\Mainmenu.h" />
@@ -254,6 +257,7 @@
     <ClInclude Include="Source\PhysicsManager.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\PlayerCollisionResponse.h" />
+    <ClInclude Include="Source\PowerUp.h" />
     <ClInclude Include="Source\ProjectileCollisionResponse.h" />
     <ClInclude Include="Source\RenderManager.h" />
     <ClInclude Include="Source\Scene.h" />
