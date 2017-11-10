@@ -1,11 +1,11 @@
 #ifndef AUDIOPLAYER_H
 #define AUDIOPLAYER_H
 
-#include <iostream>
 #include <string>
-#include <vector>
+#include <map>
 #include "sound.h"
 #include "Vector3.h"
+#include "SingletonTemplate.h"
 //#include "irrKlang.h"
 //#include "ik_vec3d.h"
 #include "../../irrKlang/include/ik_vec3d.h"
@@ -13,52 +13,37 @@
 
 #pragma comment(lib, "irrklang.lib")
 
-using namespace std;
-using namespace irrklang;
-
-class AudioPlayer
+class AudioPlayer : public Singleton<AudioPlayer>
 {
+	friend Singleton<AudioPlayer>;
 private:
-		ISoundEngine* soundEngine;
-		ISound* currentSound;
-		string fileName;
-		static int volume;
-		//static std::vector<
-		int position;
+	irrklang::ISoundEngine* soundEngine;
+	irrklang::ISound* backgroundSound;
+	static int volume;
+	int position;
+
+	//map of all sounds
+	//name, file
+	std::map<std::string, std::string>m_playlist;
 public:
-		AudioPlayer();
-		AudioPlayer(string soundFile); // Doesn't play sound, only initializes fileName
-		~AudioPlayer();
+	AudioPlayer();
+	~AudioPlayer();
 
-		//vector of sound file names
-		std::vector<Sound*> playlist;
+	//loading all sounds and all names to the playlist
+	void Init();
 
-		/* All play functions STOP execution of the program except
-		* playSoundThreaded(). Note: It isn't really multi-threaded.*/
-		void playSound(); // Plays entire sound file
-		void playSound(int milliseconds); // Plays for X number of milliseconds
-		void playSound(string soundFile); // Play entire specified sound file
-		void playSound(string soundFile, int milliseconds);
-		void playSoundThreaded(); // Starts playing sound but program continues
-		void playSoundThreaded(std::string fileName); //overloaded sound playing
-		void playSoundThreaded3D(std::string fileName, Vector3 pos);
-		bool isSoundPlaying(); // True = music is playing
-		void playLoop();
-		void playLoop(std::string fileName);
-		// Pause/Resume, works like any other media player
-		void pause();
-		void resume();
-		// Set/get sound file to be played/playing
-		void setFileName(string soundFile);
-		string getFileName();
+	//parameters are the name, volume is a value from 0 to 1
+	void PlaySound2D(std::string name, float volume = -1);
+	//parameters are the name, volume is a value from 0 to 1
+	void PlayBackground2D(std::string name, float volume = -1);
 
-		// Volume controls
-		void setVolume(int newVolume);
-		void increaseVolume();
-		void increaseVolume(int increment);
-		void decreaseVolume();
-		void decreaseVolume(int increment);
-		int getCurrentVolume();
+	// Volume controls
+	void setVolume(int newVolume);
+	void increaseVolume();
+	void increaseVolume(int increment);
+	void decreaseVolume();
+	void decreaseVolume(int increment);
+	int getCurrentVolume();
 };
 
 #endif //!AUDIOPLAYER_H

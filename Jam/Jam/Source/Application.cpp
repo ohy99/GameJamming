@@ -122,6 +122,11 @@ void Application::Init()
 	//m_window = glfwCreateWindow(m_width, m_height, "Physics", glfwGetPrimaryMonitor(), NULL);
 	m_window = glfwCreateWindow(m_window_width, m_window_height, "The Slother", NULL, NULL);
 
+	printf("Initializing AudioPlayer...\n");
+	AudioPlayer::GetInstance()->Init();
+	AudioPlayer::GetInstance()->PlayBackground2D("Yaruta");
+	//AudioPlayer::GetInstance()->PlaySound2D("Yaruta", 0.1);
+
 	//If the window couldn't be created
 	if (!m_window)
 	{
