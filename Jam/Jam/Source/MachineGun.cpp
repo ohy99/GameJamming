@@ -47,3 +47,7 @@ void MachineGun::discharge()
 	//must reset timer
 	attackspeed_timer.reset_timer();
 }
+
+void MachineGun::Handle(BaseMessage* msg)
+{
+}

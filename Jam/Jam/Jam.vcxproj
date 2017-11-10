@@ -185,6 +185,7 @@
     <ClCompile Include="Source\MachineGun.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Mainmenu.cpp" />
+    <ClCompile Include="Source\MessageDispatcher.cpp" />
     <ClCompile Include="Source\Options.cpp" />
     <ClCompile Include="Source\Particle.cpp" />
     <ClCompile Include="Source\ParticleManager.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\AttackState.h" />
     <ClInclude Include="Source\BamBamMelee.h" />
+    <ClInclude Include="Source\BaseMessage.h" />
     <ClInclude Include="Source\BasePart.h" />
     <ClInclude Include="Source\Boss.h" />
     <ClInclude Include="Source\BossBase.h" />
@@ -213,6 +215,7 @@
     <ClInclude Include="Source\CharacterBase.h" />
     <ClInclude Include="Source\Collider.h" />
     <ClInclude Include="Source\CollisionResponse.h" />
+    <ClInclude Include="Source\ConcreteMessage.h" />
     <ClInclude Include="Source\CrowdControl.h" />
     <ClInclude Include="Source\DamageHitCollisionResponse.h" />
     <ClInclude Include="Source\DefaultLeft.h" />
@@ -241,6 +244,8 @@
     <ClInclude Include="Source\Mainmenu.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GlobalVariableManager.h" />
+    <ClInclude Include="Source\MessageDispatcher.h" />
+    <ClInclude Include="Source\MessageHandle.h" />
     <ClInclude Include="Source\MoveState.h" />
     <ClInclude Include="Source\Options.h" />
     <ClInclude Include="Source\Particle.h" />

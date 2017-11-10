@@ -27,3 +27,7 @@ void BossDefaultGun::discharge()
 	//must reset timer
 	attackspeed_timer.reset_timer();
 }
+
+void BossDefaultGun::Handle(BaseMessage* msg)
+{
+}

@@ -31,3 +31,7 @@ void PewPew::discharge()
 	//must reset timer
 	attackspeed_timer.reset_timer();
 }
+
+void PewPew::Handle(BaseMessage* msg)
+{
+}

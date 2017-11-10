@@ -10,7 +10,6 @@
 #include "AudioPlayer.h"
 
 #include "DmgHitBoxManager.h"
-
 class Weapon : public GameObject
 {
 protected:

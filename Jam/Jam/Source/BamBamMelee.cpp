@@ -28,3 +28,7 @@ void BamBam::discharge()
 	//must reset timer
 	attackspeed_timer.reset_timer();
 }
+
+void BamBam::Handle(BaseMessage* msg)
+{
+}

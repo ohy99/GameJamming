@@ -45,3 +45,7 @@ void ShotGun::discharge()
 
 	attackspeed_timer.reset_timer();
 }
+
+void ShotGun::Handle(BaseMessage* msg)
+{
+}

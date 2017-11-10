@@ -16,6 +16,7 @@ public:
 
 	virtual void update(double dt);
 	virtual void discharge();
+	virtual void Handle(BaseMessage* msg);
 private:
 	float chargeTime;
 };

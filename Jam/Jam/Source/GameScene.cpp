@@ -33,6 +33,7 @@
 #include "Loader.h"
 #include "ParticleManager.h"
 #include "GameFlowController.h"
+#include "MessageDispatcher.h"
 
 GameScene::GameScene()
 {
@@ -130,6 +131,11 @@ void GameScene::Update(double dt)
 	ShowHpManager::GetInstance()->update(dt);
 	CameraManager::GetInstance()->update(dt);
 	ParticleManager::GetInstance()->update(dt);
+
+	//debug purposes
+	if (KeyboardController::GetInstance()->IsKeyPressed(VK_SPACE)) {
+
+	}
 
 	if (KeyboardController::GetInstance()->IsKeyPressed(VK_F1))
 	{

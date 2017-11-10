@@ -12,6 +12,7 @@ public:
 		this->mesh = MeshList::GetInstance()->getMesh("BLUELINE");
 	}
 	virtual void discharge();
+	virtual void Handle(BaseMessage* msg);
 	~PewPew() {}
 };
 
