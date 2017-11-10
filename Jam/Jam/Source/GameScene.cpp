@@ -34,6 +34,7 @@
 #include "ParticleManager.h"
 #include "GameFlowController.h"
 #include "MessageDispatcher.h"
+#include "ConcreteMessage.h"
 
 GameScene::GameScene()
 {
@@ -134,7 +135,7 @@ void GameScene::Update(double dt)
 
 	//debug purposes
 	if (KeyboardController::GetInstance()->IsKeyPressed(VK_SPACE)) {
-
+		MessageDispatcher::GetInstance()->Send("MachineGun", new MessageWeapon(MessageWeapon::APPLY_FIRERATE_BOOST));
 	}
 
 	if (KeyboardController::GetInstance()->IsKeyPressed(VK_F1))
