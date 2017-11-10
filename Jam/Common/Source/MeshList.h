@@ -72,7 +72,18 @@ class MeshList : public Singleton <MeshList>
 		//temp = MeshBuilder::GenerateSpriteAnimation("BLACKATTACK", 1, 6, 1.f);
 		//temp->textureID = LoadTGA("Image//blackattack.tga");
 		//assignMesh(temp);
-
+		temp = MeshBuilder::GenerateQuad("PlayerBullet", Color(1, 1, 1, 1.f), 1);
+		temp->textureID = LoadTGA("Image\\Protagonist_Bullet.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("Bullet1", Color(1, 1, 1, 1.f), 1);
+		temp->textureID = LoadTGA("Image\\EnemyBullet_01.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("Bullet2", Color(1, 1, 1, 1.f), 1);
+		temp->textureID = LoadTGA("Image\\EnemyBullet_02.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("Bullet3", Color(1, 1, 1, 1.f), 1);
+		temp->textureID = LoadTGA("Image\\EnemyBullet_03.tga");
+		assignMesh(temp);
 	
 		temp = MeshBuilder::GenerateQuad("chargeborder", Color(1, 1, 1, 0.2f), 1);
 		temp->textureID = LoadTGA("Image\\chargeborder.tga");

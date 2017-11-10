@@ -29,9 +29,12 @@ DmgHitBoxManager::DmgHitBoxManager()
 	{
 		dmg_hitbox_mesh[i] = MeshList::GetInstance()->getMesh("Quad");
 	}
-	dmg_hitbox_mesh[PROJECTILE] = MeshList::GetInstance()->getMesh("Sphere");
+	dmg_hitbox_mesh[PROJECTILE] = MeshList::GetInstance()->getMesh("PlayerBullet");
+	dmg_hitbox_mesh[ENEMYPROJ1] = MeshList::GetInstance()->getMesh("Bullet1");
+	dmg_hitbox_mesh[ENEMYPROJ2] = MeshList::GetInstance()->getMesh("Bullet2");
+	dmg_hitbox_mesh[ENEMYPROJ3] = MeshList::GetInstance()->getMesh("Bullet3");
 	dmg_hitbox_mesh[MELEE] = MeshList::GetInstance()->getMesh("Quad");
-	dmg_hitbox_mesh[BOSS_PROJ] = MeshList::GetInstance()->getMesh("Sphere");
+	dmg_hitbox_mesh[BOSS_PROJ] = MeshList::GetInstance()->getMesh("Bullet2");
 	pool_vector(hit_box_pool, default_hitbox, 200);
 }
 
@@ -50,7 +53,10 @@ void DmgHitBoxManager::set_hitbox(DmgHitBox& hitbox, DMG_COLLIDER_TYPE type)
 	switch (type)
 	{
 	case PROJECTILE:
-		hitbox.scale.Set(1, 1, 1);
+	case ENEMYPROJ1:
+	case ENEMYPROJ2:
+	case ENEMYPROJ3:
+		hitbox.scale.Set(2, 2, 1);
 		if (!dynamic_cast<ProjectileResponse*>(hitbox.collider->get_response()))//if not the collider i want
 			hitbox.collider->set_response(new ProjectileResponse);
 		
@@ -64,7 +70,7 @@ void DmgHitBoxManager::set_hitbox(DmgHitBox& hitbox, DMG_COLLIDER_TYPE type)
 		hitbox.collider->set_collision(Collision::CollisionType::AABB, &hitbox.pos, -hitbox.scale * 0.5f, hitbox.scale * 0.5f);
 		break;
 	case BOSS_PROJ:
-		hitbox.scale.Set(0.75f, 0.75f, 1);
+		hitbox.scale.Set(1.f, 1.f, 1);
 		if (!dynamic_cast<ProjectileResponse*>(hitbox.collider->get_response()))
 			hitbox.collider->set_response(new ProjectileResponse);
 
