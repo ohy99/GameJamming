@@ -49,6 +49,9 @@ void ParticleManager::spawn_particle(TYPE type, Vector3 pos)
 		for (int i = 0; i < rand_num; ++i)
 		{
 			Particle* p = this->get_inactive();
+			if (p == nullptr)
+				return;
+
 			Vector3 dir(Math::RandFloatMinMax(-1, 1), Math::RandFloatMinMax(-1, 1), 0);
 			try {
 				dir.Normalize();
@@ -61,6 +64,30 @@ void ParticleManager::spawn_particle(TYPE type, Vector3 pos)
 		}
 		break;
 	}
+	case DEADPLAYER:
+	{
+		int rand_num = Math::RandIntMinMax(20, 30);
+		for (int i = 0; i < rand_num; ++i)
+		{
+			Particle* p = this->get_inactive();
+			if (p == nullptr)
+				return;
+
+			Vector3 dir(Math::RandFloatMinMax(-1, 1), Math::RandFloatMinMax(-1, 1), 0);
+			try {
+				dir.Normalize();
+			}
+			catch (DivideByZero) {
+				dir.Set(0, 1, 0);
+			}
+			float spd = Math::RandFloatMinMax(5.0f, 15.f);
+			float dura = Math::RandFloatMinMax(1.0f, 5.0f);
+			p->init(pos, dir, Vector3(1.0f, 2.0f, 1.f), spd, dura);
+			p->mesh = MeshList::GetInstance()->getMesh("RedQuad");
+		}
+		break;
+	}
+		
 	}
 }
 

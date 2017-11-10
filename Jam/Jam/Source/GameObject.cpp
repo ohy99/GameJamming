@@ -22,7 +22,7 @@ void GameObject::render()
 
 	ms.PushMatrix();
 	ms.Translate(this->pos);
-	ms.Rotate(Math::RadianToDegree(atan2(this->dir.y, this->dir.x))- 90.f, 0, 0, 1);
+	ms.Rotate(Math::RadianToDegree(atan2(this->dir.y, this->dir.x)), 0, 0, 1);
 	ms.Scale(this->scale);
 	RenderHelper::RenderMesh(this->mesh, false);
 	ms.PopMatrix();

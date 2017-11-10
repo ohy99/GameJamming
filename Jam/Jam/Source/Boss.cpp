@@ -56,7 +56,7 @@ Boss::~Boss()
 	Deactivate();
 }
 
-void Boss::init()
+void Boss::Init()
 {
 	//randoming part
 	leftPart = this->GetRandomPart(SIDE::LEFT);
@@ -85,7 +85,7 @@ BasePart * Boss::GetRandomPart(SIDE side)
 	return Parts[side].at(Math::RandIntMinMax(0, Parts[side].size() - 1));
 }
 
-void Boss::update(double dt)
+void Boss::Update(double dt)
 {
 	//update the internal components
 	attack_timer.update_timer(dt);
@@ -133,6 +133,11 @@ void Boss::update(double dt)
 		rightPart->active = false;
 		CollisionManager::GetInstance()->remove_collider(rightPart->hitbox);
 	}
+}
+
+void Boss::Exit()
+{
+	this->Deactivate();
 }
 
 bool Boss::RegisterPart(BasePart* part, SIDE side)

@@ -17,6 +17,7 @@
 #include "MachineGun.h"
 #include "ShotGun.h"
 #include "PhysicsManager.h"
+#include "ParticleManager.h"
 
 Player::Player() : inputController(*InputController::GetInstance()), collider(nullptr)
 {
@@ -102,6 +103,7 @@ void Player::init()
 	second_wind_available = true;
 	second_wind_active = false;
 	second_wind_timer.set_duration(10.0);
+	legitDead = false;
 }
 
 void Player::update(double dt)
@@ -118,6 +120,12 @@ void Player::update(double dt)
 	//update second wind
 	update_second_wind(dt);
 
+	if (legitDead)
+	{
+		//boom
+		ParticleManager::GetInstance()->spawn_particle(ParticleManager::TYPE::DEADPLAYER, this->pos);
+	}
+		
 }
 
 void Player::update_movement(double dt)
@@ -263,15 +271,22 @@ void Player::kill_feedback(bool killed)
 
 void Player::update_second_wind(double dt)
 {
-	if (this->hitpoint.get_hp_percentage() <= 0.f && second_wind_available)
+	if (this->hitpoint.get_hp_percentage() <= 0.f)
 	{
-		second_wind_active = true;
-		second_wind_available = false;
-		this->go_down();
+		if (second_wind_available)
+		{
+			second_wind_active = true;
+			second_wind_available = false;
+			this->go_down();
+		}
+		else
+			this->legitDead;
 	}
 	if (second_wind_active)
 	{
 		second_wind_timer.update_timer(dt);
+		if (second_wind_timer.is_Duration_Passed())
+			this->legitDead = true;
 	}
 }
 

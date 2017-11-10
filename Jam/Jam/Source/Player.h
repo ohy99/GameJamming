@@ -32,6 +32,7 @@ class Player : public Singleton<Player>, public CharacterBase, public GameObject
 	//Variables
 	float default_move_speed;
 	float move_speed;
+	bool legitDead;
 
 	//LOLL
 	typedef unsigned int pt;

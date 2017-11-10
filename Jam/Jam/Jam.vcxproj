@@ -161,6 +161,8 @@
     <ClCompile Include="Source\BasePart.cpp" />
     <ClCompile Include="Source\Boss.cpp" />
     <ClCompile Include="Source\BossDefaultGun.cpp" />
+    <ClCompile Include="Source\BossManager.cpp" />
+    <ClCompile Include="Source\BossTwo.cpp" />
     <ClCompile Include="Source\CameraManager.cpp" />
     <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\DamageHitCollisionResponse.cpp" />
@@ -203,7 +205,10 @@
     <ClInclude Include="Source\BamBamMelee.h" />
     <ClInclude Include="Source\BasePart.h" />
     <ClInclude Include="Source\Boss.h" />
+    <ClInclude Include="Source\BossBase.h" />
     <ClInclude Include="Source\BossDefaultGun.h" />
+    <ClInclude Include="Source\BossManager.h" />
+    <ClInclude Include="Source\BossTwo.h" />
     <ClInclude Include="Source\CameraManager.h" />
     <ClInclude Include="Source\CharacterBase.h" />
     <ClInclude Include="Source\Collider.h" />
