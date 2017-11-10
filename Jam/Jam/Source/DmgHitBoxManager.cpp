@@ -33,8 +33,14 @@ DmgHitBoxManager::DmgHitBoxManager()
 	dmg_hitbox_mesh[ENEMYPROJ1] = MeshList::GetInstance()->getMesh("Bullet1");
 	dmg_hitbox_mesh[ENEMYPROJ2] = MeshList::GetInstance()->getMesh("Bullet2");
 	dmg_hitbox_mesh[ENEMYPROJ3] = MeshList::GetInstance()->getMesh("Bullet3");
+	dmg_hitbox_mesh[LASER] = MeshList::GetInstance()->getMesh("PlayerLaser");
 	dmg_hitbox_mesh[MELEE] = MeshList::GetInstance()->getMesh("Quad");
 	dmg_hitbox_mesh[BOSS_PROJ] = MeshList::GetInstance()->getMesh("Bullet2");
+
+	dmg_hitbox_mesh[DMGBOOST] = MeshList::GetInstance()->getMesh("Quad");
+	dmg_hitbox_mesh[ATTSPDBOOST] = MeshList::GetInstance()->getMesh("Quad");
+	dmg_hitbox_mesh[HPBOOST] = MeshList::GetInstance()->getMesh("Quad");
+
 	pool_vector(hit_box_pool, default_hitbox, 200);
 }
 
@@ -76,6 +82,25 @@ void DmgHitBoxManager::set_hitbox(DmgHitBox& hitbox, DMG_COLLIDER_TYPE type)
 
 		hitbox.collider->set_collision(Collision::CollisionType::SPHERE, &hitbox.pos, hitbox.scale.x);
 		break;
+	case LASER:
+		hitbox.scale.Set(5.f, 1.f, 1);
+		if (!dynamic_cast<ProjectileResponse*>(hitbox.collider->get_response()))
+			hitbox.collider->set_response(new ProjectileResponse);
+
+		hitbox.collider->getCollision().collisionType = Collision::CollisionType::LINE;
+		hitbox.collider->getCollision().mid = &hitbox.pos;
+		
+		hitbox.collider->getCollision().radius = hitbox.scale.x;
+		break;
+	case DMGBOOST:
+	case ATTSPDBOOST:
+	case HPBOOST:
+		hitbox.scale.Set(2, 2, 1);
+		if (!dynamic_cast<ProjectileResponse*>(hitbox.collider->get_response()))//if not the collider i want
+			hitbox.collider->set_response(new ProjectileResponse);
+
+		hitbox.collider->set_collision(Collision::CollisionType::SPHERE, &hitbox.pos, hitbox.scale.x);
+		break;
 	default:
 		std::cout << "BO SET UH" << std::endl;
 		hitbox.scale.Set(1, 1, 1);
@@ -89,6 +114,20 @@ void DmgHitBoxManager::set_hitbox(DmgHitBox& hitbox, DMG_COLLIDER_TYPE type)
 		dhr->attach_faction_component(&hitbox.faction);
 	}
 
+	switch (type)
+	{
+	case DMGBOOST:
+		hitbox.type = 1;
+		break;
+	case ATTSPDBOOST:
+		hitbox.type = 2;
+		break;
+	case HPBOOST:
+		hitbox.type = 3;
+		break;
+	default:
+		hitbox.type = 0;
+	}
 	//if (DEBUG_FIRST == nullptr)
 	//	DEBUG_FIRST = &hitbox;
 }

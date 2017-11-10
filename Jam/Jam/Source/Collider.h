@@ -27,6 +27,8 @@ public:
 	GameObject* get_owner();
 
 	Collider* duplicate(GameObject* owner);
+
+	Collision& getCollision() { return this->collision; }
 };
 
 

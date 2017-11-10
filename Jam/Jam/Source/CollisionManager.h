@@ -12,9 +12,11 @@ class CollisionManager : public Singleton<CollisionManager>
 	friend Singleton;
 	std::set<Collider*> colliders;
 
+	std::vector<Collider*> newColliders;
 public:
 	void update(double dt);
 	void add_collider(Collider* collidable);
+	void addColliderAfter(Collider* collider);
 	void remove_collider(Collider* collidable);
 	//void add_ground(Collidable* ground);
 	//Collidable* get_ground();

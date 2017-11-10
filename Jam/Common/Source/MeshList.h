@@ -69,6 +69,9 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateQuad("PlayerBullet", Color(1, 1, 1, 1.f), 1);
 		temp->textureID = LoadTGA("Image\\Protagonist_Bullet.tga");
 		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("PlayerLaser", Color(1, 1, 1, 1.f), 1);
+		temp->textureID = LoadTGA("Image\\Protagonist_Laser.tga");
+		assignMesh(temp);
 		temp = MeshBuilder::GenerateQuad("Bullet1", Color(1, 1, 1, 1.f), 1);
 		temp->textureID = LoadTGA("Image\\EnemyBullet_01.tga");
 		assignMesh(temp);

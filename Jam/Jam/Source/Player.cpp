@@ -19,6 +19,7 @@
 #include "PhysicsManager.h"
 #include "ParticleManager.h"
 #include "MessageDispatcher.h"
+#include "LaserGun.h"
 
 Player::Player() : inputController(*InputController::GetInstance()), collider(nullptr)
 {
@@ -96,6 +97,12 @@ void Player::init()
 	weap->scale.Set(1, 1);
 	MessageDispatcher::GetInstance()->Register("Shotgun", weap);
 	RenderManager::GetInstance()->attach_renderable(weap, 1);
+	weap->active = true;
+	weap->name = "GUN";
+	weapon_list.push_back(weap);
+
+	weap = new LaserGun(this->faction.side);
+	weap->scale.Set(1, 1);
 	weap->active = true;
 	weap->name = "GUN";
 	weapon_list.push_back(weap);

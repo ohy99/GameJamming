@@ -28,12 +28,22 @@ void CollisionManager::update(double dt)
 		}
 	}
 
+	for (int i = 0; i < newColliders.size(); ++i)
+		this->add_collider(newColliders.at(i));
+
+	newColliders.clear();
+
 	MyDebugger::GetInstance()->watch_this_info("COLLISION SIZE", colliders.size());
 }
 
 void CollisionManager::add_collider(Collider* collidable)
 {
 	this->colliders.insert(collidable);
+}
+
+void CollisionManager::addColliderAfter(Collider * collider)
+{
+	newColliders.push_back(collider);
 }
 
 void CollisionManager::remove_collider(Collider * collidable)
