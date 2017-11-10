@@ -9,6 +9,7 @@ class BossManager : public Singleton<BossManager>
 	{
 		DEFAULT,
 		BOSSTWO,
+		BOSSTHREE,
 		TYPE_COUNT
 	} currType;
 	BossBase* bossArray[TYPE_COUNT];

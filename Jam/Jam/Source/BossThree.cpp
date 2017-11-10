@@ -1,4 +1,4 @@
-#include "Boss.h"
+#include "BossThree.h"
 
 #include "CollisionManager.h"
 #include "RenderManager.h"
@@ -11,18 +11,9 @@
 #include "DefaultMiddle.h"
 #include "DefaultRight.h"
 
-bool CheckDuplicate(BasePart* part, std::map<std::string, BasePart*> map){
-	if (!map.empty()) {
-		auto check = map.find(part->name);
-		if (check != map.end())
-			return true;
-	}
-	return false;
-}
-
-Boss::Boss() : leftPart(nullptr), middlePart(nullptr), rightPart(nullptr),
-	middleScale(10, 10, 1), sideScale(7.5f, 7.5f, 1), moveSpd(10),
-	bossDir(-1,0,0), bossRight(0,1,0)
+BossThree::BossThree() : leftPart(nullptr), middlePart(nullptr), rightPart(nullptr),
+middleScale(10, 10, 1), sideScale(7.5f, 7.5f, 1), moveSpd(10),
+BossThreeDir(-1, 0, 0), BossThreeRight(0, 1, 0)
 {
 	//create parts here
 	Parts[LEFT].push_back(new DefaultLeft);
@@ -51,18 +42,18 @@ Boss::Boss() : leftPart(nullptr), middlePart(nullptr), rightPart(nullptr),
 	//getWorldHeight = &((*GlobalVariables::GetInstance()).get_worldHeight);
 }
 
-Boss::~Boss()
+BossThree::~BossThree()
 {
 	Deactivate();
 }
 
-void Boss::Init()
+void BossThree::Init()
 {
 	//randoming part
 	leftPart = this->GetRandomPart(SIDE::LEFT);
 	middlePart = this->GetRandomPart(SIDE::MIDDLE);
 	rightPart = this->GetRandomPart(SIDE::RIGHT);
-	
+
 	//put them inside managers
 	ActivatePart(leftPart);
 	ActivatePart(middlePart);
@@ -80,12 +71,12 @@ void Boss::Init()
 	attack_timer.set_duration(3.0);
 }
 
-BasePart * Boss::GetRandomPart(SIDE side)
+BasePart * BossThree::GetRandomPart(SIDE side)
 {
 	return Parts[side].at(Math::RandIntMinMax(0, Parts[side].size() - 1));
 }
 
-void Boss::Update(double dt)
+void BossThree::Update(double dt)
 {
 	//update the internal components
 	attack_timer.update_timer(dt);
@@ -104,12 +95,12 @@ void Boss::Update(double dt)
 		else
 			middlePart->pos += dirToIntended;
 	}
-	
+
 	//put them in da right spot
-	leftPart->pos = middlePart->pos + Vector3((middlePart->scale.x + leftPart->scale.x) * 0.5f * -bossRight.x,
-		(middlePart->scale.y + leftPart->scale.y) * 0.5f -bossRight.y, 0);
-	rightPart->pos = middlePart->pos + Vector3((middlePart->scale.x + rightPart->scale.x) * 0.5f * bossRight.x,
-		(middlePart->scale.y + rightPart->scale.y) * 0.5f * -bossRight.y, 0);
+	leftPart->pos = middlePart->pos + Vector3((middlePart->scale.x + leftPart->scale.x) * 0.5f * -BossThreeRight.x,
+		(middlePart->scale.y + leftPart->scale.y) * 0.5f - BossThreeRight.y, 0);
+	rightPart->pos = middlePart->pos + Vector3((middlePart->scale.x + rightPart->scale.x) * 0.5f * BossThreeRight.x,
+		(middlePart->scale.y + rightPart->scale.y) * 0.5f * -BossThreeRight.y, 0);
 
 
 	if (middlePart->pos == intendedPos && currState == STATE::ENTER)
@@ -135,12 +126,12 @@ void Boss::Update(double dt)
 	}
 }
 
-void Boss::Exit()
+void BossThree::Exit()
 {
 	this->Deactivate();
 }
 
-bool Boss::RegisterPart(BasePart* part, SIDE side)
+bool BossThree::RegisterPart(BasePart* part, SIDE side)
 {
 	switch (side) {
 	case LEFT:
@@ -165,31 +156,31 @@ bool Boss::RegisterPart(BasePart* part, SIDE side)
 	return false;
 }
 
-bool Boss::IsDead()
+bool BossThree::IsDead()
 {
 	if (!leftPart || !middlePart || !rightPart)
 		return false;
 	return !leftPart->active && !middlePart->active && !rightPart->active;
 }
 
-void Boss::Deactivate()
+void BossThree::Deactivate()
 {
 	DeactivatePart(leftPart);
 	DeactivatePart(middlePart);
 	DeactivatePart(rightPart);
 }
 
-void Boss::ActivatePart(BasePart * part)
+void BossThree::ActivatePart(BasePart * part)
 {
 	part->Activate();
 }
 
-void Boss::DeactivatePart(BasePart * part)
+void BossThree::DeactivatePart(BasePart * part)
 {
 	part->Deactivate();
 }
 
-void Boss::UpdatePart(BasePart * part, double dt)
+void BossThree::UpdatePart(BasePart * part, double dt)
 {
 	if (!part->active)
 		return;
@@ -198,22 +189,53 @@ void Boss::UpdatePart(BasePart * part, double dt)
 	{
 	case A1:
 	{
-		if (part == leftPart || part == rightPart)
+		if (part == leftPart)
 		{
+			static int countLeft = 0;
+			part->update(dt);		
+			if (attack_timer.get_current_percent() >= 0.2) {
+				if (countLeft > 5) {
+					//attack_timer.reset_timer();
+					part->weapon->dir.Set(0, 1, 0);
+					countLeft = 0;
+				}
+				float angle = 90/5;
+				Mtx44 rotation;
+				rotation.SetToRotation(angle, 0, 0, 1);
+				part->weapon->dir = rotation * part->weapon->dir;
+				part->weapon->dir.Normalize();
+				part->weapon->discharge();
+				++countLeft;
+			}
+		}
+		else if (part == rightPart) {
+			static int countRight = 0;
 			part->update(dt);
-			part->weapon->dir.Set(-1, 0, 0);
-			float angle = 45.f * sin(attack_timer.get_current_percent() * Math::TWO_PI);
-			Mtx44 rotation;
-			rotation.SetToRotation(angle, 0, 0, 1);
-			part->weapon->dir = rotation * part->weapon->dir;
-			part->weapon->dir.Normalize();
-			part->weapon->discharge();
+			if (attack_timer.get_current_percent() >= 0.2) {
+				if (countRight > 5) {
+					attack_timer.reset_timer();
+					part->weapon->dir.Set(-1, 1, 0);
+					countRight = 0;
+				}
+				float angle = 90 / 5;
+				Mtx44 rotation;
+				rotation.SetToRotation(angle, 0, 0, 1);
+				part->weapon->dir = rotation * part->weapon->dir;
+				part->weapon->dir.Normalize();
+				part->weapon->discharge();
+				++countRight;
+			}
 		}
 		else
 		{
 			part->update(dt);
 			part->weapon->dir = (-part->pos + Player::GetInstance()->pos).Normalize();
-			part->weapon->discharge();
+			static float t = 0;
+			t += dt;
+			if (t >= 0.5) {
+				part->weapon->discharge();
+				t = 0;
+			}
 		}
 
 		break;
@@ -222,9 +244,6 @@ void Boss::UpdatePart(BasePart * part, double dt)
 		//this is the default aka attack_state == 0
 		part->update(dt);
 		part->weapon->dir = (-part->pos + Player::GetInstance()->pos).Normalize();
-		if (attack_timer.get_current_percent() >= 1) {
-			part->weapon->discharge();
-			attack_timer.reset_timer();
-		}
+		part->weapon->discharge();
 	}
 }

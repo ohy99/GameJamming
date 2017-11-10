@@ -85,9 +85,6 @@
     <ClCompile Include="Source\Weapon.cpp">
       <Filter>GameObject\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Boss.cpp">
-      <Filter>Boss</Filter>
-    </ClCompile>
     <ClCompile Include="Source\BasePart.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
@@ -118,11 +115,17 @@
     <ClCompile Include="Source\BossManager.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
-    <ClCompile Include="Source\BossTwo.cpp">
-      <Filter>Boss</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MessageDispatcher.cpp">
       <Filter>Message</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Boss.cpp">
+      <Filter>Boss\BossPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BossTwo.cpp">
+      <Filter>Boss\BossPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BossThree.cpp">
+      <Filter>Boss\BossPart</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -255,9 +258,6 @@
     <ClInclude Include="Source\BasePart.h">
       <Filter>Boss</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Boss.h">
-      <Filter>Boss</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Application.h">
       <Filter>Scenes</Filter>
     </ClInclude>
@@ -288,9 +288,6 @@
     <ClInclude Include="Source\BossBase.h">
       <Filter>Boss</Filter>
     </ClInclude>
-    <ClInclude Include="Source\BossTwo.h">
-      <Filter>Boss</Filter>
-    </ClInclude>
     <ClInclude Include="Source\BaseMessage.h">
       <Filter>Message</Filter>
     </ClInclude>
@@ -302,6 +299,15 @@
     </ClInclude>
     <ClInclude Include="Source\MessageDispatcher.h">
       <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Boss.h">
+      <Filter>Boss\BossPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BossTwo.h">
+      <Filter>Boss\BossPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BossThree.h">
+      <Filter>Boss\BossPart</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

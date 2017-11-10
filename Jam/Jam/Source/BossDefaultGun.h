@@ -8,7 +8,7 @@ class BossDefaultGun : public Weapon
 {
 public:
 	BossDefaultGun(Faction::FACTION_SIDE side) {
-		this->set(8, 12, 8.0, DmgHitBoxManager::DMG_COLLIDER_TYPE::BOSS_PROJ, 30, side);
+		this->set(8, 12, 100, DmgHitBoxManager::DMG_COLLIDER_TYPE::BOSS_PROJ, 30, side);
 		this->mesh = MeshList::GetInstance()->getMesh("BLUELINE");
 	}
 	~BossDefaultGun() {}
