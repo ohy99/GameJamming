@@ -112,6 +112,12 @@
     <ClCompile Include="Source\MachineGun.cpp">
       <Filter>GameObject\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="Source\BossManager.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BossTwo.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\EnvironmentManager.h">
@@ -269,6 +275,15 @@
     </ClInclude>
     <ClInclude Include="Source\BossDefaultGun.h">
       <Filter>GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BossManager.h">
+      <Filter>Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BossBase.h">
+      <Filter>Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BossTwo.h">
+      <Filter>Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

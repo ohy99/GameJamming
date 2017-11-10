@@ -4,14 +4,11 @@
 #include <map>
 #include <set>
 
-#include "SingletonTemplate.h"
 #include "BasePart.h"
+#include "BossBase.h"
 
-class Boss : public Singleton<Boss>{
-	friend Singleton<Boss>;
-	Boss();
-	~Boss();
-
+class Boss : public BossBase 
+{
 	enum ATTACK_STATE
 	{
 		DEFAULT_SHOOT_AT_ME,
@@ -20,6 +17,8 @@ class Boss : public Singleton<Boss>{
 	} attack_state;
 	MyTimer attack_timer;
 public:
+	Boss();
+	~Boss();
 
 	enum SIDE {
 		DEFAULT = 0,
@@ -28,12 +27,13 @@ public:
 		RIGHT = 3
 	};
 
-	void init();
+	virtual void Init();
 	BasePart* GetRandomPart(SIDE side);
-	void update(double dt);
+	virtual void Update(double dt);
+	virtual void Exit();
 
 	bool RegisterPart(BasePart* part, SIDE side);
-	bool IsDead();
+	virtual bool IsDead();
 	void Deactivate();
 private:
 	std::map<std::string, BasePart*> leftParts;

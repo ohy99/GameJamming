@@ -2,8 +2,9 @@
 
 #include "EnemyManager.h"
 #include "KeyboardController.h"
-#include "Boss.h"
+//#include "Boss.h"
 #include "MyDebugger.h"
+#include "BossManager.h"
 
 GameFlowController::GameFlowController() :
 	max_wave_before_boss(3),
@@ -74,7 +75,7 @@ void GameFlowController::change_state(STATE state)
 		transition_timer.reset_timer();
 		break;
 	case BOSS:
-		Boss::GetInstance()->Deactivate();
+		BossManager::GetInstance()->Exit();
 		break;
 	}
 
@@ -87,7 +88,7 @@ void GameFlowController::change_state(STATE state)
 	case TRANSITION:
 		break;
 	case BOSS:
-		Boss::GetInstance()->init();
+		BossManager::GetInstance()->Init();
 		break;
 	}
 }
@@ -95,25 +96,36 @@ void GameFlowController::change_state(STATE state)
 void GameFlowController::check_change_in_state()
 {
 	//state all the conditions for the state change ;)
-
-	if (EnemyManager::GetInstance()->is_wave_ended() && currState == STATE::WAVE)
+	switch (currState)
 	{
-		change_state(STATE::TRANSITION);
-	}
-
-	if (transition_timer.is_Duration_Passed())
+	case STATE::WAVE:
 	{
-		if (prevState == STATE::WAVE)
-			change_state(STATE::BOSS);
-		else
-			change_state(STATE::WAVE);
+		if (EnemyManager::GetInstance()->is_wave_ended() && currState == STATE::WAVE)
+		{
+			change_state(STATE::TRANSITION);
+		}
+		break;
 	}
-
-	if (Boss::GetInstance()->IsDead() && currState == STATE::BOSS)
+	case STATE::TRANSITION:
 	{
-		change_state(STATE::TRANSITION);
+		if (transition_timer.is_Duration_Passed())
+		{
+			if (prevState == STATE::WAVE)
+				change_state(STATE::BOSS);
+			else
+				change_state(STATE::WAVE);
+		}
+		break;
 	}
-
+	case STATE::BOSS:
+	{
+		if (BossManager::GetInstance()->IsBossDead() && currState == STATE::BOSS)
+		{
+			change_state(STATE::TRANSITION);
+		}
+		break;
+	}
+	}
 }
 
 void GameFlowController::update_state(double dt)
@@ -127,7 +139,7 @@ void GameFlowController::update_state(double dt)
 		transition_timer.update_timer(dt);
 		break;
 	case STATE::BOSS:
-		Boss::GetInstance()->update(dt);
+		BossManager::GetInstance()->Update(dt);
 		break;
 	}
 }

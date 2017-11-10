@@ -12,6 +12,7 @@ public:
 	enum TYPE
 	{
 		HIT_ENEMY,
+		DEADPLAYER,
 	};
 private:
 	friend Singleton;
