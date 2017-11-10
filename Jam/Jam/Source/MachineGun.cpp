@@ -8,6 +8,19 @@
 #include "DieToTimer.h"
 #include "RenderManager.h"
 
+void MachineGun::update(double dt)
+{
+	attackspeed_timer.update_timer(dt);
+	if (chargeTime >= dt) {
+		chargeTime -= dt;
+	}
+	if (chargeTime >= 2) {
+		attackspeed_timer.set_duration(0.15);
+	}
+	else
+		attackspeed_timer.set_duration(0.1);
+}
+
 void MachineGun::discharge()
 {
 	//attackspd havent reach yet
@@ -26,6 +39,11 @@ void MachineGun::discharge()
 	PhysicsManager::GetInstance()->add_object(temp_proj, temp_proj->get_physics_component());
 	CollisionManager::GetInstance()->add_collider(temp_proj->get_collider_component());
 	RenderManager::GetInstance()->attach_renderable(temp_proj, 1);
+
+	AudioPlayer::GetInstance()->PlaySound2D("MachineGun", 0.2);
+
+	chargeTime += attackspeed_timer.get_duration() * 1.5;
+	//printf("timer: %f\n", attackspeed_timer.get_duration());
 	//must reset timer
 	attackspeed_timer.reset_timer();
 }

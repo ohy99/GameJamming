@@ -11,6 +11,7 @@ public:
 		this->set(8, 10, 1.f, DmgHitBoxManager::DMG_COLLIDER_TYPE::PROJECTILE, 25, side);
 		this->mesh = MeshList::GetInstance()->getMesh("BLUELINE");
 	}
+	virtual void discharge();
 	~PewPew() {}
 };
 

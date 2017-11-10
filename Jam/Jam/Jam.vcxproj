@@ -186,6 +186,7 @@
     <ClCompile Include="Source\Options.cpp" />
     <ClCompile Include="Source\Particle.cpp" />
     <ClCompile Include="Source\ParticleManager.cpp" />
+    <ClCompile Include="Source\PewPewGun.cpp" />
     <ClCompile Include="Source\PhysicsManager.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\PlayerCollisionResponse.cpp" />

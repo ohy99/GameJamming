@@ -70,6 +70,8 @@ void Mainmenu::Init()
 	next_scene = nullptr;
 	feedback_timer.set_duration(0.5);
 	feedback_timer.reset_timer();
+
+	AudioPlayer::GetInstance()->PlayBackground2D("Pim Poy", 0.2);
 }
 
 

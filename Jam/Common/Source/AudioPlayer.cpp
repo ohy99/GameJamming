@@ -309,8 +309,16 @@ AudioPlayer::~AudioPlayer()
 
 void AudioPlayer::Init()
 {
-	m_playlist["Yaruta"] = "Audio//YARUTA.mp3";
-	m_playlist["Power Bots"] = "Audio//Power Bots Loop.wav";
+	m_playlist["MachineGun"] = "Audio//Photon gun shot.wav";
+	m_playlist["PewPew"] = "Audio//Photon 1.wav";
+	m_playlist["Shotgun"] = "Audio//Fusion shot 2.wav";
+	m_playlist["Melee"] = "Audio//Melee.flac";
+
+	m_playlist["Hit"] = "Audio//Light hits.wav";
+
+	m_playlist["Arcade Funk"] = "Audio//Arcade Funk.mp3";
+	m_playlist["Defense Line"] = "Audio//Defense Line.mp3";
+	m_playlist["Pim Poy"] = "Audio//Pim Poy.wav";
 }
 
 void AudioPlayer::PlaySound2D(std::string name, float volume)
@@ -348,7 +356,7 @@ void AudioPlayer::PlayBackground2D(std::string name, float volume)
 		return;
 	}
 
-	irrklang::ISound* sound = soundEngine->play2D(fileName.c_str(), false, false, true);
+	irrklang::ISound* sound = soundEngine->play2D(fileName.c_str(), true, false, true);
 
 	if (sound == nullptr) {
 		printf("Sound file for associated name does not exist.\n");

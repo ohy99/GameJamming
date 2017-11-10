@@ -112,6 +112,9 @@
     <ClCompile Include="Source\MachineGun.cpp">
       <Filter>GameObject\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PewPewGun.cpp">
+      <Filter>GameObject\Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\EnvironmentManager.h">
