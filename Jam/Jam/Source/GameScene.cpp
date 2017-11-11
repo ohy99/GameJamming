@@ -74,29 +74,31 @@ GameScene::~GameScene()
 
 void GameScene::RenderBackground()
 {
+	float scaleX = 2000 / 1000;
+
 	static int frame = 0;
-	static float bg1X = worldWidth* 0.5f;
-	static float bg2X = worldWidth* 1.5f;
+	static float bg1X = worldWidth* 0.5f * scaleX;
+	static float bg2X = worldWidth* 1.5f * scaleX;
 
 	++frame;
 
-	const float movement = 0.2;
+	float movement = 0.5;
 
-	if (bg1X < worldWidth * -0.5)
-		bg1X = worldWidth * 1.5f;
-	if (bg2X < worldWidth * -0.5f)
-		bg2X = worldWidth * 1.5f;
+	if (bg1X < scaleX *worldWidth* -0.5f)
+		bg1X = bg2X + scaleX * worldWidth;
+	if (bg2X < scaleX *worldWidth* -0.5f)
+		bg2X = bg1X + scaleX *worldWidth;
 
 	MS& ms = Graphics::GetInstance()->modelStack;
 	ms.PushMatrix();
 	ms.Translate(bg1X -= movement, worldHeight * 0.5f, 0);
-	ms.Scale(worldWidth, worldHeight, 1);
+	ms.Scale(scaleX*worldWidth, worldHeight, 1);
 	RenderHelper::RenderMesh(backGround, false);
 	ms.PopMatrix();
 
 	ms.PushMatrix();
 	ms.Translate(bg2X -= movement, worldHeight * 0.5f, 0);
-	ms.Scale(worldWidth, worldHeight, 1);
+	ms.Scale(scaleX*worldWidth, worldHeight, 1);
 	RenderHelper::RenderMesh(backGround, false);
 	ms.PopMatrix();
 
@@ -112,12 +114,12 @@ void GameScene::RenderBackground()
 			}
 			if (go == nullptr)
 				return;
-			float scale = Math::RandFloatMinMax(20, 30);
+			float scale = Math::RandFloatMinMax(5, 20);
 			go->scale.Set(scale, scale, 1);
 			float vel = Math::RandFloatMinMax(0.2, 0.5);
 			go->dir.Set(-vel, 0, 0);
 			float y = Math::RandFloatMinMax(0, worldHeight);
-			go->pos.Set(worldWidth + scale, y, 1);
+			go->pos.Set(worldWidth + scale * 272 / 80, y, 1);
 			go->active = true;
 		}
 		frame = 0;
@@ -126,11 +128,11 @@ void GameScene::RenderBackground()
 		if (it->active) {
 			ms.PushMatrix();
 			ms.Translate(it->pos.x += it->dir.x, it->pos.y, 0);
-			ms.Scale(it->scale.x, it->scale.y, 1);
+			ms.Scale(it->scale.x * 272 / 80, it->scale.y, 1);
 			RenderHelper::RenderMesh(it->mesh, false);
 			ms.PopMatrix();
 
-			if (it->pos.x < -it->scale.x)
+			if (it->pos.x < -it->scale.x * 272 / 80)
 				it->active = false;
 		}
 	}
@@ -160,8 +162,9 @@ void GameScene::Init()
 
 	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
 	CameraManager::GetInstance()->attach_camera(&camera);
+
 	axis = MeshBuilder::GenerateAxes("", 100, 100, 100);
-	backGround = MeshList::GetInstance()->getMesh("sky");
+	backGround = MeshList::GetInstance()->getMesh("sky 2");
 
 	worldHeight = 100;
 	worldWidth = worldHeight * Application::GetWindowWidth() / Application::GetWindowHeight();
