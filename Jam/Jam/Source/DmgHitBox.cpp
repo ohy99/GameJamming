@@ -82,5 +82,5 @@ void DmgHitBox::set(Vector3 pos, Vector3 dir, Faction::FACTION_SIDE side, float 
 	this->physic.velocity = dir * velocity;
 	this->damage.set(damage, type);
 	this->faction.side = side;
-	particleSpawn.set_duration(0.1);
+	particleSpawn.set_duration(0.05);
 }

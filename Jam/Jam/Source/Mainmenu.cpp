@@ -62,12 +62,18 @@ void Mainmenu::Init()
 	Vector3 middle_pt(worldWidth * 0.5f, worldHeight * 0.5f);
 	
 	Button* temp = new Button();
-	temp->mesh = MeshList::GetInstance()->getMesh("UiButton");
+	temp->mesh = MeshList::GetInstance()->getMesh("UiButtonStart");
 	temp->pos = middle_pt;
 	temp->default_scale.Set(35, 10);
 	temp->resize_button(temp->default_scale);
-
 	buttons.insert(std::make_pair("GAME", temp));
+
+	temp = new Button();
+	temp->mesh = MeshList::GetInstance()->getMesh("UiButtonExit");
+	temp->pos = middle_pt + Vector3(0, -15);
+	temp->default_scale.Set(35, 10);
+	temp->resize_button(temp->default_scale);
+	buttons.insert(std::make_pair("EXIT", temp));
 
 	MouseController::GetInstance()->SetKeepMouseCentered(false);
 	next_scene = nullptr;
@@ -140,7 +146,10 @@ void Mainmenu::Update(double dt)
 
 		if (feedback_timer.is_Duration_Passed())
 		{
-			SceneManager::GetInstance()->setNextScene(*next_scene);
+			if (*next_scene == "EXIT")
+				SceneManager::GetInstance()->setExitGame(true);
+			else
+				SceneManager::GetInstance()->setNextScene(*next_scene);
 		}
 	}
 
