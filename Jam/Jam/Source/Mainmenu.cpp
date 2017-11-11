@@ -60,7 +60,7 @@ void Mainmenu::Init()
 	//axis = MeshList::GetInstance()->getMesh("MENUBACKGROUND");
 
 	Vector3 middle_pt(worldWidth * 0.5f, worldHeight * 0.5f);
-
+	
 	Button* temp = new Button();
 	temp->mesh = MeshList::GetInstance()->getMesh("UiButton");
 	temp->pos = middle_pt;

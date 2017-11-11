@@ -53,6 +53,8 @@ class MeshList : public Singleton <MeshList>
 		assignMesh(temp);
 		temp = MeshBuilder::GenerateQuad("BlueQuad", Color(0, 0, 1), 1);
 		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("YellowQuad", Color(1, 0.8f, 0), 1);
+		assignMesh(temp);
 
 		
 		temp = MeshBuilder::GenerateQuad("REDHPBAR", Color(1, 1, 1), 1);
@@ -148,6 +150,7 @@ class MeshList : public Singleton <MeshList>
 
 		temp = MeshBuilder::GenerateQuad("UiButton", Color(1,1,1), 1.0f);
 		temp->textureID = LoadTGA("Image\\ui_button.tga");
+		assignMesh(temp);
 		temp = MeshBuilder::GenerateQuad("sky 2", Color(1, 0, 0), 1.f);
 		temp->textureID = LoadTGA("Image\\bg_sky2.tga");
 		assignMesh(temp);

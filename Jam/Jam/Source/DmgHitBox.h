@@ -22,6 +22,7 @@ private:
 
 	DieCondition* die_condition;
 
+	MyTimer particleSpawn;
 public:
 	//0 default, 1 dmg, 2 attspd, 3 hp
 	int type;

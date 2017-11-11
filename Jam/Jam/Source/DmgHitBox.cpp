@@ -7,6 +7,7 @@
 #include "AOECollisionResponse.h"
 #include "ProjectileCollisionResponse.h"
 #include "RenderManager.h"
+#include "ParticleManager.h"
 
 DmgHitBox::DmgHitBox() : collider(nullptr), die_condition(nullptr)
 {
@@ -44,6 +45,7 @@ void DmgHitBox::set_inactive()
 		//need to reset collided vector
 		aoeresponse->reset_response();
 	}
+	particleSpawn.reset_timer();
 }
 
 void DmgHitBox::update(double dt)
@@ -61,6 +63,16 @@ void DmgHitBox::update(double dt)
 		if (pr->get_isCollided())
 			this->set_inactive();
 	}
+
+	if (this->faction.side == Faction::FACTION_SIDE::PLAYER)
+	{
+		particleSpawn.update_timer(dt);
+		if (particleSpawn.is_Duration_Passed())
+		{
+			ParticleManager::GetInstance()->spawn_particle(ParticleManager::TYPE::BULLET_TRAIL, this->pos, this->dir);
+			particleSpawn.reset_timer();
+		}
+	}
 }
 
 void DmgHitBox::set(Vector3 pos, Vector3 dir, Faction::FACTION_SIDE side, float velocity, int damage, DamageType::DMG_TYPE type)
@@ -70,4 +82,5 @@ void DmgHitBox::set(Vector3 pos, Vector3 dir, Faction::FACTION_SIDE side, float 
 	this->physic.velocity = dir * velocity;
 	this->damage.set(damage, type);
 	this->faction.side = side;
+	particleSpawn.set_duration(0.1);
 }

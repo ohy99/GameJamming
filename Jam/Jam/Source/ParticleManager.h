@@ -13,6 +13,7 @@ public:
 	{
 		HIT_ENEMY,
 		DEADPLAYER,
+		BULLET_TRAIL,
 	};
 private:
 	friend Singleton;
@@ -25,6 +26,7 @@ public:
 	void update(double dt);
 
 	void spawn_particle(TYPE type, Vector3 pos);
+	void spawn_particle(TYPE type, Vector3 pos, Vector3 dir);
 protected:
 	ParticleManager();
 	~ParticleManager();

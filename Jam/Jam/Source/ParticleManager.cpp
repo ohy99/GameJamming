@@ -3,6 +3,7 @@
 #include "Particle.h"
 #include "RenderManager.h"
 #include "MeshList.h"
+#include "MatrixStack.h"
 ParticleManager::ParticleManager()
 {
 	for (int i = 0; i < 500; ++i)
@@ -87,7 +88,32 @@ void ParticleManager::spawn_particle(TYPE type, Vector3 pos)
 		}
 		break;
 	}
+	
+
 		
+	}
+}
+
+void ParticleManager::spawn_particle(TYPE type, Vector3 pos, Vector3 dir)
+{
+	//case BULLET_TRAIL:
+	int rand_num = Math::RandIntMinMax(0, 2);
+	for (int i = 0; i < rand_num; ++i)
+	{
+		Particle* p = this->get_inactive();
+		if (p == nullptr)
+			return;
+
+		float angle = Math::RandFloatMinMax(-40.f, 40.f);
+		Mtx44 rotation;
+		rotation.SetToRotation(angle, 0, 0, 1);
+		Vector3 rdir = -dir;
+		rdir = rotation * rdir;
+
+		float spd = Math::RandFloatMinMax(7.0f, 12.f);
+		float dura = Math::RandFloatMinMax(0.5f, 1.0f);
+		p->init(pos, rdir, Vector3(Math::RandFloatMinMax(0.5f, 1.0f), 0.5f, 1.f), spd, dura);
+		p->mesh = MeshList::GetInstance()->getMesh("YellowQuad");
 	}
 }
 
