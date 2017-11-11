@@ -76,7 +76,7 @@ void DmgHitBoxManager::set_hitbox(DmgHitBox& hitbox, DMG_COLLIDER_TYPE type)
 		hitbox.collider->set_collision(Collision::CollisionType::AABB, &hitbox.pos, -hitbox.scale * 0.5f, hitbox.scale * 0.5f);
 		break;
 	case BOSS_PROJ:
-		hitbox.scale.Set(1.f, 1.f, 1);
+		hitbox.scale.Set(2.f, 2.f, 1);
 		if (!dynamic_cast<ProjectileResponse*>(hitbox.collider->get_response()))
 			hitbox.collider->set_response(new ProjectileResponse);
 

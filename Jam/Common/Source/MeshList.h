@@ -107,8 +107,11 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateQuad("HpBack", Color(1,1,1), 1.f);
 		temp->textureID = LoadTGA("Image\\ui_health11.tga");
 		assignMesh(temp);
+		//temp = MeshBuilder::GenerateQuad("HpFront", Color(1, 0, 0), 1.f);
+		//temp->textureID = LoadTGA("Image\\ui_health22.tga");
+		//assignMesh(temp);
 		temp = MeshBuilder::GenerateQuad("HpFront", Color(1, 0, 0), 1.f);
-		temp->textureID = LoadTGA("Image\\ui_health22.tga");
+		temp->textureID = LoadTGA("Image\\ui_healthbar1.tga");
 		assignMesh(temp);
 
 		temp = MeshBuilder::GenerateSpriteAnimation("reticle", 2, 3, 1.f);
@@ -150,6 +153,12 @@ class MeshList : public Singleton <MeshList>
 
 		temp = MeshBuilder::GenerateQuad("UiButton", Color(1,1,1), 1.0f);
 		temp->textureID = LoadTGA("Image\\ui_button.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("UiButtonStart", Color(1, 1, 1), 1.0f);
+		temp->textureID = LoadTGA("Image\\ui_button_start.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("UiButtonExit", Color(1, 1, 1), 1.0f);
+		temp->textureID = LoadTGA("Image\\ui_button_exit.tga");
 		assignMesh(temp);
 		temp = MeshBuilder::GenerateQuad("sky 2", Color(1, 0, 0), 1.f);
 		temp->textureID = LoadTGA("Image\\bg_sky2.tga");

@@ -51,8 +51,10 @@ void HUD::render()
 	ms.PopMatrix();
 
 	ms.PushMatrix();
-	ms.Scale(20.f * Player::GetInstance()->hitpoint.get_hp_percentage(), 10, 1);
-
+	ms.Scale(18.f * Player::GetInstance()->hitpoint.get_hp_percentage(), 4.5f, 1);
+//	ms.Translate((1.0f - Player::GetInstance()->hitpoint.get_hp_percentage()) * -1.f, 0.f, 0.0f);
+	ms.Translate(0.25f/* + (1.0f - Player::GetInstance()->hitpoint.get_hp_percentage()) * -0.5f*/, -0.275, 0.0f);
+	//ms.Translate(0.25f + (1.0f - Player::GetInstance()->hitpoint.get_hp_percentage()) * -0.5f, -0.275, 0.0f);
 	RenderHelper::RenderMesh(frontBackHp.first, false);
 	ms.PopMatrix();
 
