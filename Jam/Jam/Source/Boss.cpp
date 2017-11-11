@@ -200,6 +200,8 @@ void Boss::UpdatePart(BasePart * part, double dt)
 	{
 		if (part == leftPart || part == rightPart)
 		{
+			float dur = part->weapon->attackspeed_timer.get_duration();
+			part->weapon->attackspeed_timer.set_duration(0.2);
 			part->update(dt);
 			part->weapon->dir.Set(-1, 0, 0);
 			float angle = 45.f * sin(attack_timer.get_current_percent() * Math::TWO_PI);
@@ -208,12 +210,16 @@ void Boss::UpdatePart(BasePart * part, double dt)
 			part->weapon->dir = rotation * part->weapon->dir;
 			part->weapon->dir.Normalize();
 			part->weapon->discharge();
+			part->weapon->attackspeed_timer.set_duration(dur);
 		}
 		else
 		{
+			float dur = part->weapon->attackspeed_timer.get_duration();
+			part->weapon->attackspeed_timer.set_duration(0.4);
 			part->update(dt);
 			part->weapon->dir = (-part->pos + Player::GetInstance()->pos).Normalize();
 			part->weapon->discharge();
+			part->weapon->attackspeed_timer.set_duration(dur);
 		}
 
 		break;

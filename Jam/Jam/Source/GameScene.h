@@ -11,7 +11,7 @@
 #include "AudioPlayer.h"
 class Mesh;
 
-class GameScene : public Scene
+class GameScene : public Scene, public MessageHandle
 {
 public:
 	GameScene();
@@ -24,12 +24,17 @@ public:
 	virtual void Render();
 	virtual void Exit();
 
+	virtual void Handle(BaseMessage* msg);
+
 protected:
 	Camera camera;
 	double fps;
 	//AudioPlayer audioPlayer;
 	Mesh* axis;
 	Mesh* backGround;
+
+	bool dmg_up;
+	bool fr_up;
 
 	//Mesh* background;
 	float worldHeight;

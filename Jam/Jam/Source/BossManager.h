@@ -7,7 +7,7 @@ class BossManager : public Singleton<BossManager>
 {
 	enum BOSSTYPE
 	{
-		DEFAULT,
+		DEFAULT = 0,
 		BOSSTWO,
 		BOSSTHREE,
 		TYPE_COUNT
