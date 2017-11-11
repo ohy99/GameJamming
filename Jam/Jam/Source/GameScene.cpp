@@ -175,6 +175,8 @@ void GameScene::Init()
 	InputController::GetInstance()->init();//insert file here
 	Player::GetInstance()->init();
 
+	MessageDispatcher::GetInstance()->Register("GameScene", this);
+
 	//ProjectileManager::GetInstance();
 	EnemyManager::GetInstance()->init();
 	DmgHitBoxManager::GetInstance();
@@ -192,6 +194,8 @@ void GameScene::Init()
 	}
 
 	Player::GetInstance()->active = true;
+	fr_up = dmg_up = false;
+	crediting = false;
 }
 
 
@@ -217,15 +221,21 @@ void GameScene::Update(double dt)
 	ParticleManager::GetInstance()->update(dt);
 
 	//debug purposes
-	if (KeyboardController::GetInstance()->IsKeyPressed('P')) {
+	/*if (KeyboardController::GetInstance()->IsKeyPressed('P')) {
 		MessageDispatcher::GetInstance()->Send("MachineGun", new MessageWeapon(MessageWeapon::APPLY_FIRERATE_BOOST));
 	}
 	if (KeyboardController::GetInstance()->IsKeyPressed('B')) {
 		MessageDispatcher::GetInstance()->Send("MachineGun", new MessageWeapon(MessageWeapon::APPLY_DAMAGE_BOOST));
+	}*/
+	if (KeyboardController::GetInstance()->IsKeyDown('C')) {
+		crediting = true;
+	}
+	else {
+		crediting = false;
 	}
 
 	if (Player::GetInstance()->GetDead()) {
-		if (KeyboardController::GetInstance()->IsKeyPressed('R')) {
+		if (KeyboardController::GetInstance()->IsKeyPressed(VK_RETURN)) {
 			SceneManager::GetInstance()->setNextScene("MAIN");
 		}
 	}
@@ -235,7 +245,7 @@ void GameScene::Update(double dt)
 		SceneManager::GetInstance()->setNextScene("Editor");
 	}
 
-
+	MessageDispatcher::GetInstance()->Send("MachineGun", new MessageCheckBuff());
 	fps = 1.0 / dt;
 	MyDebugger::GetInstance()->watch_this_info("fps", fps);
 }
@@ -275,6 +285,42 @@ void GameScene::Render()
 	HUD::GetInstance()->render();
 
 	//MyDebugger::GetInstance()->render_debug_info();
+	if (dmg_up) {
+		MS& ms = Graphics::GetInstance()->modelStack;
+		ms.PushMatrix();
+		ms.Translate(worldWidth * 0.5f, worldHeight * 0.5, 3);
+		ms.Scale(worldWidth, worldHeight, 1);
+		RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("damage up"), false);
+		ms.PopMatrix();
+		dmg_up = false;
+	}
+	if (fr_up) {
+		MS& ms = Graphics::GetInstance()->modelStack;
+		ms.PushMatrix();
+		ms.Translate(worldWidth * 0.5f, worldHeight * 0.5, 1);
+		ms.Scale(worldWidth, worldHeight, 1);
+		RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("firerate up"), false);
+		ms.PopMatrix();
+		fr_up = false;
+	}
+	if (crediting) {
+		MS& ms = Graphics::GetInstance()->modelStack;
+		ms.PushMatrix();
+		ms.Translate(worldWidth * 0.5f, worldHeight * 0.5, 3);
+		ms.Scale(worldWidth, worldHeight / 3, 1);
+		RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("credit"), false);
+		ms.PopMatrix();
+	}
+
+	if (Player::GetInstance()->GetDead()) {
+		MS& ms = Graphics::GetInstance()->modelStack;
+		ms.PushMatrix();
+		ms.Translate(worldWidth * 0.5f, worldHeight * 0.5, 1);
+		ms.Scale(worldWidth * 0.8f, worldHeight * 0.8f, 1);
+		RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("death scene"), false);
+		ms.PopMatrix();
+	}
+
 	//hax
 #if DEBUGPLAYER
 	//Player::GetInstance()->render_debug();
@@ -300,5 +346,24 @@ void GameScene::Exit()
 		it = nullptr;
 	}
 	backgroundObjects.clear();
+}
+
+void GameScene::Handle(BaseMessage * msg)
+{
+	MessageCheckBuff* messageCheckBuff = dynamic_cast<MessageCheckBuff*>(msg);
+	if (messageCheckBuff) {
+		if (messageCheckBuff->bol)
+		{
+			if (messageCheckBuff->type == MessageCheckBuff::CHECK_DAMAGE) {
+				dmg_up = true;
+			}
+			else {
+				fr_up = true;
+			}
+		}
+		delete messageCheckBuff;
+		return;
+	}
+	delete msg;
 }
 

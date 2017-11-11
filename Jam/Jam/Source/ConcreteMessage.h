@@ -18,4 +18,18 @@ public:
 	virtual ~MessageWeapon() {}
 };
 
+struct MessageCheckBuff : public BaseMessage {
+	enum MESSAGE_TYPE {
+		NONE = 0,
+		CHECK_FIRERATE,
+		CHECK_DAMAGE
+	}type;
+
+	MessageCheckBuff() {}
+	MessageCheckBuff(MESSAGE_TYPE type, bool bol) : type(type), bol(bol) {}
+	virtual ~MessageCheckBuff() {}
+
+	bool bol;
+};
+
 #endif

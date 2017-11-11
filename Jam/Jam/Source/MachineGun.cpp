@@ -8,6 +8,7 @@
 #include "DieToTimer.h"
 #include "RenderManager.h"
 #include "ConcreteMessage.h"
+#include "MessageDispatcher.h"
 
 void MachineGun::update(double dt)
 {
@@ -83,6 +84,19 @@ void MachineGun::Handle(BaseMessage* msg)
 			break;
 		}
 		delete messageWeapon;
+		return;
+	}
+	MessageCheckBuff* messageCheckBuff = dynamic_cast<MessageCheckBuff*>(msg);
+	if (messageCheckBuff) {
+		if (buff == true)
+			MessageDispatcher::GetInstance()->Send("GameScene", new MessageCheckBuff(MessageCheckBuff::CHECK_DAMAGE, true));
+		else
+			MessageDispatcher::GetInstance()->Send("GameScene", new MessageCheckBuff(MessageCheckBuff::CHECK_DAMAGE, false));
+		if (fast == true)
+			MessageDispatcher::GetInstance()->Send("GameScene", new MessageCheckBuff(MessageCheckBuff::CHECK_FIRERATE, true));
+		else
+			MessageDispatcher::GetInstance()->Send("GameScene", new MessageCheckBuff(MessageCheckBuff::CHECK_FIRERATE, false));
+		delete messageCheckBuff;
 		return;
 	}
 	delete msg;

@@ -14,7 +14,6 @@ class Weapon : public GameObject
 {
 protected:
 	DamageEjector damage;						//min - max dmg
-	MyTimer attackspeed_timer;					//attspd
 	DmgHitBoxManager::DMG_COLLIDER_TYPE proj_type;//type ejected
 	Physics power;								//force / spd of proj ejected
 	Faction faction;							//which side this belongs to
@@ -27,6 +26,7 @@ protected:
 	int defaultMinDmg;
 	int defaultMaxDmg;
 public:
+	MyTimer attackspeed_timer;					//attspd
 	std::string name;
 
 	Weapon();

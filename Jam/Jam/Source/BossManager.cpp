@@ -6,10 +6,13 @@
 
 BossManager::BossManager()
 {
-	currType = BOSSTYPE::DEFAULT;
+	//currType = BOSSTYPE::DEFAULT;
+	//currType = BOSSTYPE::BOSSTWO;
 	bossArray[DEFAULT] = new Boss();
 	bossArray[BOSSTWO] = new BossTwo();
 	bossArray[BOSSTHREE] = new BossThree();
+	int boss = Math::RandIntMinMax(0, (int)TYPE_COUNT - 1);
+	currType = (BOSSTYPE)boss;
 }
 
 BossManager::~BossManager()
@@ -18,6 +21,8 @@ BossManager::~BossManager()
 
 void BossManager::Init()
 {
+	int boss = Math::RandIntMinMax(0, (int)TYPE_COUNT - 1);
+	currType = (BOSSTYPE)boss;
 	bossArray[currType]->Init();
 }
 
