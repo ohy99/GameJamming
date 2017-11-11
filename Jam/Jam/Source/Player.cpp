@@ -196,17 +196,24 @@ void Player::update_movement(double dt)
 
 	//deceleration = 0.5sec
 
+	Vector3 prevPos;
 	if (!legitDead) {
 		if (inputController.isInputDown(InputController::MOVE_FRONT)) {
 			//this->pos += this->dir * move_speed * (float)dt;
+			prevPos = pos;
 			this->pos += Vector3(0, 1, 0) * move_speed * (float)dt;
+			if (this->pos.x > worldWidth || this->pos.x < 0 || this->pos.y > worldHeight || this->pos.y < 0)
+				pos = prevPos;
 			//this->physic.velocity += Vector3(0, 1, 0) * acc * (float)dt;
 		}
 		//else
 		//	this->physic.velocity.y = Math::Min(this->physic.velocity.y - acc * 2.f * float(dt), 0.0f);
 		if (inputController.isInputDown(InputController::MOVE_BACK)) {
 			//this->pos += -this->dir * move_speed * (float)dt;
+			prevPos = pos;
 			this->pos += -Vector3(0, 1, 0) * move_speed * (float)dt;
+			if (this->pos.x > worldWidth || this->pos.x < 0 || this->pos.y > worldHeight || this->pos.y < 0)
+				pos = prevPos;
 			//this->physic.velocity += -Vector3(0, 1, 0) * acc * (float)dt;
 		}
 		//else
@@ -215,14 +222,20 @@ void Player::update_movement(double dt)
 		if (inputController.isInputDown(InputController::MOVE_LEFT)) {
 			//Vector3 right = this->dir.Cross(Vector3(0, 0, 1)).Normalize();
 			//this->pos += -right * move_speed * (float)dt;
+			prevPos = pos;
 			this->pos += -Vector3(1, 0, 0) * move_speed * (float)dt;
+			if (this->pos.x > worldWidth || this->pos.x < 0 || this->pos.y > worldHeight || this->pos.y < 0)
+				pos = prevPos;
 			//this->physic.velocity += -Vector3(1, 0, 0) * acc * (float)dt;
 		}
 		//else
 		//	this->physic.velocity.x = Math::Max(this->physic.velocity.x + acc * 2.f * float(dt), 0.0f);
 		if (inputController.isInputDown(InputController::MOVE_RIGHT)) {
 			//this->pos += right * move_speed * (float)dt;
+			prevPos = pos;
 			this->pos += Vector3(1, 0, 0) * move_speed * (float)dt;
+			if (this->pos.x > worldWidth || this->pos.x < 0 || this->pos.y > worldHeight || this->pos.y < 0)
+				pos = prevPos;
 			//this->physic.velocity += Vector3(1, 0, 0) * acc * (float)dt;
 		}
 		//else

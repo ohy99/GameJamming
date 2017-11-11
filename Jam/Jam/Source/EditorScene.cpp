@@ -18,6 +18,7 @@
 #include <fstream>
 #include <stdio.h> 
 #include "Loader.h"
+#include "GLFW\glfw3.h"
 
 EditorScene::EditorScene() : 
 	start_of_pattern("============ Pattern ============"),
@@ -67,6 +68,8 @@ void EditorScene::Init()
 	current_path = 0;
 	current_pattern = 0;
 	current_action = ACTION::CREATE_NEW_PAT;
+
+	glfwSetInputMode(Application::GetInstance().getWindowPtr(), 0x00033001, 0x00034001);
 }
 
 void EditorScene::Update(double dt)
