@@ -7,6 +7,7 @@
 #include "Damage.h"
 #include "Faction.h"
 #include "MyTimer.h"
+#include "SpriteAnimation.h"
 class Collider;
 class DmgHitBoxManager;
 class DieCondition;
@@ -24,6 +25,7 @@ private:
 
 	MyTimer particleSpawn;
 public:
+	Animation anim;
 	//0 default, 1 dmg, 2 attspd, 3 hp
 	int type;
 	DmgHitBox();
