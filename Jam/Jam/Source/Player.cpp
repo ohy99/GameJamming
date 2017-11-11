@@ -337,6 +337,9 @@ void Player::kill_feedback(bool killed)
 	{
 		//revive this guy
 		revive();
+		second_wind_available = true;
+		second_wind_timer.set_duration(Math::Max(second_wind_timer.get_duration() * 0.5, 0.5));
+		second_wind_timer.reset_timer();
 	}
 }
 

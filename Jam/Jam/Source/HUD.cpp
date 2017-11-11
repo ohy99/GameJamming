@@ -135,7 +135,8 @@ void HUD::render()
 
 			ss.str("");
 			half_width = 0.f;
-			ss << int(Player::GetInstance()->second_wind_timer.get_duration() - Player::GetInstance()->second_wind_timer.get_elapsed_time());
+			ss.precision(2);
+			ss << (Player::GetInstance()->second_wind_timer.get_duration() - Player::GetInstance()->second_wind_timer.get_elapsed_time());
 			textstr = ss.str();
 			for (unsigned int i = 0; i < textstr.size(); ++i)
 				half_width += font.textWidth[(int)textstr.at(i)];
