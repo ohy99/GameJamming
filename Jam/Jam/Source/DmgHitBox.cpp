@@ -8,6 +8,7 @@
 #include "ProjectileCollisionResponse.h"
 #include "RenderManager.h"
 #include "ParticleManager.h"
+#include "SpriteAnimation.h"
 
 DmgHitBox::DmgHitBox() : collider(nullptr), die_condition(nullptr)
 {
@@ -18,6 +19,7 @@ DmgHitBox::DmgHitBox(const DmgHitBox & other) : collider(nullptr), die_condition
 	this->collider = other.collider->duplicate(this);
 	this->mesh = other.mesh;
 	this->scale = other.scale;
+	this->anim.Set(0, 4, 1, 1.0f, true);
 }
 
 DmgHitBox::~DmgHitBox()
@@ -73,6 +75,16 @@ void DmgHitBox::update(double dt)
 			particleSpawn.reset_timer();
 		}
 	}
+
+	if (this->damage.get_type() == DamageType::DMG_TYPE::MELEE)
+	{
+		SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(this->mesh);
+		if (sa) {
+			sa->m_anim = &this->anim;
+			sa->m_anim->Update(dt);
+		}
+	}
+
 }
 
 void DmgHitBox::set(Vector3 pos, Vector3 dir, Faction::FACTION_SIDE side, float velocity, int damage, DamageType::DMG_TYPE type)

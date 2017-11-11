@@ -36,6 +36,10 @@ protected:
 	bool dmg_up;
 	bool fr_up;
 	bool crediting;
+	bool cutscene;
+
+	Mesh* cutscenes[5];
+	Mesh* toRender;
 
 	//Mesh* background;
 	float worldHeight;

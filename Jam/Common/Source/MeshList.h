@@ -110,7 +110,7 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image\\Sheep_fire.tga");
 		assignMesh(temp);
 		temp = MeshBuilder::GenerateQuad("HpBack", Color(1,1,1), 1.f);
-		temp->textureID = LoadTGA("Image\\ui_health11.tga");
+		temp->textureID = LoadTGA("Image\\ui_health1.tga");
 		assignMesh(temp);
 		//temp = MeshBuilder::GenerateQuad("HpFront", Color(1, 0, 0), 1.f);
 		//temp->textureID = LoadTGA("Image\\ui_health22.tga");
@@ -201,7 +201,23 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image\\Water_Laser.tga");
 		assignMesh(temp);
 
-		temp = MeshBuilder::GenerateSpriteAnimation("fart", 1, 5, 1.f);
+		temp = MeshBuilder::GenerateQuad("1", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\cutscene_01.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("2", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\cutscene_02.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("3", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\cutscene_03.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("4", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\cutscene_04.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("5", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\cutscene_05.tga");
+		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateSpriteAnimation("fart", 1, 5, 0.2f);
 		temp->textureID = LoadTGA("Image\\Protagonist_fart.tga");
 		assignMesh(temp);
 	}

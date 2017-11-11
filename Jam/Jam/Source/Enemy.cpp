@@ -63,7 +63,7 @@ void Enemy::init(Vector3 pos, Vector3 scale, Vector3 dir, float move_spd, float 
 	this->dir = dir;
 	this->active = true;
 
-	this->mesh = MeshList::GetInstance()->getMesh("Enemy");
+	this->mesh = MeshList::GetInstance()->getMesh("EnemySide");
 
 	RenderManager::GetInstance()->attach_renderable(this, 0);
 	RenderManager::GetInstance()->attach_renderable(weapon, 1);
