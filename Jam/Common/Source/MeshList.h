@@ -55,7 +55,12 @@ class MeshList : public Singleton <MeshList>
 		assignMesh(temp);
 		temp = MeshBuilder::GenerateQuad("YellowQuad", Color(1, 0.8f, 0), 1);
 		assignMesh(temp);
-
+		temp = MeshBuilder::GenerateQuad("YellowYellQuad", Color(1, 1.f, 0), 1);
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("PurpleQuad", Color(1, 0.f, 1.f), 1);
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("TurqQuad", Color(0, 1.f, 1.f), 1);
+		assignMesh(temp);
 		
 		temp = MeshBuilder::GenerateQuad("REDHPBAR", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image//redhpbar.tga");
@@ -114,10 +119,14 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image\\ui_healthbar1.tga");
 		assignMesh(temp);
 
+		temp = MeshBuilder::GenerateQuad("GameTitle", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\Game_Title.tga");
+		assignMesh(temp);
+
 		temp = MeshBuilder::GenerateSpriteAnimation("reticle", 2, 3, 1.f);
 		temp->textureID = LoadTGA("Image\\Recticle.tga");
 		assignMesh(temp);
-		temp = MeshBuilder::GenerateSpriteAnimation("sky", 2, 3, 1.f);
+		temp = MeshBuilder::GenerateQuad("sky",Color(1,1,1), 1.0f);
 		temp->textureID = LoadTGA("Image\\bg_sky.tga");
 		assignMesh(temp);
 

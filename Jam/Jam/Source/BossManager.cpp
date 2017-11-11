@@ -6,6 +6,7 @@
 
 BossManager::BossManager()
 {
+	//currType = BOSSTYPE::DEFAULT;
 	//currType = BOSSTYPE::BOSSTWO;
 	bossArray[DEFAULT] = new Boss();
 	bossArray[BOSSTWO] = new BossTwo();

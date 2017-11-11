@@ -14,6 +14,7 @@ public:
 		HIT_ENEMY,
 		DEADPLAYER,
 		BULLET_TRAIL,
+		CLICKFORFUN,
 	};
 private:
 	friend Singleton;

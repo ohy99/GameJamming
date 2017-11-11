@@ -24,8 +24,9 @@ void RenderManager::render_all_active_objects()
 			if (!dynamic_cast<Player*>(go))
 				go->render();
 		}
-		Player::GetInstance()->render();
 	}
+	if (Player::GetInstance()->active)
+		Player::GetInstance()->render();
 }
 
 void RenderManager::post_render()

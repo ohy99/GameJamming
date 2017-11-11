@@ -12,7 +12,7 @@
 #include "DefaultRight.h"
 
 BossThree::BossThree() : leftPart(nullptr), middlePart(nullptr), rightPart(nullptr),
-middleScale(10, 10, 1), sideScale(7.5f, 7.5f, 1), moveSpd(10),
+middleScale(20, 20, 1), sideScale(15.f, 15.f, 1), moveSpd(10),
 BossThreeDir(-1, 0, 0), BossThreeRight(0, 1, 0)
 {
 	//create parts here
@@ -53,6 +53,60 @@ void BossThree::Init()
 	leftPart = this->GetRandomPart(SIDE::LEFT);
 	middlePart = this->GetRandomPart(SIDE::MIDDLE);
 	rightPart = this->GetRandomPart(SIDE::RIGHT);
+
+	leftPart->dir.Set(-1, 0, 0);
+	middlePart->dir.Set(-1, 0, 0);
+	rightPart->dir.Set(-1, 0, 0);
+
+	Mesh* temp;
+	temp = nullptr;
+	switch (Math::RandIntMinMax(0, 2))
+	{
+	case 0:
+		temp = MeshList::GetInstance()->getMesh("HarpyBoss2Attack");
+		break;
+	case 1:
+		temp = MeshList::GetInstance()->getMesh("WolfAttack");
+		break;
+	case 2:
+		temp = MeshList::GetInstance()->getMesh("HarpyBossAttack");
+		break;
+	}
+	leftPart->mesh = temp;
+	temp = nullptr;
+	switch (Math::RandIntMinMax(0, 2))
+	{
+	case 0:
+		temp = MeshList::GetInstance()->getMesh("HarpyBoss2Attack");
+		break;
+	case 1:
+		temp = MeshList::GetInstance()->getMesh("WolfAttack");
+		break;
+	case 2:
+		temp = MeshList::GetInstance()->getMesh("HarpyBossAttack");
+		break;
+	}
+	middlePart->mesh = temp;
+	temp = nullptr;
+	switch (Math::RandIntMinMax(0, 2))
+	{
+	case 0:
+		temp = MeshList::GetInstance()->getMesh("HarpyBoss2Attack");
+		break;
+	case 1:
+		temp = MeshList::GetInstance()->getMesh("WolfAttack");
+		break;
+	case 2:
+		temp = MeshList::GetInstance()->getMesh("HarpyBossAttack");
+		break;
+	}
+	rightPart->mesh = temp;
+
+
+	//leftPart->mesh = MeshList::GetInstance()->getMesh("HarpyBoss2Attack");
+	//middlePart->mesh = MeshList::GetInstance()->getMesh("WolfAttack");
+	//rightPart->mesh = MeshList::GetInstance()->getMesh("HarpyBossAttack");
+
 
 	//put them inside managers
 	ActivatePart(leftPart);

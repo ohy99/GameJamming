@@ -193,6 +193,7 @@ void GameScene::Init()
 		backgroundObjects.push_back(go);
 	}
 
+	Player::GetInstance()->active = true;
 	fr_up = dmg_up = false;
 	crediting = false;
 }
@@ -283,6 +284,7 @@ void GameScene::Render()
 	RenderManager::GetInstance()->post_render();
 	HUD::GetInstance()->render();
 
+	//MyDebugger::GetInstance()->render_debug_info();
 	if (dmg_up) {
 		MS& ms = Graphics::GetInstance()->modelStack;
 		ms.PushMatrix();
@@ -319,10 +321,9 @@ void GameScene::Render()
 		ms.PopMatrix();
 	}
 
-	MyDebugger::GetInstance()->render_debug_info();
 	//hax
 #if DEBUGPLAYER
-	Player::GetInstance()->render_debug();
+	//Player::GetInstance()->render_debug();
 #endif
 	ms.PopMatrix();
 

@@ -8,6 +8,8 @@
 #include "Faction.h"
 #include "Weapon.h"
 #include "CharacterBase.h"
+#include <utility>
+#include "SpriteAnimation.h"
 
 //One headed boi
 class BossTwo : public BossBase, public GameObject, public CharacterBase
@@ -18,12 +20,14 @@ class BossTwo : public BossBase, public GameObject, public CharacterBase
 	float moveSpd;
 
 	MyTimer attack_timer;
+	
 
 	enum STATE
 	{
 		ENTER,//Enter as in enter da screen
 		ATTACK
 	} currState;
+	std::pair<Mesh*, Animation> meshpair[2];
 public:
 	BossTwo();
 	~BossTwo();

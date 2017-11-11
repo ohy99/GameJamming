@@ -7,6 +7,8 @@
 #include "CollisionManager.h"
 #include "RenderManager.h"
 #include "Player.h"
+#include "Graphics.h"
+#include "RenderHelper.h"
 
 BossTwo::BossTwo()
 {
@@ -20,14 +22,14 @@ void BossTwo::Init()
 {
 	hitbox = new Collider(this, new EnemyResponse);
 	hitbox->set_response(new EnemyResponse);
-	this->scale.Set(10.f, 10.f, 0.f);
+	this->scale.Set(15.f, 15.f, 0.f);
 	this->hitbox->set_collision(Collision::CollisionType::AABB,
 		&this->pos, -this->scale * 0.5f, this->scale * 0.5f);
 
 	hitpoint.init_hp(2000);
 	this->faction.side = Faction::FACTION_SIDE::ENEMY;
 
-	this->mesh = MeshList::GetInstance()->getMesh("RedQuad");
+	this->dir.Set(-1, 0, 0);
 
 	weapon = new BossDefaultGun(this->faction.side);
 
@@ -42,6 +44,27 @@ void BossTwo::Init()
 	CollisionManager::GetInstance()->add_collider(this->hitbox);
 	RenderManager::GetInstance()->attach_renderable(this, 1);
 	attack_timer.set_duration(0.4);
+
+	Mesh* temp;
+	temp = nullptr;
+	switch (Math::RandIntMinMax(0, 2))
+	{
+	case 0:
+		temp = MeshList::GetInstance()->getMesh("HarpyBoss2Attack");
+		break;
+	case 1:
+		temp = MeshList::GetInstance()->getMesh("WolfAttack");
+		break;
+	case 2:
+		temp = MeshList::GetInstance()->getMesh("HarpyBossAttack");
+		break;
+	}
+	this->mesh = temp;
+
+	//meshpair[0].first = MeshList::GetInstance()->getMesh("HarpyBossIdle");
+	//meshpair[0].second.Set(0, 1, 1, 0.5f, true);
+	//meshpair[1].first = MeshList::GetInstance()->getMesh("HarpyBossAttack");
+	//currState = ENTER;
 }
 
 void BossTwo::Update(double dt)
@@ -68,6 +91,7 @@ void BossTwo::Update(double dt)
 			this->pos += dirToIntended.Normalized() * moveSpd * (float)dt;
 		else {
 			this->pos += dirToIntended;
+			currState = ATTACK;
 		}
 	}
 	else {
@@ -76,6 +100,11 @@ void BossTwo::Update(double dt)
 		else
 			intendedPos = pt1;
 	}
+
+	//if (currState == ENTER)
+	//	meshpair[currState].second.Update(dt);
+	//this->mesh = meshpair[currState].first;
+	
 }
 
 void BossTwo::Exit()
