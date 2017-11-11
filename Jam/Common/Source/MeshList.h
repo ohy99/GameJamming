@@ -125,6 +125,10 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image\\bg_meteor.tga");
 		assignMesh(temp);
 
+		temp = MeshBuilder::GenerateQuad("credit", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\credits.tga");
+		assignMesh(temp);
+
 
 		temp = MeshBuilder::GenerateQuad("Enemy", Color(1, 0, 0), 1.f);
 		temp->textureID = LoadTGA("Image\\Enemy_Oce_Top.tga");

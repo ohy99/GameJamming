@@ -194,6 +194,7 @@ void GameScene::Init()
 	}
 
 	fr_up = dmg_up = false;
+	crediting = false;
 }
 
 
@@ -219,15 +220,21 @@ void GameScene::Update(double dt)
 	ParticleManager::GetInstance()->update(dt);
 
 	//debug purposes
-	if (KeyboardController::GetInstance()->IsKeyPressed('P')) {
+	/*if (KeyboardController::GetInstance()->IsKeyPressed('P')) {
 		MessageDispatcher::GetInstance()->Send("MachineGun", new MessageWeapon(MessageWeapon::APPLY_FIRERATE_BOOST));
 	}
 	if (KeyboardController::GetInstance()->IsKeyPressed('B')) {
 		MessageDispatcher::GetInstance()->Send("MachineGun", new MessageWeapon(MessageWeapon::APPLY_DAMAGE_BOOST));
+	}*/
+	if (KeyboardController::GetInstance()->IsKeyDown('C')) {
+		crediting = true;
+	}
+	else {
+		crediting = false;
 	}
 
 	if (Player::GetInstance()->GetDead()) {
-		if (KeyboardController::GetInstance()->IsKeyPressed(VK_SPACE)) {
+		if (KeyboardController::GetInstance()->IsKeyPressed(VK_RETURN)) {
 			SceneManager::GetInstance()->setNextScene("MAIN");
 		}
 	}
@@ -293,6 +300,14 @@ void GameScene::Render()
 		RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("firerate up"), false);
 		ms.PopMatrix();
 		fr_up = false;
+	}
+	if (crediting) {
+		MS& ms = Graphics::GetInstance()->modelStack;
+		ms.PushMatrix();
+		ms.Translate(worldWidth * 0.5f, worldHeight * 0.5, 3);
+		ms.Scale(worldWidth, worldHeight / 3, 1);
+		RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("credit"), false);
+		ms.PopMatrix();
 	}
 
 	if (Player::GetInstance()->GetDead()) {

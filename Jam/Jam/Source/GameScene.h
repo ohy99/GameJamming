@@ -35,6 +35,7 @@ protected:
 
 	bool dmg_up;
 	bool fr_up;
+	bool crediting;
 
 	//Mesh* background;
 	float worldHeight;
