@@ -16,9 +16,12 @@
 #include "RenderManager.h"
 #include "KeyboardController.h"
 #include "MouseController.h"
+#include "ParticleManager.h"
 
 #include "GL\glew.h"
 #include "GLFW\glfw3.h"
+
+#include "Player.h"
 
 Mainmenu::Mainmenu()
 {
@@ -53,7 +56,7 @@ void Mainmenu::Init()
 
 	worldHeight = 100;
 	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
-	worldWidth = worldHeight * 4.f / 3.f;
+	//worldWidth = worldHeight * 16.f / 9.f;
 
 	Math::InitRNG();
 
@@ -74,6 +77,13 @@ void Mainmenu::Init()
 	temp->default_scale.Set(35, 10);
 	temp->resize_button(temp->default_scale);
 	buttons.insert(std::make_pair("EXIT", temp));
+	
+	temp = new Button();
+	temp->mesh = MeshList::GetInstance()->getMesh("GameTitle");
+	temp->pos = middle_pt + Vector3(0, 35);
+	temp->default_scale.Set(75, 25);
+	temp->resize_button(temp->default_scale);
+	buttons.insert(std::make_pair("NULL", temp));
 
 	MouseController::GetInstance()->SetKeepMouseCentered(false);
 	next_scene = nullptr;
@@ -83,7 +93,15 @@ void Mainmenu::Init()
 	AudioPlayer::GetInstance()->PlayBackground2D("Pim Poy", 0.2);
 
 	//Cursor										GLFW_CURSOR 0x00033001   GLFW_CURSOR_NORMAL 0x00034001
-	glfwSetInputMode(Application::GetInstance().getWindowPtr(), 0x00033001, 0x00034001);
+	glfwSetInputMode(Application::GetInstance().getWindowPtr(), 0x00033001, 0x00034002);
+
+	mouseParticleTimer.set_duration(0.2);
+
+	prevCursor.SetZero();
+
+	GlobalVariables::GetInstance()->worldWidth = &this->worldWidth;
+	GlobalVariables::GetInstance()->worldHeight = &this->worldHeight;
+	Player::GetInstance()->active = false;
 }
 
 
@@ -141,19 +159,33 @@ void Mainmenu::Update(double dt)
 	
 	if (next_scene)
 	{
-		//next scene set alr
-		feedback_timer.update_timer(dt);
-
-		if (feedback_timer.is_Duration_Passed())
+		if (*next_scene != "NULL")
 		{
-			if (*next_scene == "EXIT")
-				SceneManager::GetInstance()->setExitGame(true);
-			else
-				SceneManager::GetInstance()->setNextScene(*next_scene);
+			//next scene set alr
+			feedback_timer.update_timer(dt);
+
+			if (feedback_timer.is_Duration_Passed())
+			{
+				if (*next_scene == "EXIT")
+					SceneManager::GetInstance()->setExitGame(true);
+				else
+					SceneManager::GetInstance()->setNextScene(*next_scene);
+			}
 		}
 	}
 
+	ParticleManager::GetInstance()->update(dt);
+	PhysicsManager::GetInstance()->update(dt);
+	mouseParticleTimer.update_timer(dt);
+	if (mouseParticleTimer.is_Duration_Passed())
+	{
+		Vector3 displacement = -prevCursor + cursor_point_in_world_space;
+		if (prevCursor.IsZero() == false && displacement.IsZero() == false)
+			ParticleManager::GetInstance()->spawn_particle(ParticleManager::CLICKFORFUN,
+				cursor_point_in_world_space, displacement.Normalize());
+	}
 
+	prevCursor = cursor_point_in_world_space;
 }
 
 
@@ -181,13 +213,19 @@ void Mainmenu::Render()
 	ms.PushMatrix();
 	//ms.Scale(135, 100, 1);
 	RenderHelper::RenderMesh(axis, false);
+
+	ms.Translate(worldWidth * 0.5f, worldHeight * 0.5f, 1);
+	ms.Scale(worldWidth, worldHeight, 1);
+	RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("sky 2"), false);
 	ms.PopMatrix();
+	Player::GetInstance()->RenderReticle();
 
 
 	for each (auto &butt in buttons)
 	{
 		butt.second->render_button();
 	}
+	RenderManager::GetInstance()->render_all_active_objects();
 }
 
 void Mainmenu::Exit()

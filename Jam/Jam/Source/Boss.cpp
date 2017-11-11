@@ -21,7 +21,7 @@ bool CheckDuplicate(BasePart* part, std::map<std::string, BasePart*> map){
 }
 
 Boss::Boss() : leftPart(nullptr), middlePart(nullptr), rightPart(nullptr),
-	middleScale(10, 10, 1), sideScale(7.5f, 7.5f, 1), moveSpd(10),
+	middleScale(20, 20, 1), sideScale(15.f, 15.f, 1), moveSpd(10),
 	bossDir(-1,0,0), bossRight(0,1,0)
 {
 	//create parts here
@@ -63,6 +63,54 @@ void Boss::Init()
 	middlePart = this->GetRandomPart(SIDE::MIDDLE);
 	rightPart = this->GetRandomPart(SIDE::RIGHT);
 	
+	Mesh* temp;
+	temp = nullptr;
+	switch (Math::RandIntMinMax(0, 2))
+	{
+	case 0:
+		temp = MeshList::GetInstance()->getMesh("HarpyBoss2Attack");
+		break;
+	case 1:
+		temp = MeshList::GetInstance()->getMesh("WolfAttack");
+		break;
+	case 2:
+		temp = MeshList::GetInstance()->getMesh("HarpyBossAttack");
+		break;
+	}
+	leftPart->mesh = temp;
+	temp = nullptr;
+	switch (Math::RandIntMinMax(0, 2))
+	{
+	case 0:
+		temp = MeshList::GetInstance()->getMesh("HarpyBoss2Attack");
+		break;
+	case 1:
+		temp = MeshList::GetInstance()->getMesh("WolfAttack");
+		break;
+	case 2:
+		temp = MeshList::GetInstance()->getMesh("HarpyBossAttack");
+		break;
+	}
+	middlePart->mesh = temp;
+	temp = nullptr;
+	switch (Math::RandIntMinMax(0, 2))
+	{
+	case 0:
+		temp = MeshList::GetInstance()->getMesh("HarpyBoss2Attack");
+		break;
+	case 1:
+		temp = MeshList::GetInstance()->getMesh("WolfAttack");
+		break;
+	case 2:
+		temp = MeshList::GetInstance()->getMesh("HarpyBossAttack");
+		break;
+	}
+	rightPart->mesh = temp;
+
+	leftPart->dir.Set(-1, 0, 0);
+	middlePart->dir.Set(-1, 0, 0);
+	rightPart->dir.Set(-1, 0, 0);
+
 	//put them inside managers
 	ActivatePart(leftPart);
 	ActivatePart(middlePart);

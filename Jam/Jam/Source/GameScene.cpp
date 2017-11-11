@@ -190,6 +190,8 @@ void GameScene::Init()
 		go->mesh = MeshList::GetInstance()->getMesh("Meteor");
 		backgroundObjects.push_back(go);
 	}
+
+	Player::GetInstance()->active = true;
 }
 
 
@@ -272,10 +274,10 @@ void GameScene::Render()
 	RenderManager::GetInstance()->post_render();
 	HUD::GetInstance()->render();
 
-	MyDebugger::GetInstance()->render_debug_info();
+	//MyDebugger::GetInstance()->render_debug_info();
 	//hax
 #if DEBUGPLAYER
-	Player::GetInstance()->render_debug();
+	//Player::GetInstance()->render_debug();
 #endif
 	ms.PopMatrix();
 

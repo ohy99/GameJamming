@@ -96,25 +96,79 @@ void ParticleManager::spawn_particle(TYPE type, Vector3 pos)
 
 void ParticleManager::spawn_particle(TYPE type, Vector3 pos, Vector3 dir)
 {
-	//case BULLET_TRAIL:
-	int rand_num = Math::RandIntMinMax(-1, 2);
-	for (int i = 0; i < rand_num; ++i)
+	switch (type)
 	{
-		Particle* p = this->get_inactive();
-		if (p == nullptr)
-			return;
+	case BULLET_TRAIL:
+	{
+		int rand_num = Math::RandIntMinMax(-1, 2);
+		for (int i = 0; i < rand_num; ++i)
+		{
+			Particle* p = this->get_inactive();
+			if (p == nullptr)
+				return;
 
-		float angle = Math::RandFloatMinMax(-30.f, 30.f);
-		Mtx44 rotation;
-		rotation.SetToRotation(angle, 0, 0, 1);
-		Vector3 rdir = -dir;
-		rdir = rotation * rdir;
+			float angle = Math::RandFloatMinMax(-30.f, 30.f);
+			Mtx44 rotation;
+			rotation.SetToRotation(angle, 0, 0, 1);
+			Vector3 rdir = -dir;
+			rdir = rotation * rdir;
 
-		float spd = Math::RandFloatMinMax(10.0f, 15.f);
-		float dura = Math::RandFloatMinMax(0.25f, 0.5f);
-		p->init(pos, rdir, Vector3(Math::RandFloatMinMax(0.5f, 1.0f), 0.5f, 1.f), spd, dura);
-		p->mesh = MeshList::GetInstance()->getMesh("YellowQuad");
+			float spd = Math::RandFloatMinMax(10.0f, 15.f);
+			float dura = Math::RandFloatMinMax(0.25f, 0.5f);
+			p->init(pos, rdir, Vector3(Math::RandFloatMinMax(0.5f, 1.0f), 0.5f, 1.f), spd, dura);
+			p->mesh = MeshList::GetInstance()->getMesh("YellowQuad");
+		}
+		break;
 	}
+	case CLICKFORFUN:
+	{
+		int rand_num = Math::RandIntMinMax(1, 3);
+		for (int i = 0; i < rand_num; ++i)
+		{
+			Particle* p = this->get_inactive();
+			if (p == nullptr)
+				return;
+
+			float angle = Math::RandFloatMinMax(-30.f, 30.f);
+			Mtx44 rotation;
+			rotation.SetToRotation(angle, 0, 0, 1);
+			Vector3 rdir = -dir;
+			rdir = rotation * rdir;
+			if (rdir.IsZero())
+			{
+				rdir.Set(Math::RandFloat(), Math::RandFloat());
+				try {
+					rdir.Normalize();
+				}
+				catch (DivideByZero) {
+					rdir.Set(1, 0, 0);
+				}
+			}
+
+			float spd = Math::RandFloatMinMax(10.0f, 15.f);
+			float dura = Math::RandFloatMinMax(0.25f, 0.5f);
+			p->init(pos, rdir, Vector3(Math::RandFloatMinMax(0.5f, 1.0f), 0.5f, 1.f), spd, dura);
+			int randmesh = Math::RandIntMinMax(0, 6);
+			if (randmesh == 0)
+				p->mesh = MeshList::GetInstance()->getMesh("Quad");
+			else if (randmesh == 1)
+				p->mesh = MeshList::GetInstance()->getMesh("RedQuad");
+			else if (randmesh == 2)
+				p->mesh = MeshList::GetInstance()->getMesh("GreenQuad");
+			else if (randmesh == 3)
+				p->mesh = MeshList::GetInstance()->getMesh("BlueQuad");
+			else if (randmesh == 4)
+				p->mesh = MeshList::GetInstance()->getMesh("YellowYellQuad");
+			else if (randmesh == 5)
+				p->mesh = MeshList::GetInstance()->getMesh("PurpleQuad");
+			else if (randmesh == 6)
+				p->mesh = MeshList::GetInstance()->getMesh("TurqQuad");
+		}
+	}
+		break;
+	}
+
+
 }
 
 Particle * ParticleManager::get_inactive()

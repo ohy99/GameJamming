@@ -28,6 +28,8 @@ protected:
 
 	Mesh* axis;
 
+	MyTimer mouseParticleTimer;
+	Vector3 prevCursor;
 	std::map<std::string , Button*> buttons;
 	MyTimer feedback_timer;
 	const std::string* next_scene;

@@ -43,8 +43,8 @@ Player::Player() : inputController(*InputController::GetInstance()), collider(nu
 Player::~Player()
 {
 	delete collider;
-	for (int i = 0; i < sizeof(weapon) / sizeof(weapon[0]); ++i)
-		delete weapon[i];
+	//for (int i = 0; i < sizeof(weapon) / sizeof(weapon[0]); ++i)
+	//	delete weapon[i];
 
 	for each (auto w in weapon_list)
 	{
@@ -367,6 +367,25 @@ void Player::render()
 
 	hitpoint.render_hpbar(Vector3(pos.x, pos.y + scale.y, pos.z), Vector3(scale.x, 1));
 
+	this->RenderReticle();
+}
+
+void Player::Handle(BaseMessage* msg) {
+	MessageWeapon* messageWeapon = dynamic_cast<MessageWeapon*>(msg);
+	if (messageWeapon) {
+		switch (messageWeapon->type) {
+		case MessageWeapon::HEAL_UP:
+			this->hitpoint.kena_heal_maxhp(0.25f);
+			break;
+		}
+		delete messageWeapon;
+		return;
+	}
+	delete msg;
+}
+
+void Player::RenderReticle()
+{
 	double x, y;
 	MouseController::GetInstance()->GetMousePosition(x, y);
 	float w = Application::GetWindowWidth();
@@ -381,18 +400,4 @@ void Player::render()
 	ms.Scale(5, 5, 1);
 	RenderHelper::RenderMesh(reticle.first, false);
 	ms.PopMatrix();
-}
-
-void Player::Handle(BaseMessage* msg) {
-	MessageWeapon* messageWeapon = dynamic_cast<MessageWeapon*>(msg);
-	if (messageWeapon) {
-		switch (messageWeapon->type) {
-		case MessageWeapon::HEAL_UP:
-			this->hitpoint.kena_heal_maxhp(0.1f);
-			break;
-		}
-		delete messageWeapon;
-		return;
-	}
-	delete msg;
 }

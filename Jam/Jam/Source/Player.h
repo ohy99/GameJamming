@@ -85,6 +85,8 @@ public:
 	void kill_feedback(bool killed);
 
 	virtual void Handle(BaseMessage* msg);
+
+	void RenderReticle();
 protected:
 	Player();
 	~Player();
