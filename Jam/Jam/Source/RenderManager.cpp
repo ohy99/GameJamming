@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include <exception>
 #include "EnvironmentManager.h"
+#include "Player.h"
 
 RenderManager::RenderManager() : last_to_render(nullptr)
 {
@@ -19,8 +20,11 @@ void RenderManager::render_all_active_objects()
 	for each (auto &gopair in objects)
 	{
 		//if (go->active)
-		for each (auto &go in gopair.second)
+		for each (auto &go in gopair.second) {
+			if (!dynamic_cast<Player*>(go))
 				go->render();
+		}
+		Player::GetInstance()->render();
 	}
 }
 

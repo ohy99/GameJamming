@@ -114,12 +114,12 @@ void GameScene::RenderBackground()
 			}
 			if (go == nullptr)
 				return;
-			float scale = Math::RandFloatMinMax(10, 30);
+			float scale = Math::RandFloatMinMax(5, 20);
 			go->scale.Set(scale, scale, 1);
 			float vel = Math::RandFloatMinMax(0.2, 0.5);
 			go->dir.Set(-vel, 0, 0);
 			float y = Math::RandFloatMinMax(0, worldHeight);
-			go->pos.Set(worldWidth + scale, y, 1);
+			go->pos.Set(worldWidth + scale * 272 / 80, y, 1);
 			go->active = true;
 		}
 		frame = 0;
@@ -128,11 +128,11 @@ void GameScene::RenderBackground()
 		if (it->active) {
 			ms.PushMatrix();
 			ms.Translate(it->pos.x += it->dir.x, it->pos.y, 0);
-			ms.Scale(it->scale.x, it->scale.y, 1);
+			ms.Scale(it->scale.x * 272 / 80, it->scale.y, 1);
 			RenderHelper::RenderMesh(it->mesh, false);
 			ms.PopMatrix();
 
-			if (it->pos.x < -it->scale.x)
+			if (it->pos.x < -it->scale.x * 272 / 80)
 				it->active = false;
 		}
 	}
