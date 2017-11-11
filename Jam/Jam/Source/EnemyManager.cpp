@@ -14,7 +14,7 @@
 #include "MyDebugger.h"
 
 EnemyManager::EnemyManager() : max_movespd(25.f), acceleration(10.f), initial_movespd(10.f),
-spawn_wave(true), enemy_scale(3, 3, 1), wave_number(0), max_wave(0)
+spawn_wave(true), enemy_scale(7.5, 7.5f, 1), wave_number(0), max_wave(0)
 {
 	for (int i = 0; i < 50; ++i)
 	{

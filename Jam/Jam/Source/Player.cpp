@@ -20,6 +20,7 @@
 #include "ParticleManager.h"
 #include "MessageDispatcher.h"
 #include "LaserGun.h"
+#include "ConcreteMessage.h"
 
 Player::Player() : inputController(*InputController::GetInstance()), collider(nullptr)
 {
@@ -35,6 +36,8 @@ Player::Player() : inputController(*InputController::GetInstance()), collider(nu
 	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(reticle.first);
 	if (sa)
 		sa->m_anim = &reticle.second;
+
+	MessageDispatcher::GetInstance()->Register("Player", this);
 }
 
 Player::~Player()
@@ -380,3 +383,16 @@ void Player::render()
 	ms.PopMatrix();
 }
 
+void Player::Handle(BaseMessage* msg) {
+	MessageWeapon* messageWeapon = dynamic_cast<MessageWeapon*>(msg);
+	if (messageWeapon) {
+		switch (messageWeapon->type) {
+		case MessageWeapon::HEAL_UP:
+			this->hitpoint.kena_heal_maxhp(0.1f);
+			break;
+		}
+		delete messageWeapon;
+		return;
+	}
+	delete msg;
+}

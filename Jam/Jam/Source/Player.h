@@ -12,6 +12,7 @@
 #include "Physics.h"
 #include <utility>
 #include "SpriteAnimation.h"
+class BaseMessage;
 class Weapon;
 class Collider;
 class HUD;
@@ -82,6 +83,8 @@ public:
 	inline bool GetDead() { return legitDead; }
 
 	void kill_feedback(bool killed);
+
+	virtual void Handle(BaseMessage* msg);
 protected:
 	Player();
 	~Player();

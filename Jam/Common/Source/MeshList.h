@@ -119,6 +119,35 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateQuad("Meteor", Color(1, 0, 0), 1.f);
 		temp->textureID = LoadTGA("Image\\bg_meteor.tga");
 		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateQuad("Enemy", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\Enemy_Oce_Top.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("EnemySide", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\Enemy_Oce_Side.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("HarpyBossAttack", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\enemy_harpyboss_attack.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateSpriteAnimation("HarpyBossIdle", 1, 2, 1.f);
+		temp->textureID = LoadTGA("Image\\enemy_harpyboss_idle.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("HarpyBoss2Attack", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\enemy_harpyboss2_attack.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateSpriteAnimation("HarpyBoss2Idle", 1, 2, 1.f);
+		temp->textureID = LoadTGA("Image\\enemy_harpyboss2_idle.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateSpriteAnimation("WolfAttack", 1, 2, 1.f);
+		temp->textureID = LoadTGA("Image\\enemy_wolf_attack.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateSpriteAnimation("WolfIdle", 1, 2, 1.f);
+		temp->textureID = LoadTGA("Image\\enemy_wolf_idle.tga");
+		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateQuad("UiButton", Color(1,1,1), 1.0f);
+		temp->textureID = LoadTGA("Image\\ui_button.tga");
+		assignMesh(temp);
 	}
 
 	void assignMesh(Mesh* a) {

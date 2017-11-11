@@ -62,7 +62,7 @@ void Mainmenu::Init()
 	Vector3 middle_pt(worldWidth * 0.5f, worldHeight * 0.5f);
 
 	Button* temp = new Button();
-	temp->mesh = MeshList::GetInstance()->getMesh("Quad");
+	temp->mesh = MeshList::GetInstance()->getMesh("UiButton");
 	temp->pos = middle_pt;
 	temp->default_scale.Set(35, 10);
 	temp->resize_button(temp->default_scale);

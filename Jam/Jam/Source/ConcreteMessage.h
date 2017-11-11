@@ -9,6 +9,7 @@ public:
 		NONE = 0,
 		APPLY_DAMAGE_BOOST,
 		APPLY_FIRERATE_BOOST,
+		HEAL_UP,
 	}type;
 
 	MessageWeapon(MESSAGE_TYPE type)
