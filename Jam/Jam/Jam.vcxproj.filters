@@ -115,9 +115,6 @@
     <ClCompile Include="Source\PewPewGun.cpp">
       <Filter>GameObject\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="Source\BossManager.cpp">
-      <Filter>Boss</Filter>
-    </ClCompile>
     <ClCompile Include="Source\BossTwo.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
@@ -129,6 +126,12 @@
     </ClCompile>
     <ClCompile Include="Source\LaserGun.cpp">
       <Filter>GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BossManager.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BossThree.cpp">
+      <Filter>Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -314,6 +317,9 @@
     </ClInclude>
     <ClInclude Include="Source\LaserGun.h">
       <Filter>GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BossThree.h">
+      <Filter>Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

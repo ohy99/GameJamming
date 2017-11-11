@@ -24,7 +24,7 @@ void BossTwo::Init()
 	this->hitbox->set_collision(Collision::CollisionType::AABB,
 		&this->pos, -this->scale * 0.5f, this->scale * 0.5f);
 
-	hitpoint.init_hp(1000);
+	hitpoint.init_hp(2000);
 	this->faction.side = Faction::FACTION_SIDE::ENEMY;
 
 	this->mesh = MeshList::GetInstance()->getMesh("RedQuad");
@@ -35,30 +35,46 @@ void BossTwo::Init()
 	float worldHeight = GlobalVariables::GetInstance()->get_worldHeight();
 	this->pos.Set(worldWidth + 10, worldHeight * 0.5f, 0);
 	intendedPos.Set(worldWidth - 10,
-		worldHeight * 0.75f, 0);
+		worldHeight * 0.9f, 0);
 
 	moveSpd = 10.f;
 
 	CollisionManager::GetInstance()->add_collider(this->hitbox);
 	RenderManager::GetInstance()->attach_renderable(this, 1);
-
+	attack_timer.set_duration(0.4);
 }
 
 void BossTwo::Update(double dt)
 {
+	float worldWidth = GlobalVariables::GetInstance()->get_worldWidth();
+	float worldHeight = GlobalVariables::GetInstance()->get_worldHeight();
+	Vector3 pt1(worldWidth - 20, worldHeight * 0.9f);
+	Vector3 pt2(worldWidth - 20, worldHeight * 0.1f);
 	this->weapon->pos = this->pos;
 	this->weapon->dir = (-this->pos + Player::GetInstance()->pos).Normalized();
 	this->weapon->update(dt);
-	this->weapon->discharge();
+	attack_timer.update_timer(dt);
+
+	if (attack_timer.get_current_percent() >= 1) {
+		attack_timer.reset_timer();
+		this->weapon->discharge();
+	}
 
 	Vector3 dirToIntended = -this->pos + intendedPos;
-	if (dirToIntended.LengthSquared() >= 0.f)
+	if (dirToIntended.LengthSquared() >= (dirToIntended.Normalized() * moveSpd).LengthSquared())
 	{
 		//okay im not there yet so im gona move
 		if (dirToIntended.LengthSquared() > moveSpd * moveSpd * (float)dt * (float)dt)
 			this->pos += dirToIntended.Normalized() * moveSpd * (float)dt;
-		else
+		else {
 			this->pos += dirToIntended;
+		}
+	}
+	else {
+		if (intendedPos == pt1)
+			intendedPos = pt2;
+		else
+			intendedPos = pt1;
 	}
 }
 

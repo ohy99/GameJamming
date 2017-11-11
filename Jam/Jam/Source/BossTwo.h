@@ -17,6 +17,8 @@ class BossTwo : public BossBase, public GameObject, public CharacterBase
 	Vector3 intendedPos;
 	float moveSpd;
 
+	MyTimer attack_timer;
+
 	enum STATE
 	{
 		ENTER,//Enter as in enter da screen

@@ -117,8 +117,8 @@ void Application::Init()
 
 
 	//Create a window and create its OpenGL context
-	m_window_width = 800;
-	m_window_height = 600;
+	m_window_width = 1600;
+	m_window_height = 900;
 	//m_window = glfwCreateWindow(m_width, m_height, "Physics", glfwGetPrimaryMonitor(), NULL);
 	m_window = glfwCreateWindow(m_window_width, m_window_height, "The Slother", NULL, NULL);
 
