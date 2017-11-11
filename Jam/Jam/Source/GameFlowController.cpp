@@ -32,12 +32,12 @@ void GameFlowController::init()
 
 void GameFlowController::update(double dt)
 {
-	if (KeyboardController::GetInstance()->IsKeyPressed(VK_SPACE))
+	if (KeyboardController::GetInstance()->IsKeyPressed(VK_F4))
 	{
 		//EnemyManager::GetInstance()->reset_wave(false);
 		change_state(STATE::TRANSITION);
 	}
-	if (KeyboardController::GetInstance()->IsKeyReleased(VK_SPACE))
+	if (KeyboardController::GetInstance()->IsKeyReleased(VK_F4))
 	{
 		//EnemyManager::GetInstance()->reset_wave(true);
 	}

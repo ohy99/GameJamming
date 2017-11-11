@@ -82,7 +82,13 @@ void GameScene::RenderBackground()
 
 	++frame;
 
-	float movement = 0.5;
+	float movement;
+	if (GameFlowController::GetInstance()->currState == GameFlowController::WAVE)
+		movement = 0.5;
+	else if (GameFlowController::GetInstance()->currState == GameFlowController::TRANSITION)
+		movement = 0.375;
+	else if (GameFlowController::GetInstance()->currState == GameFlowController::BOSS)
+		movement = 0.25;
 
 	if (bg1X < scaleX *worldWidth* -0.5f)
 		bg1X = bg2X + scaleX * worldWidth;

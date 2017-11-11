@@ -60,7 +60,6 @@ bool DamageHitResponse::response(GameObject * other, GameObject* my_owner)
 						DmgHitBoxManager::DMG_COLLIDER_TYPE type = 
 							(DmgHitBoxManager::DMG_COLLIDER_TYPE)Math::RandIntMinMax(DmgHitBoxManager::DMGBOOST,
 								DmgHitBoxManager::HPBOOST);
-						std::cout << type << std::endl;
 						DmgHitBox* pup = DmgHitBoxManager::GetInstance()->get_hitbox(type);
 						Vector3 randDir(Math::RandFloat(), Math::RandFloat());
 						try {

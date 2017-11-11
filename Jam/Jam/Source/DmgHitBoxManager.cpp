@@ -37,9 +37,9 @@ DmgHitBoxManager::DmgHitBoxManager()
 	dmg_hitbox_mesh[MELEE] = MeshList::GetInstance()->getMesh("fart");
 	dmg_hitbox_mesh[BOSS_PROJ] = MeshList::GetInstance()->getMesh("Bullet2");
 
-	dmg_hitbox_mesh[DMGBOOST] = MeshList::GetInstance()->getMesh("Quad");
-	dmg_hitbox_mesh[ATTSPDBOOST] = MeshList::GetInstance()->getMesh("Quad");
-	dmg_hitbox_mesh[HPBOOST] = MeshList::GetInstance()->getMesh("Quad");
+	dmg_hitbox_mesh[DMGBOOST] = MeshList::GetInstance()->getMesh("dmg pu");
+	dmg_hitbox_mesh[ATTSPDBOOST] = MeshList::GetInstance()->getMesh("firerate pu");
+	dmg_hitbox_mesh[HPBOOST] = MeshList::GetInstance()->getMesh("health pu");
 
 	pool_vector(hit_box_pool, default_hitbox, 200);
 }
@@ -95,7 +95,7 @@ void DmgHitBoxManager::set_hitbox(DmgHitBox& hitbox, DMG_COLLIDER_TYPE type)
 	case DMGBOOST:
 	case ATTSPDBOOST:
 	case HPBOOST:
-		hitbox.scale.Set(2, 2, 1);
+		hitbox.scale.Set(5, 5, 1);
 		if (!dynamic_cast<ProjectileResponse*>(hitbox.collider->get_response()))//if not the collider i want
 			hitbox.collider->set_response(new ProjectileResponse);
 

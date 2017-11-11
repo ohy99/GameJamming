@@ -189,6 +189,18 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image\\bg_death_scene.tga");
 		assignMesh(temp);
 
+		temp = MeshBuilder::GenerateQuad("health pu", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\CosmoCookie_Health.tga");
+		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateQuad("dmg pu", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\Weed_Rage.tga");
+		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateQuad("firerate pu", Color(1, 0, 0), 1.f);
+		temp->textureID = LoadTGA("Image\\Water_Laser.tga");
+		assignMesh(temp);
+
 		temp = MeshBuilder::GenerateSpriteAnimation("fart", 1, 5, 1.f);
 		temp->textureID = LoadTGA("Image\\Protagonist_fart.tga");
 		assignMesh(temp);
