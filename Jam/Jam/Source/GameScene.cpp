@@ -305,7 +305,7 @@ void GameScene::Render()
 		MS& ms = Graphics::GetInstance()->modelStack;
 		ms.PushMatrix();
 		ms.Translate(worldWidth * 0.5f, worldHeight * 0.5, 3);
-		ms.Scale(worldWidth, worldHeight / 3, 1);
+		ms.Scale(worldWidth, worldHeight / 2, 1);
 		RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("credit"), false);
 		ms.PopMatrix();
 	}

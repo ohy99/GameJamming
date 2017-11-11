@@ -34,7 +34,7 @@ DmgHitBoxManager::DmgHitBoxManager()
 	dmg_hitbox_mesh[ENEMYPROJ2] = MeshList::GetInstance()->getMesh("Bullet2");
 	dmg_hitbox_mesh[ENEMYPROJ3] = MeshList::GetInstance()->getMesh("Bullet3");
 	dmg_hitbox_mesh[LASER] = MeshList::GetInstance()->getMesh("PlayerLaser");
-	dmg_hitbox_mesh[MELEE] = MeshList::GetInstance()->getMesh("Quad");
+	dmg_hitbox_mesh[MELEE] = MeshList::GetInstance()->getMesh("fart");
 	dmg_hitbox_mesh[BOSS_PROJ] = MeshList::GetInstance()->getMesh("Bullet2");
 
 	dmg_hitbox_mesh[DMGBOOST] = MeshList::GetInstance()->getMesh("Quad");
@@ -69,7 +69,7 @@ void DmgHitBoxManager::set_hitbox(DmgHitBox& hitbox, DMG_COLLIDER_TYPE type)
 		hitbox.collider->set_collision(Collision::CollisionType::SPHERE, &hitbox.pos, hitbox.scale.x);
 		break;
 	case MELEE:
-		hitbox.scale.Set(7.5, 7.5, 1);
+		hitbox.scale.Set(15, 15, 1);
 		if (!dynamic_cast<AOEResponse*>(hitbox.collider->get_response()))//if not the collider i want
 			hitbox.collider->set_response(new AOEResponse);
 		

@@ -179,6 +179,10 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateQuad("death scene", Color(1, 0, 0), 1.f);
 		temp->textureID = LoadTGA("Image\\bg_death_scene.tga");
 		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateSpriteAnimation("fart", 1, 5, 1.f);
+		temp->textureID = LoadTGA("Image\\Protagonist_fart.tga");
+		assignMesh(temp);
 	}
 
 	void assignMesh(Mesh* a) {
